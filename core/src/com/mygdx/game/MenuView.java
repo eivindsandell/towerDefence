@@ -21,7 +21,11 @@ public class MenuView implements Screen {
     private TextureAtlas buttonAtlas;
     private BitmapFont font;
     private TextButton.TextButtonStyle textButtonStyle;
-    public TextButton button;
+    public TextButton localMpButton;
+    private TextButton MpButton;
+    public TextButton settingsButton;
+    public TextButton helpButton;
+    public TextButton quitButton;
 
     public MenuView(Game game){
         this.game = game;
@@ -31,16 +35,7 @@ public class MenuView implements Screen {
         stage = new Stage();
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
-        skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("Button");
-        textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        textButtonStyle.checked = skin.getDrawable("ButtonPressed");
-        button = new TextButton("Button1", textButtonStyle);
-        button.setPosition(screenWidth/5,screenHeight/2);
-        stage.addActor(button);
+
     }
 
     @Override
@@ -82,4 +77,39 @@ public class MenuView implements Screen {
     public void dispose() {
         stage.dispose();
     }
+
+    private void createAllButtons(){
+        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
+        skin.addRegions(buttonAtlas);
+        textButtonStyle = new TextButton.TextButtonStyle();
+        //Todo:  fix this: font.getData().setScale();
+        textButtonStyle.font = font;
+        textButtonStyle.up = skin.getDrawable("Button");
+        textButtonStyle.down = skin.getDrawable("ButtonPressed");
+        textButtonStyle.checked = skin.getDrawable("ButtonPressed");
+        //
+        localMpButton = new TextButton("Local Multiplayer", textButtonStyle);
+        MpButton = new TextButton("Online Multiplayer", textButtonStyle);
+        settingsButton = new TextButton("Local Multiplayer", textButtonStyle);
+        helpButton = new TextButton("Local Multiplayer", textButtonStyle);
+        quitButton = new TextButton("Quit", textButtonStyle);
+        //
+        int widthplacement = (int)(screenWidth/2-localMpButton.getWidth()/2);
+        int buttonheight = (int)localMpButton.getHeight();
+        int buffer = (int)buttonheight/2;
+        //
+        settingsButton.setPosition(widthplacement,screenHeight/2);
+        localMpButton.setPosition(widthplacement,settingsButton.getY()+ 2*buttonheight + 2*buffer);
+        MpButton.setPosition(widthplacement,settingsButton.getY()+buttonheight + buffer);
+        helpButton.setPosition(widthplacement,settingsButton.getY() - buttonheight- buffer);
+        quitButton.setPosition(widthplacement,settingsButton.getY() - 2*buttonheight - 2*buffer);
+        MpButton.setDisabled(true);
+        //
+        stage.addActor(localMpButton);
+        stage.addActor(MpButton);
+        stage.addActor(settingsButton);
+        stage.addActor(helpButton);
+        stage.addActor(quitButton);
+    }
 }
+
