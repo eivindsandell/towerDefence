@@ -1,11 +1,19 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 
 /**
  * Created by Zindre on 06-Mar-17.
  */
 public class AttackView implements Screen {
+    Game game;
+
+
+    public AttackView(Game game){
+        this.game = game;
+    }
+
     @Override
     public void show() {
 
