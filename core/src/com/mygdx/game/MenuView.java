@@ -35,7 +35,7 @@ public class MenuView implements Screen {
         stage = new Stage();
         font = new BitmapFont();
         skin = new Skin();
-
+        createAllButtons();
     }
 
     @Override
@@ -82,7 +82,6 @@ public class MenuView implements Screen {
         buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
         skin.addRegions(buttonAtlas);
         textButtonStyle = new TextButton.TextButtonStyle();
-        //Todo:  fix this: font.getData().setScale();
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("Button");
         textButtonStyle.down = skin.getDrawable("ButtonPressed");
@@ -90,21 +89,22 @@ public class MenuView implements Screen {
         //
         localMpButton = new TextButton("Local Multiplayer", textButtonStyle);
         MpButton = new TextButton("Online Multiplayer", textButtonStyle);
-        settingsButton = new TextButton("Local Multiplayer", textButtonStyle);
-        helpButton = new TextButton("Local Multiplayer", textButtonStyle);
+        settingsButton = new TextButton("Settings", textButtonStyle);
+        helpButton = new TextButton("Help", textButtonStyle);
         quitButton = new TextButton("Quit", textButtonStyle);
         //
         int widthplacement = (int)(screenWidth/2-localMpButton.getWidth()/2);
         int buttonheight = (int)localMpButton.getHeight();
         int buffer = (int)buttonheight/2;
         //
-        settingsButton.setPosition(widthplacement,screenHeight/2);
+        settingsButton.setPosition(widthplacement,screenHeight/2-buttonheight/2);
         localMpButton.setPosition(widthplacement,settingsButton.getY()+ 2*buttonheight + 2*buffer);
         MpButton.setPosition(widthplacement,settingsButton.getY()+buttonheight + buffer);
         helpButton.setPosition(widthplacement,settingsButton.getY() - buttonheight- buffer);
         quitButton.setPosition(widthplacement,settingsButton.getY() - 2*buttonheight - 2*buffer);
         MpButton.setDisabled(true);
         //
+        font.getData().setScale(4);
         stage.addActor(localMpButton);
         stage.addActor(MpButton);
         stage.addActor(settingsButton);
