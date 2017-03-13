@@ -46,13 +46,13 @@ public class MenuView implements Screen {
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.pack"));
+        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
         skin.addRegions(buttonAtlas);
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("blank-1");
-        textButtonStyle.down = skin.getDrawable("blank-2");
-        textButtonStyle.checked = skin.getDrawable("blank-1");
+        textButtonStyle.up = skin.getDrawable("Button");
+        textButtonStyle.down = skin.getDrawable("ButtonPressed");
+        textButtonStyle.checked = skin.getDrawable("ButtonPressed");
         button = new TextButton("Button1", textButtonStyle);
         stage.addActor(button);
     }
