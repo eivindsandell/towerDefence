@@ -5,11 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-public class DefenceView implements Screen {
+
+public class HelpView implements Screen {
     Game game;
 
 
-    public DefenceView(Game game){
+    public HelpView(Game game){
         this.game = game;
     }
 
@@ -22,6 +23,7 @@ public class DefenceView implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
     }
 
     @Override

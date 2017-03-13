@@ -3,9 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/**
- * Created by Zindre on 06-Mar-17.
- */
 public abstract class Mob {
     private double health;
     private double speed;

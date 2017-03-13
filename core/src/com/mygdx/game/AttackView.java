@@ -5,9 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-/**
- * Created by Zindre on 06-Mar-17.
- */
 public class AttackView implements Screen {
     Game game;
 

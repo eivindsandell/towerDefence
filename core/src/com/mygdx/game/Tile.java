@@ -1,13 +1,9 @@
 package com.mygdx.game;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 public class Tile {
 
     private int x,y;
-    private int type; //0: Ground, 1: Road, 2: Start, 3: Goal
+    private int type;
     private int tiles_to_portal;
 
     public void setX(int x) {
