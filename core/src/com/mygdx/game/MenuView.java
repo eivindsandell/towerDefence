@@ -4,9 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,29 +16,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 public class MenuView implements Screen {
 
     Game game;
-
-    public MenuView(Game game){
-        this.game = game;
-    }
-
+    Globals globals;
     Stage stage;
     Skin skin;
+    int screenHeight;
+    int screenWidth;
     TextureAtlas buttonAtlas;
     BitmapFont font;
     TextButton.TextButtonStyle textButtonStyle;
-    TextButton button;
+    public TextButton button;
 
-    @Override
-    public void show() {
-        System.out.println("testing print");
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    public MenuView(Game game){
+        this.game = game;
+        globals = new Globals();
+        screenHeight = globals.screenHeight;
+        screenWidth = globals.screenWith;
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
         buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
@@ -51,7 +42,20 @@ public class MenuView implements Screen {
         textButtonStyle.down = skin.getDrawable("ButtonPressed");
         textButtonStyle.checked = skin.getDrawable("ButtonPressed");
         button = new TextButton("Button1", textButtonStyle);
+        button.setPosition(screenWidth/5,screenHeight/2);
         stage.addActor(button);
+    }
+
+    @Override
+    public void show() {
+        System.out.println("testing print");
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.input.setInputProcessor(stage);
         stage.draw();
     }
 
