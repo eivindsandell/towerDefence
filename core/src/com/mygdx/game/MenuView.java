@@ -17,8 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
  */
 public class MenuView implements Screen {
 
-    SpriteBatch batch;
-    Texture img;
     Game game;
 
     public MenuView(Game game){
@@ -34,19 +32,18 @@ public class MenuView implements Screen {
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
         System.out.println("testing print");
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.pack"));
+        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.pack.atlas"));
         skin.addRegions(buttonAtlas);
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
@@ -55,6 +52,7 @@ public class MenuView implements Screen {
         textButtonStyle.checked = skin.getDrawable("blank-1");
         button = new TextButton("Button1", textButtonStyle);
         stage.addActor(button);
+        stage.draw();
     }
 
 
@@ -81,7 +79,6 @@ public class MenuView implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        img.dispose();
+        stage.dispose();
     }
 }
