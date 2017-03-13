@@ -10,20 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
-/**
- * Created by Zindre on 06-Mar-17.
- */
 public class MenuView implements Screen {
 
-    Game game;
-    Globals globals;
-    Stage stage;
-    Skin skin;
-    int screenHeight;
-    int screenWidth;
-    TextureAtlas buttonAtlas;
-    BitmapFont font;
-    TextButton.TextButtonStyle textButtonStyle;
+    private Game game;
+    private Globals globals;
+    private Stage stage;
+    private Skin skin;
+    private int screenHeight;
+    private int screenWidth;
+    private TextureAtlas buttonAtlas;
+    private BitmapFont font;
+    private TextButton.TextButtonStyle textButtonStyle;
     public TextButton button;
 
     public MenuView(Game game){

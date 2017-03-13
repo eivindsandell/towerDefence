@@ -5,9 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.List;
 
-/**
- * Created by Zindre on 06-Mar-17.
- */
 public abstract class Tower {
     private double damage;
     private double speed;
