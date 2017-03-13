@@ -1,11 +1,20 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 
 /**
  * Created by Zindre on 06-Mar-17.
  */
 public class PlayRoundView implements Screen {
+    Game game;
+
+    public PlayRoundView(Game game){
+        this.game = game;
+    }
+
     @Override
     public void show() {
 
@@ -13,7 +22,8 @@ public class PlayRoundView implements Screen {
 
     @Override
     public void render(float delta) {
-
+        Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
     @Override
