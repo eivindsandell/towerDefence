@@ -23,14 +23,6 @@ public class Globals {
     public Integer getScreenHeight() {
         return screenHeight;
     }
-
-    public void setScreenWith(Integer screenWith) {
-        this.screenWith = screenWith;
-    }
-
-    public void setScreenHeight(Integer screenHeight) {
-        this.screenHeight = screenHeight;
-    }
 }
 
 
