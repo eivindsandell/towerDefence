@@ -1,8 +1,5 @@
 package com.mygdx.game;
 
-/**
- * Created by Zindre on 06-Mar-17.
- */
 public class Tile {
 
     private int x,y;

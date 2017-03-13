@@ -2,11 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 
-/**
- * For global variables
- * Created by eivin on 13.03.2017.
- */
-
 public class Globals {
     Integer screenWith;
     Integer screenHeight;
@@ -24,13 +19,6 @@ public class Globals {
         return screenHeight;
     }
 
-    public void setScreenWith(Integer screenWith) {
-        this.screenWith = screenWith;
-    }
-
-    public void setScreenHeight(Integer screenHeight) {
-        this.screenHeight = screenHeight;
-    }
 }
 
 
