@@ -5,10 +5,12 @@ import com.badlogic.gdx.Gdx;
 public class Globals {
     Integer screenWith;
     Integer screenHeight;
+    boolean soundEnabled;
 
     public Globals(){
         screenWith = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
+        soundEnabled = true;
     }
 
     public Integer getScreenWith() {
@@ -18,6 +20,21 @@ public class Globals {
     public Integer getScreenHeight() {
         return screenHeight;
     }
+
+    public boolean isSoundEnabled() {
+        return soundEnabled;
+    }
+
+    // Enables or disables sound
+    public void muteSound(){
+        if (soundEnabled){
+            soundEnabled = false;
+        }
+        else{
+            soundEnabled = true;
+        }
+    }
+
 
 }
 
