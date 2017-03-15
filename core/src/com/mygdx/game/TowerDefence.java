@@ -9,13 +9,17 @@ public class TowerDefence extends Game {
 
 	MenuView menuView;
 	DefenceView defenceView;
+	SettingsView settingsView;
 
 	@Override
 	public void create() {
 		menuView = new MenuView(this);
 		defenceView = new DefenceView(this);
+		settingsView = new SettingsView(this);
 		this.setScreen(menuView);
 		launchGame();
+		settingsGame();
+		backToMenuGame();
 		quitGame();
 	}
 
@@ -35,6 +39,28 @@ public class TowerDefence extends Game {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				Gdx.app.exit();
+			}
+		});
+	}
+
+	private void settingsGame(){
+		menuView.settingsButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("Button pressed!");
+				setScreen(settingsView);
+				menuView.dispose();
+			}
+		});
+	}
+
+	private void backToMenuGame(){
+		settingsView.backButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("Button pressed!");
+				setScreen(menuView);
+				settingsView.dispose();
 			}
 		});
 	}
