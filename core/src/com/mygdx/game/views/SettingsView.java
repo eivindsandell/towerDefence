@@ -3,12 +3,16 @@ package com.mygdx.game.views;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -31,12 +35,15 @@ public class SettingsView implements Screen {
     private BitmapFont font;
     public TextButton backButton;
     private CheckBox soundCheck;
+    private CheckBox musicCheck;
     private CheckBox.CheckBoxStyle checkBoxStyle;
     private TextButton.TextButtonStyle textButtonStyle;
+    private Music music;
 
 
-    public SettingsView(Game game){
+    public SettingsView(Game game, Music music){
         globals = new Globals();
+        this.music = music;
         this.game = game;
         screenHeight = globals.getScreenHeight();
         screenWidth = globals.getScreenWith();
@@ -45,6 +52,7 @@ public class SettingsView implements Screen {
         skin = new Skin();
         createAllButtons();
         createCheckBox();
+        checkBoxListener();
     }
 
     @Override
@@ -93,12 +101,38 @@ public class SettingsView implements Screen {
         checkBoxStyle.fontColor = new Color(Color.BLACK);
         checkBoxStyle.checkboxOff = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("checkBoxes/checkbox_unchecked.png"))));
         checkBoxStyle.checkboxOn = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("checkBoxes/checkbox_checked.png"))));
-        soundCheck = new CheckBox("Disable Sound", checkBoxStyle);
-        int checkButtonWidth = (int) (soundCheck.getWidth());
-        soundCheck.setPosition(screenWidth/2-checkButtonWidth/2, screenHeight/2);
+        soundCheck = new CheckBox("Disable SFX", checkBoxStyle);
+        musicCheck = new CheckBox("Disable Music", checkBoxStyle);
+        int musicButtonWidth = (int) (musicCheck.getWidth());
+        int buffer = (int) (musicCheck.getHeight());
+        int sfxButtonWidth = (int) (soundCheck.getWidth());
+        soundCheck.setPosition(screenWidth/2-sfxButtonWidth/2, screenHeight/2-buffer);
+        musicCheck.setPosition(screenWidth/2-musicButtonWidth/2, screenHeight/2+buffer);
+        musicCheck.setChecked(false);
         soundCheck.setChecked(false);
         stage.addActor(soundCheck);
+        stage.addActor(musicCheck);
+    }
 
+    private void checkBoxListener(){
+        musicCheck.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                handleSound();
+                return false;
+            }
+        });
+    }
+
+    private void handleSound(){
+        if (musicCheck.isChecked()){
+            music.pause();
+            globals.muteSound();
+        }
+        else {
+            music.play();
+            globals.unMuteSound();
+        }
     }
 
     private void createAllButtons(){

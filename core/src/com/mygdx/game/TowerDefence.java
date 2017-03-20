@@ -19,8 +19,8 @@ public class TowerDefence extends Game {
 	public void create() {
 		menuView = new MenuView(this);
 		defenceView = new com.mygdx.game.views.DefenceView(this);
-		settingsView = new SettingsView(this);
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
+		settingsView = new SettingsView(this, music);
 		this.setScreen(menuView);
 		handleMusic();
 		launchGame();

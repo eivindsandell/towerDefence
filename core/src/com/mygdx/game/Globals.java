@@ -27,12 +27,11 @@ public class Globals {
 
     // Enables or disables sound
     public void muteSound(){
-        if (soundEnabled){
-            soundEnabled = false;
-        }
-        else{
-            soundEnabled = true;
-        }
+        soundEnabled = false;
+    }
+
+    public void unMuteSound(){
+        soundEnabled = true;
     }
 
 
