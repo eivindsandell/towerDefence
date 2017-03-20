@@ -61,7 +61,7 @@ public class Board {
         for(int i = 0; i <= board_size; i++) {
             for(int j = 0; j <= board_size; j++) {
                 if(pre_board.get(i).get(j) == 1) {
-                    tile_board.get(i).set(j, new Tile(i, j, calculate_path(i, j)));
+                    tile_board.get(i).set(j, new Tile(i, j, pre_board.get(i).get(j), calculate_path(i, j)));
                 }
             }
         }
