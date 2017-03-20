@@ -81,7 +81,6 @@ public class SettingsView implements Screen {
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("Button");
         textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        textButtonStyle.checked = skin.getDrawable("ButtonPressed");
         //
 
        backButton = new TextButton("Back to menu", textButtonStyle);

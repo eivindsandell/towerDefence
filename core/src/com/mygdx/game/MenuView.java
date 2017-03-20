@@ -85,7 +85,6 @@ public class MenuView implements Screen {
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("Button");
         textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        textButtonStyle.checked = skin.getDrawable("ButtonPressed");
         //
         localMpButton = new TextButton("Local Multiplayer", textButtonStyle);
         MpButton = new TextButton("Online Multiplayer", textButtonStyle);
