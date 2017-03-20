@@ -30,8 +30,8 @@ public class MenuView implements Screen {
     public MenuView(Game game){
         this.game = game;
         globals = new Globals();
-        screenHeight = globals.screenHeight;
-        screenWidth = globals.screenWith;
+        screenHeight = globals.getScreenHeight();
+        screenWidth = globals.getScreenWith();
         stage = new Stage();
         font = new BitmapFont();
         skin = new Skin();
