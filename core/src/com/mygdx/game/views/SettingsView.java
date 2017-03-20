@@ -93,7 +93,6 @@ public class SettingsView implements Screen {
         checkBoxStyle.fontColor = new Color(Color.BLACK);
         checkBoxStyle.checkboxOff = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("checkBoxes/checkbox_unchecked.png"))));
         checkBoxStyle.checkboxOn = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("checkBoxes/checkbox_checked.png"))));
-        //checkBoxStyle.checked = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("checkBoxes/checkbox_checked.png"))));
         soundCheck = new CheckBox("Disable Sound", checkBoxStyle);
         int checkButtonWidth = (int) (soundCheck.getWidth());
         soundCheck.setPosition(screenWidth/2-checkButtonWidth/2, screenHeight/2);
