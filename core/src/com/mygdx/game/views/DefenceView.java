@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -24,6 +25,12 @@ public class DefenceView implements Screen {
     DragAndDrop dad;
     Stage stage;
     Skin skin;
+    Button rightButton;
+    Button leftButton;
+    TextField money;
+    Button doneButton;
+    TextureAtlas buttonAtlas;
+    Button.ButtonStyle buttonStyle;
 
     public DefenceView(Game game){
         this.game = game;
@@ -37,6 +44,8 @@ public class DefenceView implements Screen {
         skin.add("default", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         skin.add("badlogic", new Texture(Gdx.files.internal("badlogic.jpg")));
 
+        setUpButtons();
+
         table.setPosition((int)(g.getScreenWith()*0.1),(int)((g.getScreenHeight()-g.getScreenWith())*0.25));
         table.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.75));
         table.setWidth((int)(g.getScreenWith()*0.8));
@@ -49,45 +58,14 @@ public class DefenceView implements Screen {
         table.add("hei6");
         table.setBackground("badlogic");
 
-        dad = new DragAndDrop();
-        dad.addSource(new DragAndDrop.Source(table) {
-            public DragAndDrop.Payload dragStart (InputEvent event, float x, float y, int pointer) {
-                DragAndDrop.Payload payload = new DragAndDrop.Payload();
-                payload.setObject("Some payload!");
-
-                payload.setDragActor(new Label("Some payload!", skin));
-
-                Label validLabel = new Label("Some payload!", skin);
-                validLabel.setColor(0, 1, 0, 1);
-                payload.setValidDragActor(validLabel);
-
-                Label invalidLabel = new Label("Some payload!", skin);
-                invalidLabel.setColor(1, 0, 0, 1);
-                payload.setInvalidDragActor(invalidLabel);
-
-                return payload;
-            }
-        });
-        dad.addTarget(new DragAndDrop.Target(table) {
-            public boolean drag (DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
-                getActor().setColor(Color.GREEN);
-                return true;
-            }
-
-            public void reset (DragAndDrop.Source source, DragAndDrop.Payload payload) {
-                getActor().setColor(Color.WHITE);
-            }
-
-            public void drop (DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
-                System.out.println("Accepted: " + payload.getObject() + " " + x + ", " + y);
-            }
-        });
-
     }
 
     @Override
     public void show() {
         stage.addActor(table);
+        stage.addActor(leftButton);
+        stage.addActor(rightButton);
+        stage.addActor(doneButton);
     }
 
     @Override
@@ -116,7 +94,7 @@ public class DefenceView implements Screen {
 
     @Override
     public void hide() {
-
+        stage.clear();
     }
 
     @Override
@@ -129,91 +107,30 @@ public class DefenceView implements Screen {
         sr.rect(0,0,g.getScreenWith(),g.getScreenHeight()-g.getScreenWith());
         sr.end();
     }
-    /*
-    public class DragAndDropTest extends GdxTest {
-        Stage stage;
 
-        public void create () {
-            stage = new Stage();
-            Gdx.input.setInputProcessor(stage);
+    private void setUpButtons(){
+        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
+        skin.addRegions(buttonAtlas);
+        buttonStyle = new Button.ButtonStyle();
+        buttonStyle.up = skin.getDrawable("Button");
+        buttonStyle.down = skin.getDrawable("ButtonPressed");
 
-            final Skin skin = new Skin();
-            skin.add("default", new LabelStyle(new BitmapFont(), Color.WHITE));
-            skin.add("badlogic", new Texture("data/badlogic.jpg"));
+        leftButton = new Button(buttonStyle);
+        rightButton = new Button(buttonStyle);
+        doneButton = new Button(buttonStyle);
 
-            Image sourceImage = new Image(skin, "badlogic");
-            sourceImage.setBounds(50, 125, 100, 100);
-            stage.addActor(sourceImage);
+        leftButton.setPosition(0,0);
+        rightButton.setPosition((int)(g.getScreenWith()*0.9),0);
+        doneButton.setPosition((int)(g.getScreenWith()*0.6),0);
 
-            Image validTargetImage = new Image(skin, "badlogic");
-            validTargetImage.setBounds(200, 50, 100, 100);
-            stage.addActor(validTargetImage);
+        leftButton.setWidth((int)(g.getScreenWith()*0.1));
+        leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWith()));
 
-            Image invalidTargetImage = new Image(skin, "badlogic");
-            invalidTargetImage.setBounds(200, 200, 100, 100);
-            stage.addActor(invalidTargetImage);
+        rightButton.setWidth(leftButton.getWidth());
+        rightButton.setHeight(leftButton.getHeight());
 
-            DragAndDrop dragAndDrop = new DragAndDrop();
-            dragAndDrop.addSource(new Source(sourceImage) {
-                public Payload dragStart (InputEvent event, float x, float y, int pointer) {
-                    Payload payload = new Payload();
-                    payload.setObject("Some payload!");
-
-                    payload.setDragActor(new Label("Some payload!", skin));
-
-                    Label validLabel = new Label("Some payload!", skin);
-                    validLabel.setColor(0, 1, 0, 1);
-                    payload.setValidDragActor(validLabel);
-
-                    Label invalidLabel = new Label("Some payload!", skin);
-                    invalidLabel.setColor(1, 0, 0, 1);
-                    payload.setInvalidDragActor(invalidLabel);
-
-                    return payload;
-                }
-            });
-            dragAndDrop.addTarget(new Target(validTargetImage) {
-                public boolean drag (Source source, Payload payload, float x, float y, int pointer) {
-                    getActor().setColor(Color.GREEN);
-                    return true;
-                }
-
-                public void reset (Source source, Payload payload) {
-                    getActor().setColor(Color.WHITE);
-                }
-
-                public void drop (Source source, Payload payload, float x, float y, int pointer) {
-                    System.out.println("Accepted: " + payload.getObject() + " " + x + ", " + y);
-                }
-            });
-            dragAndDrop.addTarget(new Target(invalidTargetImage) {
-                public boolean drag (Source source, Payload payload, float x, float y, int pointer) {
-                    getActor().setColor(Color.RED);
-                    return false;
-                }
-
-                public void reset (Source source, Payload payload) {
-                    getActor().setColor(Color.WHITE);
-                }
-
-                public void drop (Source source, Payload payload, float x, float y, int pointer) {
-                }
-            });
-        }
-
-        public void render () {
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            stage.act(Gdx.graphics.getDeltaTime());
-            stage.draw();
-        }
-
-        public void resize (int width, int height) {
-            stage.getViewport().update(width, height, true);
-        }
-
-        public void dispose () {
-            stage.dispose();
-        }
-    }*/
+        doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.25));
+        doneButton.setWidth((int)(g.getScreenWith()*0.3));
+    }
 }
 
