@@ -9,13 +9,13 @@ public class TowerDefence extends Game {
 
 	MenuView menuView;
 	com.mygdx.game.views.DefenceView defenceView;
-	SettingsView settingsView;
+	com.mygdx.game.views.SettingsView settingsView;
 
 	@Override
 	public void create() {
 		menuView = new MenuView(this);
 		defenceView = new com.mygdx.game.views.DefenceView(this);
-		settingsView = new SettingsView(this);
+		settingsView = new com.mygdx.game.views.SettingsView(this);
 		this.setScreen(menuView);
 		launchGame();
 		settingsGame();
