@@ -29,6 +29,7 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(defenceView);
+				menuView.hide();
 			}
 		});
 	}

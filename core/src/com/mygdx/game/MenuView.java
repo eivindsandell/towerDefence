@@ -41,6 +41,11 @@ public class MenuView implements Screen {
     @Override
     public void show() {
         System.out.println("testing print");
+        stage.addActor(localMpButton);
+        stage.addActor(MpButton);
+        stage.addActor(settingsButton);
+        stage.addActor(helpButton);
+        stage.addActor(quitButton);
     }
 
     @Override
@@ -70,6 +75,7 @@ public class MenuView implements Screen {
 
     @Override
     public void hide() {
+        stage.clear();
 
     }
 
@@ -116,11 +122,6 @@ public class MenuView implements Screen {
         MpButton.setDisabled(true);
         //
         font.getData().setScale(4);
-        stage.addActor(localMpButton);
-        stage.addActor(MpButton);
-        stage.addActor(settingsButton);
-        stage.addActor(helpButton);
-        stage.addActor(quitButton);
     }
 }
 
