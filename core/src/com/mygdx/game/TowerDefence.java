@@ -29,7 +29,6 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(defenceView);
-				menuView.dispose();
 			}
 		});
 	}
@@ -49,7 +48,7 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(settingsView);
-				menuView.dispose();
+
 			}
 		});
 	}
@@ -60,7 +59,6 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(menuView);
-				settingsView.dispose();
 			}
 		});
 	}
