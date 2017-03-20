@@ -8,13 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 public class TowerDefence extends Game {
 
 	MenuView menuView;
-	DefenceView defenceView;
+	com.mygdx.game.views.DefenceView defenceView;
 	SettingsView settingsView;
 
 	@Override
 	public void create() {
 		menuView = new MenuView(this);
-		defenceView = new DefenceView(this);
+		defenceView = new com.mygdx.game.views.DefenceView(this);
 		settingsView = new SettingsView(this);
 		this.setScreen(menuView);
 		launchGame();
@@ -29,7 +29,6 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(defenceView);
-				menuView.dispose();
 			}
 		});
 	}
@@ -49,7 +48,7 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(settingsView);
-				menuView.dispose();
+
 			}
 		});
 	}
@@ -60,7 +59,6 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(menuView);
-				settingsView.dispose();
 			}
 		});
 	}

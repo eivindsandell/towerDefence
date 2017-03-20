@@ -30,8 +30,8 @@ public class MenuView implements Screen {
     public MenuView(Game game){
         this.game = game;
         globals = new Globals();
-        screenHeight = globals.screenHeight;
-        screenWidth = globals.screenWith;
+        screenHeight = globals.getScreenHeight();
+        screenWidth = globals.getScreenWith();
         stage = new Stage();
         font = new BitmapFont();
         skin = new Skin();
@@ -85,7 +85,6 @@ public class MenuView implements Screen {
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("Button");
         textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        textButtonStyle.checked = skin.getDrawable("ButtonPressed");
         //
         localMpButton = new TextButton("Local Multiplayer", textButtonStyle);
         MpButton = new TextButton("Online Multiplayer", textButtonStyle);
