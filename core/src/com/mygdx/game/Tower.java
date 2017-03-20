@@ -13,10 +13,10 @@ public abstract class Tower {
     private int price;
     private List<Tile> road;
     private Tile position;
-    private int[][] range;
+    private List<List<Integer>> range;
     private List<Tile> shootable_tiles;
 
-    public Tower(double damage, double speed, int[][] range, Sprite sprite, SpriteBatch spriteBatch, int price) {
+    public Tower(double damage, double speed, List<List<Integer>> range, Sprite sprite, SpriteBatch spriteBatch, int price) {
         this.damage = damage;
         this.speed = speed;
         this.range = range;
@@ -34,7 +34,7 @@ public abstract class Tower {
         return speed;
     }
 
-    public int[][] getRange() {
+    public List<List<Integer>> getRange() {
         return range;
     }
 
