@@ -2,21 +2,27 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.mygdx.game.views.DefenceView;
+import com.mygdx.game.views.SettingsView;
 
 public class TowerDefence extends Game {
 
 	MenuView menuView;
-	com.mygdx.game.views.DefenceView defenceView;
+	DefenceView defenceView;
 	SettingsView settingsView;
+	Music music;
 
 	@Override
 	public void create() {
 		menuView = new MenuView(this);
 		defenceView = new com.mygdx.game.views.DefenceView(this);
 		settingsView = new SettingsView(this);
+		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
 		this.setScreen(menuView);
+		handleMusic();
 		launchGame();
 		settingsGame();
 		backToMenuGame();
@@ -29,8 +35,15 @@ public class TowerDefence extends Game {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
 				setScreen(defenceView);
+				menuView.hide();
 			}
 		});
+	}
+
+	private void handleMusic(){
+		music.play();
+		music.setLooping(true);
+		music.setVolume(0.5f);
 	}
 
 	private void quitGame(){

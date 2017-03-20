@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.models;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,7 +23,6 @@ public abstract class Tower {
         this.sprite = sprite;
         this.spriteBatch = spriteBatch;
         this.price = price;
-
     }
 
     public double getDamage() {
@@ -34,9 +33,7 @@ public abstract class Tower {
         return speed;
     }
 
-    public List<List<Integer>> getRange() {
-        return range;
-    }
+    public List<List<Integer>> getRange() { return range; }
 
     public Sprite getSprite() {
         return sprite;

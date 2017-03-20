@@ -41,6 +41,11 @@ public class MenuView implements Screen {
     @Override
     public void show() {
         System.out.println("testing print");
+        stage.addActor(localMpButton);
+        stage.addActor(MpButton);
+        stage.addActor(settingsButton);
+        stage.addActor(helpButton);
+        stage.addActor(quitButton);
     }
 
     @Override
@@ -70,6 +75,7 @@ public class MenuView implements Screen {
 
     @Override
     public void hide() {
+        stage.clear();
 
     }
 
@@ -92,10 +98,22 @@ public class MenuView implements Screen {
         helpButton = new TextButton("Help", textButtonStyle);
         quitButton = new TextButton("Quit", textButtonStyle);
         //
-        int widthplacement = (int)(screenWidth/2-localMpButton.getWidth()/2);
-        int buttonheight = (int)localMpButton.getHeight();
-        int buffer = (int)buttonheight/2;
+        float ratio = localMpButton.getHeight() / localMpButton.getWidth();
         //
+        localMpButton.setWidth((int)(screenWidth*0.7));
+        localMpButton.setHeight((int)(ratio*localMpButton.getWidth()));
+        MpButton.setWidth((int)(screenWidth*0.7));
+        MpButton.setHeight((int)(ratio*MpButton.getWidth()));
+        settingsButton.setWidth((int)(screenWidth*0.7));
+        settingsButton.setHeight((int)(ratio*settingsButton.getWidth()));
+        helpButton.setWidth((int)(screenWidth*0.7));
+        helpButton.setHeight((int)(ratio*helpButton.getWidth()));
+        quitButton.setWidth((int)(screenWidth*0.7));
+        quitButton.setHeight((int)(ratio*quitButton.getWidth()));
+        //
+        int buttonheight = (int)localMpButton.getHeight();
+        int widthplacement = (int)(screenWidth/2-localMpButton.getWidth()/2);
+        int buffer = (int)localMpButton.getHeight()/2;
         settingsButton.setPosition(widthplacement,screenHeight/2-buttonheight/2);
         localMpButton.setPosition(widthplacement,settingsButton.getY()+ 2*buttonheight + 2*buffer);
         MpButton.setPosition(widthplacement,settingsButton.getY()+buttonheight + buffer);
@@ -104,11 +122,6 @@ public class MenuView implements Screen {
         MpButton.setDisabled(true);
         //
         font.getData().setScale(4);
-        stage.addActor(localMpButton);
-        stage.addActor(MpButton);
-        stage.addActor(settingsButton);
-        stage.addActor(helpButton);
-        stage.addActor(quitButton);
     }
 }
 

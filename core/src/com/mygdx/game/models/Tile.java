@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.models;
 
 public class Tile {
 
@@ -18,10 +18,11 @@ public class Tile {
         this.type = type;
     }
 
-    public Tile(int x, int y, int type) {
+    public Tile(int x, int y, int type, int tiles_to_portal) {
         this.x = x;
         this.y = y;
         this.type = type;
+        this.tiles_to_portal = tiles_to_portal;
     }
 
     public int getType() {
@@ -35,5 +36,7 @@ public class Tile {
     public int getY() {
         return y;
     }
+
+    public int getTiles_to_portal() { return tiles_to_portal; }
 }
 
