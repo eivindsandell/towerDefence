@@ -8,9 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.controllers.AttackViewController;
 import com.mygdx.game.controllers.DefenceViewController;
 import com.mygdx.game.controllers.PlayRoundViewController;
-import com.mygdx.game.views.AttackView;
-import com.mygdx.game.views.DefenceView;
-import com.mygdx.game.views.SettingsView;
+import com.mygdx.game.views.*;
 
 public class TowerDefence extends Game {
 
@@ -18,6 +16,8 @@ public class TowerDefence extends Game {
 	DefenceView defenceView;
 	SettingsView settingsView;
 	AttackView attackView;
+	BetweenRoundView betweenRoundView;
+	PlayRoundView playRoundView;
 	Music music;
 	DefenceViewController defenceViewController;
 	AttackViewController attackViewController;
@@ -31,6 +31,7 @@ public class TowerDefence extends Game {
 		defenceViewController = new DefenceViewController(defenceView);
 		attackView = new AttackView(this);
 		attackViewController = new AttackViewController(attackView);
+		betweenRoundView = new BetweenRoundView(this);
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
 		settingsView = new SettingsView(this, music);
 		this.setScreen(menuView);
@@ -46,7 +47,7 @@ public class TowerDefence extends Game {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
-				setScreen(defenceView);
+				setScreen(betweenRoundView);
 				menuView.hide();
 			}
 		});

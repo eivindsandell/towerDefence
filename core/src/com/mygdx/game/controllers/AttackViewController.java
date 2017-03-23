@@ -12,13 +12,18 @@ public class AttackViewController extends Game{
     BetweenRoundView betweenRoundView;
     public AttackViewController(AttackView attackView){
         this.attackView = attackView;
-
     }
 
 
     @Override
     public void create() {
         betweenRoundView = new BetweenRoundView(this);
+        prevMenu();
+        nextMenu();
+        nextScreen();
+    }
+
+    public void prevMenu(){
         attackView.leftButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -26,6 +31,9 @@ public class AttackViewController extends Game{
 
             }
         });
+    }
+
+    public void nextMenu(){
         attackView.rightButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -33,6 +41,8 @@ public class AttackViewController extends Game{
 
             }
         });
+    }
+    public void nextScreen(){
         attackView.doneButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

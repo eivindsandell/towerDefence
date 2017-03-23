@@ -98,7 +98,7 @@ public class BetweenRoundView implements Screen {
         //
         font.getData().setScale(4);
 
-
+        goNext();
     }
 
     private void goNext(){
