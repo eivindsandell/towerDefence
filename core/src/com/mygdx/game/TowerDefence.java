@@ -5,6 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.mygdx.game.controllers.AttackViewController;
+import com.mygdx.game.controllers.DefenceViewController;
+import com.mygdx.game.controllers.PlayRoundViewController;
+import com.mygdx.game.views.AttackView;
 import com.mygdx.game.views.DefenceView;
 import com.mygdx.game.views.SettingsView;
 
@@ -13,12 +17,20 @@ public class TowerDefence extends Game {
 	MenuView menuView;
 	DefenceView defenceView;
 	SettingsView settingsView;
+	AttackView attackView;
 	Music music;
+	DefenceViewController defenceViewController;
+	AttackViewController attackViewController;
+	PlayRoundViewController playRoundViewController;
+
 
 	@Override
 	public void create() {
 		menuView = new MenuView(this);
-		defenceView = new com.mygdx.game.views.DefenceView(this);
+		defenceView = new DefenceView(this);
+		defenceViewController = new DefenceViewController(defenceView);
+		attackView = new AttackView(this);
+		attackViewController = new AttackViewController(attackView);
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
 		settingsView = new SettingsView(this, music);
 		this.setScreen(menuView);
