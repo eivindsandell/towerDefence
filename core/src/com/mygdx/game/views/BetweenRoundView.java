@@ -7,9 +7,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.Globals;
 
 public class BetweenRoundView implements Screen {
@@ -23,10 +25,11 @@ public class BetweenRoundView implements Screen {
     private BitmapFont font;
     public TextButton nextButton;
     private TextButton.TextButtonStyle textButtonStyle;
+    DefenceView defenceView;
 
-    
+
     public BetweenRoundView(Game game){
-
+        defenceView = new DefenceView(this.game);
         globals = new Globals();
         this.game = game;
         screenHeight = globals.getScreenHeight();
@@ -35,11 +38,12 @@ public class BetweenRoundView implements Screen {
         font = new BitmapFont();
         skin = new Skin();
         createAllButtons();
+
     }
 
     @Override
     public void show() {
-
+        stage.addActor(nextButton);
     }
 
     @Override
@@ -72,7 +76,7 @@ public class BetweenRoundView implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.clear();
     }
 
     private void createAllButtons(){
@@ -93,7 +97,20 @@ public class BetweenRoundView implements Screen {
         nextButton.setPosition(widthPlacement, 100);
         //
         font.getData().setScale(4);
-        stage.addActor(nextButton);
+
 
     }
+
+    private void goNext(){
+        nextButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("Button pressed!");
+                dispose();
+                game.setScreen(defenceView);
+
+            }
+        });
+    }
+
 }
