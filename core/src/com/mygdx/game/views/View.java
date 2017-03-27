@@ -31,8 +31,6 @@ public abstract class View implements Screen {
     protected TextureAtlas buttonAtlas;
     protected TextButton.TextButtonStyle buttonStyle;
     protected TextField.TextFieldStyle textFieldStyle;
-    protected Texture tower1;
-    protected ArrayList<Image> attackers;
     protected Cell c1;
     protected Cell c2;
     protected Cell c3;
@@ -45,13 +43,7 @@ public abstract class View implements Screen {
         skin = new Skin();
         stage = new Stage();
         font = new BitmapFont();
-        tower1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
-        attackers = new ArrayList<Image>(10);
-        attackers.add(new Image(tower1));
-        attackers.add(new Image(tower1));
-        while(attackers.size()!= 10){
-            attackers.add(new Image());
-        }
+
         setUpButtons();
         setUpTable();
     }
@@ -112,6 +104,8 @@ public abstract class View implements Screen {
         table.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.75));
         table.setWidth((int)(g.getScreenWith()*0.8));
 
+        float width = table.getWidth();
+        float height = table.getHeight();
         c1 = table.add();
         c3 = table.add();
         c5 = table.add();
@@ -119,32 +113,14 @@ public abstract class View implements Screen {
         c2 = table.add();
         c4 = table.add();
         c6 = table.add();
-        float width = table.getWidth();
-        float height = table.getHeight();
         c1.top().left();
+
         c1.width(width/3).height(height/2);
         c2.width(width/3).height(height/2);
         c3.width(width/3).height(height/2);
         c4.width(width/3).height(height/2);
         c5.width(width/3).height(height/2);
         c6.width(width/3).height(height/2);
-
-        /*
-        c1.setActorBounds(x,y+height/2,width/3,height/2);
-        c2.setActorBounds(x,y,width/3,height/2);
-        c3.setActorBounds(x+width/3,y+height/2,width/3,height/2);
-        c4.setActorBounds(x+width/3,y,width/3,height/2);
-        c5.setActorBounds(x+2*width/3,y+height/2,width/3,height/2);
-        c6.setActorBounds(x+2*width/3,y,width/3,height/2);
-
-
-        c1.top().left();
-        c2.bottom().left();
-        c3.top().center();
-        c4.bottom().center();
-        c5.top().right();
-        c6.bottom().right();
-        */
 
     }
 
