@@ -2,6 +2,7 @@ package com.mygdx.game.views;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
@@ -19,6 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.Globals;
+
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.Input.Keys.R;
 
@@ -39,12 +42,22 @@ public class SettingsView implements Screen {
     private CheckBox.CheckBoxStyle checkBoxStyle;
     private TextButton.TextButtonStyle textButtonStyle;
     private Music music;
+    private Preferences preferences;
 
 
-    public SettingsView(Game game, Music music){
+    /**
+     * Constructor that takes in a instance of the game, an instance of the game music, and a list of all the sound effect
+     * When used from a class with no sound, set the values to null
+     * @param game
+     * @param music
+     * @param sfx
+     */
+    public SettingsView(Game game, Music music, ArrayList<Music> sfx){
         globals = new Globals();
         this.music = music;
         this.game = game;
+        preferences = Gdx.app.getPreferences("My Preferences");
+        preferences.flush();
         screenHeight = globals.getScreenHeight();
         screenWidth = globals.getScreenWith();
         stage = new Stage();
@@ -108,7 +121,12 @@ public class SettingsView implements Screen {
         int sfxButtonWidth = (int) (soundCheck.getWidth());
         soundCheck.setPosition(screenWidth/2-sfxButtonWidth/2, screenHeight/2-buffer);
         musicCheck.setPosition(screenWidth/2-musicButtonWidth/2, screenHeight/2+buffer);
-        musicCheck.setChecked(false);
+        if (preferences.getBoolean("musicEnabled")){
+            musicCheck.setChecked(false);
+        }
+        else {
+            musicCheck.setChecked(true);
+        }
         soundCheck.setChecked(false);
         stage.addActor(soundCheck);
         stage.addActor(musicCheck);
@@ -119,7 +137,7 @@ public class SettingsView implements Screen {
             @Override
             public boolean handle(Event event) {
                 handleSound();
-                return false;
+                return true;
             }
         });
     }
