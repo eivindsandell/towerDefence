@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.Globals;
 
 public abstract class View implements Screen {
-    private Game game;
+    public Game game;
     private Globals g = new Globals();
     private ShapeRenderer sr = new ShapeRenderer();
     private Table table;
@@ -33,7 +33,6 @@ public abstract class View implements Screen {
         skin = new Skin();
         stage = new Stage();
         font = new BitmapFont();
-        Gdx.input.setInputProcessor(stage);
         setUpButtons();
         setUpTable();
     }
@@ -51,7 +50,8 @@ public abstract class View implements Screen {
         Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         drawBackground();
-        stage.act(Gdx.graphics.getDeltaTime());
+        Gdx.input.setInputProcessor(stage);
+        //stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 
@@ -123,6 +123,10 @@ public abstract class View implements Screen {
 
         doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.25));
         doneButton.setWidth((int)(g.getScreenWith()*0.3));
+    }
+
+    Game getGame(){
+        return game;
     }
 }
 
