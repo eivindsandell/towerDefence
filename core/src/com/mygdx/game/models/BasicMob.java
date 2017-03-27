@@ -7,15 +7,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BasicMob extends Mob {
 
-    private double maxHealth = 100;
-    private double currentHealth = maxHealth;
-    private double speed = 0.01;
-    private Sprite sprite = new Sprite(new Texture(Gdx.files.internal("basicMob.png")));
-    private SpriteBatch spriteBatch;
-    private int price = 10;
-    private int damage = 1;
+    Texture texture;
 
     public BasicMob() {
+        maxHealth = 100;
+        currentHealth = maxHealth;
+        speed = 0.01;
+        texture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        Sprite sprite = new Sprite(texture);
+        SpriteBatch spriteBatch;
+        price = 10;
+        damage = 1;
     }
 
     public void setMaxHealth(double health) {

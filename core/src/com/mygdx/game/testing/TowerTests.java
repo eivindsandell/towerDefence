@@ -73,5 +73,17 @@ public class TowerTests {
 
         Tower tower = new StandardTower(range, board.getTile_board().get(2).get(4), board);
         Mob mobOne = new BasicMob();
+        Mob mobTwo = new BasicMob();
+        Mob mobThree = new BasicMob();
+        Mob mobFour = new BasicMob();
+        Mob mobFive = new BasicMob();
+
+        board.getTile_board().get(0).get(2).addMobToTile(mobOne);
+        board.getTile_board().get(2).get(3).addMobToTile(mobTwo);
+        board.getTile_board().get(2).get(3).addMobToTile(mobThree);
+        board.getTile_board().get(3).get(3).addMobToTile(mobFour);
+        board.getTile_board().get(3).get(5).addMobToTile(mobFive);
+
+        assertThat(tower.getShootableMobs(), hasItems(mobOne, mobTwo, mobThree, mobFour, mobFive));
     }
 }

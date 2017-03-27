@@ -48,5 +48,9 @@ public class Tile {
     public ArrayList<Mob> getMobsOnTile() {
         return mobsOnTile;
     }
+
+    public void addMobToTile(Mob mob) {
+        mobsOnTile.add(mob);
+    }
 }
 

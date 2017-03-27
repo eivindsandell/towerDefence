@@ -5,15 +5,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Mob {
-    private double maxHealth;
-    private double currentHealth;
-    private double speed;
-    private Sprite sprite;
-    private SpriteBatch spriteBatch;
-    private int price;
-    private int damage;
-    private double x,y;
-    private Game game;
+    protected double maxHealth;
+    protected double currentHealth;
+    protected double speed;
+    protected Sprite sprite;
+    protected SpriteBatch spriteBatch;
+    protected int price;
+    protected int damage;
+    protected double x, y;
+    protected Game game;
 
 
     public Mob() {
