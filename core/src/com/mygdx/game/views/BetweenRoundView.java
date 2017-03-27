@@ -33,7 +33,7 @@ public class BetweenRoundView implements Screen {
         globals = new Globals();
         this.game = game;
         screenHeight = globals.getScreenHeight();
-        screenWidth = globals.getScreenWith();
+        screenWidth = globals.getScreenWidth();
         stage = new Stage();
         font = new BitmapFont();
         skin = new Skin();

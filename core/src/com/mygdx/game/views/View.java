@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,6 +20,7 @@ public abstract class View implements Screen {
     protected Globals g = new Globals();
     protected ShapeRenderer sr = new ShapeRenderer();
     protected Table table;
+    protected Table boardGrid;
     protected Stage stage;
     protected Skin skin;
     protected BitmapFont font;
@@ -39,6 +39,7 @@ public abstract class View implements Screen {
     protected Cell c4;
     protected Cell c5;
     protected Cell c6;
+    protected int gridSize = 8;
 
     public View(Game game){
         this.game = game;
@@ -54,6 +55,7 @@ public abstract class View implements Screen {
         }
         setUpButtons();
         setUpTable();
+        createBoardGrid();
     }
 
     @Override
@@ -66,7 +68,7 @@ public abstract class View implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
+        Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         drawBackground();
         Gdx.input.setInputProcessor(stage);
@@ -101,16 +103,16 @@ public abstract class View implements Screen {
     private void drawBackground(){
         sr.begin(ShapeRenderer.ShapeType.Filled);
         sr.setColor(0,0,0,1);
-        sr.rect(0,0,g.getScreenWith(),g.getScreenHeight()-g.getScreenWith());
+        sr.rect(0,0,g.getScreenWidth(),g.getScreenHeight()-g.getScreenWidth());
         sr.end();
     }
     private void setUpTable(){
         table = new Table();
         table.setTouchable(Touchable.enabled);
         table.setDebug(true);
-        table.setPosition((int)(g.getScreenWith()*0.1),(int)((g.getScreenHeight()-g.getScreenWith())*0.25));
-        table.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.75));
-        table.setWidth((int)(g.getScreenWith()*0.8));
+        table.setPosition((int)(g.getScreenWidth()*0.1),(int)((g.getScreenHeight()-g.getScreenWidth())*0.25));
+        table.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.75));
+        table.setWidth((int)(g.getScreenWidth()*0.8));
 
         c1 = table.add();
         c3 = table.add();
@@ -148,6 +150,24 @@ public abstract class View implements Screen {
 
     }
 
+    private void createBoardGrid(){
+        boardGrid = new Table();
+        boardGrid.setTouchable(Touchable.enabled);
+        boardGrid.setDebug(true);
+        boardGrid.setPosition(0,(int)(g.getScreenHeight()-g.getScreenWidth()));
+        boardGrid.setHeight(g.getScreenWidth());
+        boardGrid.setWidth(g.getScreenWidth());
+        int size = g.getScreenWidth()/gridSize;
+        for (int y = 0; y < gridSize; y++) {
+            boardGrid.row();
+            for (int x = 0; x < gridSize; x++) {
+                boardGrid.add().size(size);
+            }
+        }
+        stage.addActor(boardGrid);
+
+    }
+
     private void setUpButtons(){
         buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
         skin.addRegions(buttonAtlas);
@@ -165,18 +185,18 @@ public abstract class View implements Screen {
         money = new TextField("0",textFieldStyle);
 
         leftButton.setPosition(0,0);
-        rightButton.setPosition((int)(g.getScreenWith()*0.9),0);
-        doneButton.setPosition((int)(g.getScreenWith()*0.6),0);
-        money.setPosition((int)(g.getScreenWith()*0.1),0);
+        rightButton.setPosition((int)(g.getScreenWidth()*0.9),0);
+        doneButton.setPosition((int)(g.getScreenWidth()*0.6),0);
+        money.setPosition((int)(g.getScreenWidth()*0.1),0);
 
-        leftButton.setWidth((int)(g.getScreenWith()*0.1));
-        leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWith()));
+        leftButton.setWidth((int)(g.getScreenWidth()*0.1));
+        leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWidth()));
 
         rightButton.setWidth(leftButton.getWidth());
         rightButton.setHeight(leftButton.getHeight());
 
-        doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.25));
-        doneButton.setWidth((int)(g.getScreenWith()*0.3));
+        doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.25));
+        doneButton.setWidth((int)(g.getScreenWidth()*0.3));
     }
 
     Game getGame(){
