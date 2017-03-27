@@ -14,13 +14,13 @@ import static org.junit.Assert.assertThat;
 
 public class TowerTests {
     @Test
-    public void simple() {
+    public void testShootableTilesInRange() {
         ArrayList<ArrayList<Integer>> range = new ArrayList<ArrayList<Integer>>(Arrays.asList(
-                new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 1)),
+                new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0)),
                 new ArrayList<Integer>(Arrays.asList(0, 1, 1, 1, 0)),
                 new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 0)),
                 new ArrayList<Integer>(Arrays.asList(0, 1, 1, 1, 0)),
-                new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1)))
+                new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0)))
         );
 
         Board board = new Board(
@@ -45,5 +45,10 @@ public class TowerTests {
                 board.getTile_board().get(3).get(4),
                 board.getTile_board().get(3).get(2),
                 board.getTile_board().get(2).get(2)));
+    }
+
+    @Test
+    public void testShootableMobsOnTilesInRange() {
+
     }
 }
