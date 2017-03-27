@@ -9,10 +9,12 @@ public class Board {
 
     private ArrayList<ArrayList<Tile>> tile_board;
     private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal
+    private int size;
 
     public Board(ArrayList<ArrayList<Integer>> pre_board) {
         this.pre_board = pre_board;
         tile_board = build_board(pre_board);
+        size = pre_board.size();
     }
 
     public int calculate_path(int x, int y) {
@@ -81,5 +83,9 @@ public class Board {
 
     public ArrayList<ArrayList<Integer>> getPre_board() {
         return pre_board;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
