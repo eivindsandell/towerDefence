@@ -1,5 +1,6 @@
 package com.mygdx.game.models;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -11,15 +12,11 @@ public abstract class Mob {
     private int price;
     private int damage;
     private double x,y;
+    private Game game;
 
 
-    public Mob(double health, double speed, Sprite sprite, SpriteBatch spriteBatch, int price, int damage) {
-        this.health = health;
-        this.speed = speed;
-        this.sprite = sprite;
-        this.spriteBatch = spriteBatch;
-        this.price = price;
-        this.damage = damage;
+    public Mob(Game game) {
+        this.game = game;
     }
 
     public double getHealth() {
