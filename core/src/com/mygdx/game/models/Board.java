@@ -11,7 +11,7 @@ public class Board {
     private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal
     private int size;
     private ArrayList<Tower> towersOnBoard;
-    private LinkedList<Mob> mobsOnBoard;
+    private Queue<Mob> mobsOnBoard;
     private int attackerMoney;
     private int defenderMoney;
     private double towerHealth;
@@ -89,7 +89,7 @@ public class Board {
     }
 
     public Mob nextMob() {
-        return mobsOnBoard.removeFirst();
+        return mobsOnBoard.remove();
     }
 
     public ArrayList<ArrayList<Tile>> getTile_board() {
@@ -108,7 +108,7 @@ public class Board {
         return towersOnBoard;
     }
 
-    public LinkedList<Mob> getMobsOnBoard() {
+    public Queue<Mob> getMobsOnBoard() {
         return mobsOnBoard;
     }
 
