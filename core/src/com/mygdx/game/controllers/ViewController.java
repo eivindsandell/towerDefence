@@ -1,36 +1,36 @@
-package com.mygdx.game.views;
+package com.mygdx.game.controllers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.Globals;
 
 import java.util.ArrayList;
 
-public abstract class View implements Screen {
-    public Game game;
-    protected Globals g = new Globals();
-    protected ShapeRenderer sr = new ShapeRenderer();
-    protected Table table;
-    protected Stage stage;
+public class ViewController extends Game {
+
     protected Skin skin;
+    protected Globals g = new Globals();
+
+    protected ShapeRenderer sr = new ShapeRenderer();
+
     protected BitmapFont font;
-    public TextButton rightButton;
-    public TextButton leftButton;
+    protected TextButton rightButton;
+    protected TextButton leftButton;
     protected TextField money;
-    public TextButton doneButton;
+    protected TextButton doneButton;
     protected TextureAtlas buttonAtlas;
     protected TextButton.TextButtonStyle buttonStyle;
     protected TextField.TextFieldStyle textFieldStyle;
+
+    protected int listIndex;
+
+    protected Table table;
     protected Cell c1;
     protected Cell c2;
     protected Cell c3;
@@ -38,65 +38,18 @@ public abstract class View implements Screen {
     protected Cell c5;
     protected Cell c6;
 
-    public View(Game game){
-        this.game = game;
+    protected Texture attcker1;
+    protected Texture tower1;
+    @Override
+    public void create() {
+        attcker1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
+        tower1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
         skin = new Skin();
-        stage = new Stage();
         font = new BitmapFont();
-
         setUpButtons();
         setUpTable();
     }
-
-    @Override
-    public void show() {
-        stage.addActor(table);
-        stage.addActor(leftButton);
-        stage.addActor(rightButton);
-        stage.addActor(doneButton);
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        drawBackground();
-        Gdx.input.setInputProcessor(stage);
-        //stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-        stage.clear();
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-    private void drawBackground(){
-        sr.begin(ShapeRenderer.ShapeType.Filled);
-        sr.setColor(0,0,0,1);
-        sr.rect(0,0,g.getScreenWith(),g.getScreenHeight()-g.getScreenWith());
-        sr.end();
-    }
-    private void setUpTable(){
+    protected void setUpTable(){
         table = new Table();
         table.setTouchable(Touchable.enabled);
         table.setDebug(true);
@@ -124,7 +77,7 @@ public abstract class View implements Screen {
 
     }
 
-    private void setUpButtons(){
+    protected void setUpButtons(){
         buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
         skin.addRegions(buttonAtlas);
         buttonStyle = new TextButton.TextButtonStyle();
@@ -155,10 +108,43 @@ public abstract class View implements Screen {
         doneButton.setWidth((int)(g.getScreenWith()*0.3));
     }
 
-    Game getGame(){
-        return game;
+    public void drawBackground(){
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.setColor(0,0,0,1);
+        sr.rect(0,0,g.getScreenWith(),g.getScreenHeight()-g.getScreenWith());
+        sr.end();
+    }
+    public void increaseListIndex(ArrayList<Image> list){
+        listIndex += 2;
+        if(listIndex>8){listIndex = 0;}
+        addStuffToTable(list);
     }
 
-    Table getTable(){return table;}
-}
+    public void decreaseListIndex(ArrayList<Image> list){
+        listIndex -= 2;
+        if(listIndex<0){listIndex = 8;}
+        addStuffToTable(list);
+    }
 
+    public void addStuffToTable(ArrayList<Image> list){
+        c1.setActor(null);
+        c2.setActor(null);
+        c3.setActor(null);
+        c4.setActor(null);
+        c5.setActor(null);
+        c6.setActor(null);
+
+        c1.setActor(list.get((listIndex)));
+        c3.setActor(list.get((listIndex+2)%10));
+        c5.setActor(list.get((listIndex+4)%10));
+        c2.setActor(list.get((listIndex+1)%10));
+        c4.setActor(list.get((listIndex+3)%10));
+        c6.setActor(list.get((listIndex+5)%10));
+    }
+
+    public Table getTable(){return table;}
+    public TextButton getLeftButton(){return leftButton;}
+    public TextButton getRightButton(){return rightButton;}
+    public TextButton getDoneButton(){return doneButton;}
+    public TextField getMoney(){return money;}
+}
