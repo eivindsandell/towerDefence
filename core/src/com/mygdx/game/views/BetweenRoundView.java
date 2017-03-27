@@ -13,9 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.Globals;
+import com.mygdx.game.TowerDefence;
 
 public class BetweenRoundView implements Screen {
-    Game game;
+    TowerDefence game;
     Globals globals = new Globals();
     private Stage stage;
     private Skin skin;
@@ -25,11 +26,10 @@ public class BetweenRoundView implements Screen {
     private BitmapFont font;
     public TextButton nextButton;
     private TextButton.TextButtonStyle textButtonStyle;
-    DefenceView defenceView;
 
 
-    public BetweenRoundView(Game game){
-        defenceView = new DefenceView(this.game);
+
+    public BetweenRoundView(TowerDefence game){
         globals = new Globals();
         this.game = game;
         screenHeight = globals.getScreenHeight();
@@ -107,7 +107,7 @@ public class BetweenRoundView implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed!");
                 dispose();
-                game.setScreen(defenceView);
+                game.setScreen(game.getDefenceView());
 
             }
         });
