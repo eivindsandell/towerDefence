@@ -16,6 +16,7 @@ public abstract class Tower {
     private ArrayList<ArrayList<Integer>> range;
     private ArrayList<Tile> shootable_tiles;
     private Board board;
+    private ArrayList<Mob> mobs;
 
     public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, SpriteBatch spriteBatch, int price, Tile position, Board board) {
         this.damage = damage;
@@ -89,5 +90,15 @@ public abstract class Tower {
                 }
             }
         }
+    }
+
+    public ArrayList<Mob> shootableMobs() {
+        mobs = new ArrayList<Mob>();
+        for (int i = 0; i < shootable_tiles.size(); i++) {
+            for (int j = 0; j < shootable_tiles.get(i).getMobsOnTile().size(); j++) {
+                mobs.add(shootable_tiles.get(i).getMobsOnTile().get(j));
+            }
+        }
+        return mobs;
     }
 }

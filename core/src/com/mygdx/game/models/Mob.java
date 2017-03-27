@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Mob {
-    private double health;
+    private double maxHealth;
+    private double currentHealth;
     private double speed;
     private Sprite sprite;
     private SpriteBatch spriteBatch;
@@ -15,12 +16,15 @@ public abstract class Mob {
     private Game game;
 
 
-    public Mob(Game game) {
-        this.game = game;
+    public Mob() {
     }
 
-    public double getHealth() {
-        return health;
+    public double getMaxHealth() {
+        return maxHealth;
+    }
+
+    public double getCurrentHealth() {
+        return currentHealth;
     }
 
     public double getSpeed() {

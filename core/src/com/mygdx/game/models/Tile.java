@@ -1,10 +1,13 @@
 package com.mygdx.game.models;
 
+import java.util.ArrayList;
+
 public class Tile {
 
     private int x,y;
     private int type;
     private int tiles_to_portal;
+    private ArrayList<Mob> mobsOnTile;
 
     public void setX(int x) {
         this.x = x;
@@ -23,6 +26,7 @@ public class Tile {
         this.y = y;
         this.type = type;
         this.tiles_to_portal = tiles_to_portal;
+        mobsOnTile = new ArrayList<Mob>();
     }
 
     public int getType() {
@@ -37,6 +41,12 @@ public class Tile {
         return y;
     }
 
-    public int getTiles_to_portal() { return tiles_to_portal; }
+    public int getTiles_to_portal() {
+        return tiles_to_portal;
+    }
+
+    public ArrayList<Mob> getMobsOnTile() {
+        return mobsOnTile;
+    }
 }
 
