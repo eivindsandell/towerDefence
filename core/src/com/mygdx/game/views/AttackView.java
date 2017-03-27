@@ -25,11 +25,6 @@ public class AttackView extends View{
     public void increaseListIndex(){
         listIndex += 2;
         if(listIndex>8){listIndex = 0;}
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         addStuffToTable();
     }
 
