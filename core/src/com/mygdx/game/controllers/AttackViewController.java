@@ -2,6 +2,7 @@ package com.mygdx.game.controllers;
 
 
 import com.badlogic.gdx.Game;
+import com.mygdx.game.models.BasicMob;
 import com.mygdx.game.views.AttackView;
 import com.mygdx.game.views.BetweenRoundView;
 
