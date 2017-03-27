@@ -4,7 +4,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -12,27 +14,44 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.Globals;
 
+import java.util.ArrayList;
+
 public abstract class View implements Screen {
     public Game game;
-    private Globals g = new Globals();
-    private ShapeRenderer sr = new ShapeRenderer();
-    private Table table;
-    private Stage stage;
-    private Skin skin;
-    private BitmapFont font;
+    protected Globals g = new Globals();
+    protected ShapeRenderer sr = new ShapeRenderer();
+    protected Table table;
+    protected Stage stage;
+    protected Skin skin;
+    protected BitmapFont font;
     public TextButton rightButton;
     public TextButton leftButton;
-    private TextField money;
+    protected TextField money;
     public TextButton doneButton;
-    private TextureAtlas buttonAtlas;
-    private TextButton.TextButtonStyle buttonStyle;
-    private TextField.TextFieldStyle textFieldStyle;
+    protected TextureAtlas buttonAtlas;
+    protected TextButton.TextButtonStyle buttonStyle;
+    protected TextField.TextFieldStyle textFieldStyle;
+    protected Texture tower1;
+    protected ArrayList<Image> attackers;
+    protected Cell c1;
+    protected Cell c2;
+    protected Cell c3;
+    protected Cell c4;
+    protected Cell c5;
+    protected Cell c6;
 
     public View(Game game){
         this.game = game;
         skin = new Skin();
         stage = new Stage();
         font = new BitmapFont();
+        tower1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
+        attackers = new ArrayList<Image>(10);
+        attackers.add(new Image(tower1));
+        attackers.add(new Image(tower1));
+        while(attackers.size()!= 10){
+            attackers.add(new Image());
+        }
         setUpButtons();
         setUpTable();
     }
@@ -92,6 +111,41 @@ public abstract class View implements Screen {
         table.setPosition((int)(g.getScreenWith()*0.1),(int)((g.getScreenHeight()-g.getScreenWith())*0.25));
         table.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.75));
         table.setWidth((int)(g.getScreenWith()*0.8));
+
+        c1 = table.add();
+        c3 = table.add();
+        c5 = table.add();
+        table.row();
+        c2 = table.add();
+        c4 = table.add();
+        c6 = table.add();
+        float width = table.getWidth();
+        float height = table.getHeight();
+        c1.top().left();
+        c1.width(width/3).height(height/2);
+        c2.width(width/3).height(height/2);
+        c3.width(width/3).height(height/2);
+        c4.width(width/3).height(height/2);
+        c5.width(width/3).height(height/2);
+        c6.width(width/3).height(height/2);
+
+        /*
+        c1.setActorBounds(x,y+height/2,width/3,height/2);
+        c2.setActorBounds(x,y,width/3,height/2);
+        c3.setActorBounds(x+width/3,y+height/2,width/3,height/2);
+        c4.setActorBounds(x+width/3,y,width/3,height/2);
+        c5.setActorBounds(x+2*width/3,y+height/2,width/3,height/2);
+        c6.setActorBounds(x+2*width/3,y,width/3,height/2);
+
+
+        c1.top().left();
+        c2.bottom().left();
+        c3.top().center();
+        c4.bottom().center();
+        c5.top().right();
+        c6.bottom().right();
+        */
+
     }
 
     private void setUpButtons(){
@@ -128,5 +182,7 @@ public abstract class View implements Screen {
     Game getGame(){
         return game;
     }
+
+    Table getTable(){return table;}
 }
 

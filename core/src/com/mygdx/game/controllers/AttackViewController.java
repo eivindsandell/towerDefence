@@ -6,19 +6,21 @@ import com.mygdx.game.views.AttackView;
 import com.mygdx.game.views.BetweenRoundView;
 
 public class AttackViewController extends Game{
-    AttackView attackView;
-    BetweenRoundView betweenRoundView;
+    private AttackView attackView;
+    private BetweenRoundView betweenRoundView;
 
     public AttackViewController(AttackView attackView){
+        this.attackView = attackView;
     }
 
 
     @Override
     public void create() {
         betweenRoundView = new BetweenRoundView(this);
-        attackView = new AttackView(this);
     }
 
+    public void left(){ attackView.decreaseListIndex();}
+    public void right(){ attackView.increaseListIndex();}
 
     public void attackLeftMenu(){
         System.out.println("Left menu");
