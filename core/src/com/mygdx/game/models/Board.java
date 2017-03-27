@@ -2,6 +2,7 @@ package com.mygdx.game.models;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -10,11 +11,35 @@ public class Board {
     private ArrayList<ArrayList<Tile>> tile_board;
     private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal
     private int size;
+    private ArrayList<Tower> towersOnBoard;
+    private Queue<Mob> mobsOnBoard;
+    private int attackerMoney;
+    private int defenderMoney;
+    private double towerHealth;
 
     public Board(ArrayList<ArrayList<Integer>> pre_board) {
         this.pre_board = pre_board;
         tile_board = build_board(pre_board);
         size = pre_board.size();
+        towersOnBoard = new ArrayList<Tower>();
+        mobsOnBoard = new LinkedList<Mob>();
+    }
+
+    public Board() {
+        pre_board = new ArrayList<ArrayList<Integer>>(Arrays.asList(
+                new ArrayList<Integer>(Arrays.asList(2, 0, 1, 1, 1, 1, 0, 0)),
+                new ArrayList<Integer>(Arrays.asList(1, 0, 1, 0, 0, 1, 1, 1)),
+                new ArrayList<Integer>(Arrays.asList(1, 0, 1, 1, 0, 0, 0, 1)),
+                new ArrayList<Integer>(Arrays.asList(1, 1, 0, 1, 0, 1, 1, 1)),
+                new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 0, 1, 0, 0)),
+                new ArrayList<Integer>(Arrays.asList(1, 1, 0, 1, 0, 1, 0, 3)),
+                new ArrayList<Integer>(Arrays.asList(1, 0, 0, 1, 0, 1, 0, 1)),
+                new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 0, 1, 1, 1)))
+        );
+        tile_board = build_board(pre_board);
+        size = pre_board.size();
+        towersOnBoard = new ArrayList<Tower>();
+        mobsOnBoard = new LinkedList<Mob>();
     }
 
     public int calculate_path(int x, int y) {
@@ -77,6 +102,14 @@ public class Board {
         return tile_board;
     }
 
+    public void addMobToQueue(Mob mob) {
+        mobsOnBoard.add(mob);
+    }
+
+    public Mob nextMob() {
+        return mobsOnBoard.remove();
+    }
+
     public ArrayList<ArrayList<Tile>> getTile_board() {
         return tile_board;
     }
@@ -87,5 +120,37 @@ public class Board {
 
     public int getSize() {
         return size;
+    }
+
+    public ArrayList<Tower> getTowersOnBoard() {
+        return towersOnBoard;
+    }
+
+    public Queue<Mob> getMobsOnBoard() {
+        return mobsOnBoard;
+    }
+
+    public int getAttackerMoney() {
+        return attackerMoney;
+    }
+
+    public void setAttackerMoney(int attackerMoney) {
+        this.attackerMoney = attackerMoney;
+    }
+
+    public int getDefenderMoney() {
+        return defenderMoney;
+    }
+
+    public void setDefenderMoney(int defenderMoney) {
+        this.defenderMoney = defenderMoney;
+    }
+
+    public double getTowerHealth() {
+        return towerHealth;
+    }
+
+    public void setTowerHealth(double towerHealth) {
+        this.towerHealth = towerHealth;
     }
 }
