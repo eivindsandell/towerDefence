@@ -1,9 +1,9 @@
 package com.mygdx.game.testing;
 
-import com.mygdx.game.models.BasicMob;
 import com.mygdx.game.models.Board;
 import com.mygdx.game.models.Mob;
 import com.mygdx.game.models.StandardTower;
+import com.mygdx.game.models.TestMob;
 import com.mygdx.game.models.Tower;
 
 import org.junit.Test;
@@ -72,11 +72,11 @@ public class TowerTests {
         );
 
         Tower tower = new StandardTower(range, board.getTile_board().get(2).get(4), board);
-        Mob mobOne = new BasicMob();
-        Mob mobTwo = new BasicMob();
-        Mob mobThree = new BasicMob();
-        Mob mobFour = new BasicMob();
-        Mob mobFive = new BasicMob();
+        Mob mobOne = new TestMob();
+        Mob mobTwo = new TestMob();
+        Mob mobThree = new TestMob();
+        Mob mobFour = new TestMob();
+        Mob mobFive = new TestMob();
 
         board.getTile_board().get(0).get(2).addMobToTile(mobOne);
         board.getTile_board().get(2).get(3).addMobToTile(mobTwo);
@@ -84,6 +84,6 @@ public class TowerTests {
         board.getTile_board().get(3).get(3).addMobToTile(mobFour);
         board.getTile_board().get(3).get(5).addMobToTile(mobFive);
 
-        assertThat(tower.getShootableMobs(), hasItems(mobOne, mobTwo, mobThree, mobFour, mobFive));
+        assertThat(tower.getShootableMobs(), hasItems(mobTwo, mobThree, mobFour, mobFive));
     }
 }
