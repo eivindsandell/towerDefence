@@ -1,6 +1,5 @@
 package com.mygdx.game.models;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,8 +15,7 @@ public class BasicMob extends Mob {
     private int price = 10;
     private int damage = 1;
 
-    public BasicMob(Game game) {
-        super(game);
+    public BasicMob() {
     }
 
     public void setMaxHealth(double health) {

@@ -16,8 +16,7 @@ public abstract class Mob {
     private Game game;
 
 
-    public Mob(Game game) {
-        this.game = game;
+    public Mob() {
     }
 
     public double getMaxHealth() {
