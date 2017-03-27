@@ -1,6 +1,5 @@
 package com.mygdx.game.models;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,19 +7,25 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BasicMob extends Mob {
 
-    private double health = 100;
-    private double speed = 0.01;
-    private Sprite sprite = new Sprite(new Texture(Gdx.files.internal("basicMob.png")));
-    private SpriteBatch spriteBatch;
-    private int price = 10;
-    private int damage = 1;
+    Texture texture;
 
-    public BasicMob(Game game) {
-        super(game);
+    public BasicMob() {
+        maxHealth = 100;
+        currentHealth = maxHealth;
+        speed = 0.01;
+        texture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        Sprite sprite = new Sprite(texture);
+        SpriteBatch spriteBatch;
+        price = 10;
+        damage = 1;
     }
 
-    public void setHealth(double health) {
-        this.health = health;
+    public void setMaxHealth(double health) {
+        this.maxHealth = maxHealth;
+    }
+
+    public void setCurrentHealth(double health) {
+        this.currentHealth = currentHealth;
     }
 
     public void setDamage(int damage) {
@@ -37,9 +42,13 @@ public class BasicMob extends Mob {
 
 
     @Override
-    public double getHealth() {
+    public double getMaxHealth() {
+        return maxHealth;
+    }
 
-        return health;
+    @Override
+    public double getCurrentHealth() {
+        return currentHealth;
     }
 
     @Override

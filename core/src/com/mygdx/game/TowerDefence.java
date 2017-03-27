@@ -22,22 +22,18 @@ public class TowerDefence extends Game {
 	Music music;
 	Preferences preferences;
 	Globals globals;
-	DefenceViewController defenceViewController;
-	AttackViewController attackViewController;
-	PlayRoundViewController playRoundViewController;
 
 	@Override
 	public void create() {
 		menuView = new MenuView(this);
 		globals = new Globals();
 		preferences = Gdx.app.getPreferences("My Preferences");
-		defenceView = new DefenceView(this);
-		defenceViewController = new DefenceViewController(defenceView);
 		attackView = new AttackView(this);
-		attackViewController = new AttackViewController(attackView);
 		betweenRoundView = new BetweenRoundView(this);
-		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
+		defenceView = new DefenceView(this);
+		playRoundView = new PlayRoundView(this);
 		settingsView = new SettingsView(this, music, null);
+		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
 		this.setScreen(menuView);
 		handleMusic();
 		launchGame();
@@ -95,4 +91,8 @@ public class TowerDefence extends Game {
 			}
 		});
 	}
+	public DefenceView getDefenceView(){return defenceView;}
+	public AttackView getAttackView(){return attackView;}
+	public BetweenRoundView getBetweenRoundView(){return betweenRoundView;}
+	public PlayRoundView getPlayRoundView(){return playRoundView;}
 }
