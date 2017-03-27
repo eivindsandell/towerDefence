@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BasicMob extends Mob {
 
-    private double health = 100;
+    private double maxHealth = 100;
+    private double currentHealth = maxHealth;
     private double speed = 0.01;
     private Sprite sprite = new Sprite(new Texture(Gdx.files.internal("basicMob.png")));
     private SpriteBatch spriteBatch;
@@ -19,8 +20,12 @@ public class BasicMob extends Mob {
         super(game);
     }
 
-    public void setHealth(double health) {
-        this.health = health;
+    public void setMaxHealth(double health) {
+        this.maxHealth = maxHealth;
+    }
+
+    public void setCurrentHealth(double health) {
+        this.currentHealth = currentHealth;
     }
 
     public void setDamage(int damage) {
@@ -37,9 +42,13 @@ public class BasicMob extends Mob {
 
 
     @Override
-    public double getHealth() {
+    public double getMaxHealth() {
+        return maxHealth;
+    }
 
-        return health;
+    @Override
+    public double getCurrentHealth() {
+        return currentHealth;
     }
 
     @Override

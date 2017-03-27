@@ -10,11 +10,18 @@ public class Board {
     private ArrayList<ArrayList<Tile>> tile_board;
     private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal
     private int size;
+    private ArrayList<Tower> towersOnBoard;
+    private LinkedList<Mob> mobsOnBoard;
+    private int attackerMoney;
+    private int defenderMoney;
+    private double towerHealth;
 
     public Board(ArrayList<ArrayList<Integer>> pre_board) {
         this.pre_board = pre_board;
         tile_board = build_board(pre_board);
         size = pre_board.size();
+        towersOnBoard = new ArrayList<Tower>();
+        mobsOnBoard = new LinkedList<Mob>();
     }
 
     public int calculate_path(int x, int y) {
@@ -77,6 +84,14 @@ public class Board {
         return tile_board;
     }
 
+    public void addMobToQueue(Mob mob) {
+        mobsOnBoard.add(mob);
+    }
+
+    public Mob nextMob() {
+        return mobsOnBoard.removeFirst();
+    }
+
     public ArrayList<ArrayList<Tile>> getTile_board() {
         return tile_board;
     }
@@ -87,5 +102,37 @@ public class Board {
 
     public int getSize() {
         return size;
+    }
+
+    public ArrayList<Tower> getTowersOnBoard() {
+        return towersOnBoard;
+    }
+
+    public LinkedList<Mob> getMobsOnBoard() {
+        return mobsOnBoard;
+    }
+
+    public int getAttackerMoney() {
+        return attackerMoney;
+    }
+
+    public void setAttackerMoney(int attackerMoney) {
+        this.attackerMoney = attackerMoney;
+    }
+
+    public int getDefenderMoney() {
+        return defenderMoney;
+    }
+
+    public void setDefenderMoney(int defenderMoney) {
+        this.defenderMoney = defenderMoney;
+    }
+
+    public double getTowerHealth() {
+        return towerHealth;
+    }
+
+    public void setTowerHealth(double towerHealth) {
+        this.towerHealth = towerHealth;
     }
 }
