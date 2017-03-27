@@ -8,6 +8,7 @@ import com.mygdx.game.views.BetweenRoundView;
 public class AttackViewController extends Game{
     AttackView attackView;
     BetweenRoundView betweenRoundView;
+
     public AttackViewController(AttackView attackView){
     }
 
@@ -19,6 +20,13 @@ public class AttackViewController extends Game{
     }
 
 
+    public void attackLeftMenu(){
+        System.out.println("Left menu");
+    }
+
+    public void attackRightMenu(){
+        System.out.println("Right menu");
+    }
 
 }
 
