@@ -15,8 +15,9 @@ public abstract class Tower {
     private Tile position;
     private ArrayList<ArrayList<Integer>> range;
     private ArrayList<Tile> shootable_tiles;
+    private Board board;
 
-    public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, SpriteBatch spriteBatch, int price, Tile position) {
+    public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, SpriteBatch spriteBatch, int price, Tile position, Board board) {
         this.damage = damage;
         this.speed = speed;
         this.position = position;
@@ -24,6 +25,16 @@ public abstract class Tower {
         this.sprite = sprite;
         this.spriteBatch = spriteBatch;
         this.price = price;
+        this.shootable_tiles = new ArrayList<Tile>();
+        calculate_shootable_tiles(board);
+    }
+
+    public Tower(ArrayList<ArrayList<Integer>> range, Tile position, Board board) {
+        this.range = range;
+        this.position = position;
+        this.board = board;
+        this.shootable_tiles = new ArrayList<Tile>();
+        calculate_shootable_tiles(board);
     }
 
     public double getDamage() {
@@ -58,18 +69,22 @@ public abstract class Tower {
         return position;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
     public void calculate_shootable_tiles(Board board) {
         int towerX = position.getX();
         int towerY = position.getY();
         int rangeWidth = (range.size() - 1) / 2;
-        for (int i = 0; i > range.size(); i++) {
-            for (int j = 0; j > range.get(i).size(); j++) {
+        for (int i = 0; i < range.size(); i++) {
+            for (int j = 0; j < range.get(i).size(); j++) {
                 if (range.get(i).get(j) == 1) {
                     try {
                         if (board.getTile_board().get(towerX + i - rangeWidth).get(towerY + j - rangeWidth).getType() > 0) {
-                            shootable_tiles.add(board.getTile_board().get(towerX + i).get(towerY + j));
+                            shootable_tiles.add(board.getTile_board().get(towerX + i - rangeWidth).get(towerY + j - rangeWidth));
                         }
-                    } catch (IndexOutOfBoundsException e) {
+                    } catch (ArrayIndexOutOfBoundsException e) {
                     }
                 }
             }
