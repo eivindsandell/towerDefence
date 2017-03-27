@@ -1,62 +1,55 @@
 package com.mygdx.game.views;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.Globals;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
-public class AttackView implements Screen {
-    Game game;
-    ShapeRenderer sr = new ShapeRenderer();
-    Globals g = new Globals();
+public class AttackView extends View{
+    BetweenRoundView betweenRoundView;
 
-
-    public AttackView(Game game){
-        this.game = game;
+    public AttackView(Game game) {
+        super(game);
+        betweenRoundView = new BetweenRoundView(getGame());
+        goNext();
+        prevMenu();
+        nextMenu();
     }
 
-    @Override
-    public void show() {
 
+
+
+    private void goNext(){
+        doneButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("Button pressed!");
+                dispose();
+                game.setScreen(betweenRoundView);
+
+            }
+        });
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        displayTowerMenu();
+    public void prevMenu(){
+        leftButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("Button pressed!");
+
+            }
+        });
     }
 
-    @Override
-    public void resize(int width, int height) {
+    public void nextMenu(){
+        rightButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("Button pressed!");
 
+            }
+        });
     }
 
-    @Override
-    public void pause() {
 
-    }
 
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
-    private void displayTowerMenu(){
-        sr.begin(ShapeRenderer.ShapeType.Filled);
-        sr.setColor(0,0,0,1);
-        sr.rect(0,0,g.getScreenWith(),g.getScreenHeight()-g.getScreenWith());
-        sr.end();
-    }
 }
