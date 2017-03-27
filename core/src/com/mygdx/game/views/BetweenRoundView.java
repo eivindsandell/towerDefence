@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -26,6 +27,8 @@ public class BetweenRoundView implements Screen {
     public TextButton nextButton;
     private TextButton.TextButtonStyle textButtonStyle;
     DefenceView defenceView;
+    private Label.LabelStyle labelStyle;
+    private Label infoText;
 
 
     public BetweenRoundView(Game game){
@@ -38,11 +41,13 @@ public class BetweenRoundView implements Screen {
         font = new BitmapFont();
         skin = new Skin();
         createAllButtons();
+        createText();
 
     }
 
     @Override
     public void show() {
+        stage.addActor(infoText);
         stage.addActor(nextButton);
     }
 
@@ -86,19 +91,23 @@ public class BetweenRoundView implements Screen {
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("Button");
         textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        //
-
         nextButton = new TextButton("Defence player ready", textButtonStyle);
+        nextButton.setWidth((int)(screenWidth*0.7));
+        float ratio = nextButton.getHeight() / nextButton.getWidth();
+        nextButton.setHeight((int)(ratio*nextButton.getWidth()));
         int widthPlacement = (int)(screenWidth/2-nextButton.getWidth()/2);
-        //
-
-        //
-
         nextButton.setPosition(widthPlacement, 100);
-        //
-        font.getData().setScale(4);
+        font.getData().setScale(2);
 
         goNext();
+    }
+
+    private void createText(){
+        labelStyle = new Label.LabelStyle();
+        font.setColor(0,0,0,1);
+        labelStyle.font = font;
+        infoText = new Label("Pass the phone to the defending player", labelStyle);
+        infoText.setPosition(screenWidth,screenHeight/2);
     }
 
     private void goNext(){
