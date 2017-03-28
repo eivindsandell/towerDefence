@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Globals;
 
 import java.util.ArrayList;
@@ -21,13 +22,13 @@ public class ViewController extends Game {
     public static final int LOWERCENTER = 4;
     public static final int LOWERRIGHT = 6;
 
-
     protected Skin skin;
-    protected Globals g = new Globals();
 
+    protected Globals g = new Globals();
     protected ShapeRenderer sr = new ShapeRenderer();
 
     protected BitmapFont font;
+
     protected TextButton rightButton;
     protected TextButton leftButton;
     protected TextField money;
@@ -35,10 +36,10 @@ public class ViewController extends Game {
     protected TextureAtlas buttonAtlas;
     protected TextButton.TextButtonStyle buttonStyle;
     protected TextField.TextFieldStyle textFieldStyle;
-
     protected int listIndex;
 
     protected Table boardGrid;
+
     protected int gridSize;
     protected Table table;
     protected Cell c1;
@@ -49,24 +50,27 @@ public class ViewController extends Game {
     protected Cell c6;
     protected float cellwidth;
     protected float cellheight;
-
     protected Texture attcker1;
-    protected Texture tower1;
 
+    protected Texture tower1;
     private Cell chosenCell;
 
-    @Override
-    public void create() {
-        attcker1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
-        tower1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
+    private Array<Cell> cells;
+    private Cell chosenGridCell;
 
+    public ViewController(){
+        attcker1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
+        tower1 = new Texture(Gdx.files.internal("towerDefense_tile249.png"));
+        listIndex = 0;
         skin = new Skin();
         font = new BitmapFont();
         chosenCell = null;
+        chosenGridCell = null;
         gridSize = 8;
         setUpButtons();
         setUpTable();
         createBoardGrid();
+        cells = boardGrid.getCells();
     }
 
     private void createBoardGrid(){
@@ -148,6 +152,21 @@ public class ViewController extends Game {
         sr.setColor(0,0,0,1);
         sr.rect(0,0,g.getScreenWidth(),g.getScreenHeight()-g.getScreenWidth());
         sr.end();
+    }
+
+    public void findSelectedSquare(float x, float y){
+        int row = boardGrid.getRow(y);
+        chosenGridCell = cells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
+    }
+    public void fillSelectedSquare(Cell cell){
+        if(cell!=null){
+            float x = boardGrid.getX()+cell.getActorX();
+            float y = boardGrid.getY()+cell.getActorY();
+            sr.begin(ShapeRenderer.ShapeType.Filled);
+            sr.setColor(0,0,1,1);
+            sr.rect(x,y,boardGrid.getWidth()/gridSize,boardGrid.getHeight()/gridSize);
+            sr.end();
+        }
     }
 
     public void findPressedCell(float x, float y){
@@ -235,5 +254,13 @@ public class ViewController extends Game {
 
     public Cell getChosenCell() {
         return chosenCell;
+    }
+    public Cell getChosenGridCell() {
+        return chosenGridCell;
+    }
+
+    @Override
+    public void create() {
+
     }
 }

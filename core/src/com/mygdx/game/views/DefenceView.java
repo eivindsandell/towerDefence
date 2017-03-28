@@ -19,11 +19,12 @@ public class DefenceView implements Screen{
     public DefenceView(TowerDefence game) {
         this.game = game;
         stage = new Stage();
-        defenceViewController = new DefenceViewController(this);
+        defenceViewController = new DefenceViewController();
         goNext();
         prevMenu();
         nextMenu();
         chooseTower();
+        chooseGridCell();
         defenceViewController.fillTable();
     }
 
@@ -32,7 +33,6 @@ public class DefenceView implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed!");
-                dispose();
                 game.setScreen(game.getPlayRoundView());
             }
         });
@@ -69,6 +69,15 @@ public class DefenceView implements Screen{
         });
     }
 
+    public void chooseGridCell(){
+        defenceViewController.getBoard().addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("I got clicked!");
+                defenceViewController.findSelectedSquare(x,y);
+            }
+        });
+    }
 
     @Override
     public void show() {
@@ -76,6 +85,7 @@ public class DefenceView implements Screen{
         stage.addActor(defenceViewController.getLeftButton());
         stage.addActor(defenceViewController.getRightButton());
         stage.addActor(defenceViewController.getTable());
+        stage.addActor(defenceViewController.getBoard());
     }
 
     @Override
@@ -85,6 +95,7 @@ public class DefenceView implements Screen{
         Gdx.input.setInputProcessor(stage);
         defenceViewController.drawBackground();
         defenceViewController.drawSquareAroundChosenTableCell(defenceViewController.getChosenCell());
+        defenceViewController.fillSelectedSquare(defenceViewController.getChosenGridCell());
         stage.draw();
     }
 
@@ -105,7 +116,7 @@ public class DefenceView implements Screen{
 
     @Override
     public void hide() {
-
+        stage.clear();
     }
 
     @Override

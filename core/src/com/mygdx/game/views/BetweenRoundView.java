@@ -76,7 +76,7 @@ public class BetweenRoundView implements Screen {
 
     @Override
     public void hide() {
-
+        stage.clear();
     }
 
     @Override
@@ -115,7 +115,6 @@ public class BetweenRoundView implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed!");
-                dispose();
                 game.setScreen(game.getDefenceView());
 
             }

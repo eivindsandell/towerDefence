@@ -19,7 +19,7 @@ public class AttackView implements Screen{
     public AttackView(TowerDefence game) {
         this.game = game;
         stage = new Stage();
-        attackViewController = new AttackViewController(this);
+        attackViewController = new AttackViewController();
         goNext();
         prevMenu();
         nextMenu();
@@ -105,7 +105,7 @@ public class AttackView implements Screen{
 
     @Override
     public void hide() {
-
+        stage.clear();
     }
 
     @Override

@@ -67,7 +67,9 @@ public class SettingsView implements Screen {
 
     @Override
     public void show() {
-
+        stage.addActor(soundCheck);
+        stage.addActor(musicCheck);
+        stage.addActor(backButton);
     }
 
     @Override
@@ -96,7 +98,7 @@ public class SettingsView implements Screen {
 
     @Override
     public void hide() {
-
+        stage.clear();
     }
 
     @Override
@@ -125,8 +127,6 @@ public class SettingsView implements Screen {
             musicCheck.setChecked(true);
         }
         soundCheck.setChecked(false);
-        stage.addActor(soundCheck);
-        stage.addActor(musicCheck);
     }
 
     private void checkBoxListener(){
@@ -168,8 +168,6 @@ public class SettingsView implements Screen {
         backButton.setPosition(widthPlacement, 100);
         //
         font.getData().setScale(4);
-        stage.addActor(backButton);
-
     }
 
 }

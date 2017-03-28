@@ -6,9 +6,6 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.mygdx.game.controllers.AttackViewController;
-import com.mygdx.game.controllers.DefenceViewController;
-import com.mygdx.game.controllers.PlayRoundViewController;
 import com.mygdx.game.views.*;
 
 public class TowerDefence extends Game {
@@ -28,9 +25,9 @@ public class TowerDefence extends Game {
 		menuView = new MenuView(this);
 		globals = new Globals();
 		preferences = Gdx.app.getPreferences("My Preferences");
+		defenceView = new DefenceView(this);
 		attackView = new AttackView(this);
 		betweenRoundView = new BetweenRoundView(this);
-		defenceView = new DefenceView(this);
 		playRoundView = new PlayRoundView(this);
 		settingsView = new SettingsView(this, music, null);
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
