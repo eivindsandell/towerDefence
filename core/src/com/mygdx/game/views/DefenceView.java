@@ -1,22 +1,15 @@
 package com.mygdx.game.views;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.TowerDefence;
-import com.mygdx.game.controllers.AttackViewController;
 import com.mygdx.game.controllers.DefenceViewController;
-
-import java.util.ArrayList;
 
 public class DefenceView implements Screen{
     private DefenceViewController defenceViewController;
@@ -51,7 +44,6 @@ public class DefenceView implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed!");
-                defenceViewController.attackLeftMenu();
                 defenceViewController.left();
             }
         });
@@ -62,7 +54,6 @@ public class DefenceView implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed!");
-                defenceViewController.attackRightMenu();
                 defenceViewController.right();
             }
         });
@@ -73,7 +64,7 @@ public class DefenceView implements Screen{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("I got clicked!");
-
+                defenceViewController.findPressedCell(x,y);
             }
         });
     }
@@ -93,6 +84,7 @@ public class DefenceView implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
         defenceViewController.drawBackground();
+        defenceViewController.drawSquareAroundChosenTableCell(defenceViewController.getChosenCell());
         stage.draw();
     }
 

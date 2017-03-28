@@ -1,21 +1,15 @@
 package com.mygdx.game.views;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.AttackViewController;
-
-import java.util.ArrayList;
 
 public class AttackView implements Screen{
     private AttackViewController attackViewController;
@@ -50,7 +44,6 @@ public class AttackView implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed!");
-                attackViewController.attackLeftMenu();
                 attackViewController.left();
             }
         });
@@ -61,7 +54,6 @@ public class AttackView implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed!");
-                attackViewController.attackRightMenu();
                 attackViewController.right();
             }
         });
@@ -72,8 +64,7 @@ public class AttackView implements Screen{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("I got clicked!");
-
-
+                attackViewController.findPressedCell(x,y);
             }
         });
     }
@@ -93,6 +84,7 @@ public class AttackView implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
         attackViewController.drawBackground();
+        attackViewController.drawSquareAroundChosenTableCell(attackViewController.getChosenCell());
         stage.draw();
     }
 

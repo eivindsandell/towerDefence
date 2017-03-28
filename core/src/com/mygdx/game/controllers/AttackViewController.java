@@ -49,12 +49,5 @@ public class AttackViewController extends ViewController{
         increaseListIndex(attackers);
     }
 
-    public void attackLeftMenu(){
-        System.out.println("Left menu");
-    }
-
-    public void attackRightMenu(){
-        System.out.println("Right menu");
-    }
 }
 

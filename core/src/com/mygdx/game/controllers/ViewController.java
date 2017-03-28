@@ -14,6 +14,14 @@ import java.util.ArrayList;
 
 public class ViewController extends Game {
 
+    public static final int UPPERLEFT = 1;
+    public static final int UPPERCENTER = 3;
+    public static final int UPPERRIGHT = 5;
+    public static final int LOWERLEFT = 2;
+    public static final int LOWERCENTER = 4;
+    public static final int LOWERRIGHT = 6;
+
+
     protected Skin skin;
     protected Globals g = new Globals();
 
@@ -39,9 +47,13 @@ public class ViewController extends Game {
     protected Cell c4;
     protected Cell c5;
     protected Cell c6;
+    protected float cellwidth;
+    protected float cellheight;
 
     protected Texture attcker1;
     protected Texture tower1;
+
+    private Cell chosenCell;
 
     @Override
     public void create() {
@@ -50,6 +62,7 @@ public class ViewController extends Game {
 
         skin = new Skin();
         font = new BitmapFont();
+        chosenCell = null;
         gridSize = 8;
         setUpButtons();
         setUpTable();
@@ -80,8 +93,8 @@ public class ViewController extends Game {
         table.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.75));
         table.setWidth((int)(g.getScreenWidth()*0.8));
 
-        float width = table.getWidth();
-        float height = table.getHeight();
+        cellwidth = table.getWidth()/3;
+        cellheight = table.getHeight()/2;
         c1 = table.add();
         c3 = table.add();
         c5 = table.add();
@@ -90,12 +103,12 @@ public class ViewController extends Game {
         c4 = table.add();
         c6 = table.add();
         c1.top().left();
-        c1.width(width/3).height(height/2);
-        c2.width(width/3).height(height/2);
-        c3.width(width/3).height(height/2);
-        c4.width(width/3).height(height/2);
-        c5.width(width/3).height(height/2);
-        c6.width(width/3).height(height/2);
+        c1.width(cellwidth).height(cellheight);
+        c2.width(cellwidth).height(cellheight);
+        c3.width(cellwidth).height(cellheight);
+        c4.width(cellwidth).height(cellheight);
+        c5.width(cellwidth).height(cellheight);
+        c6.width(cellwidth).height(cellheight);
 
     }
 
@@ -136,15 +149,57 @@ public class ViewController extends Game {
         sr.rect(0,0,g.getScreenWidth(),g.getScreenHeight()-g.getScreenWidth());
         sr.end();
     }
+
+    public void findPressedCell(float x, float y){
+        System.out.print("Touched x = ");
+        System.out.print(x);
+        System.out.print(" | y = ");
+        System.out.println(y);
+        System.out.println(cellwidth);
+        boolean rightCell = x > (2*cellwidth);
+        boolean centerCell = x > (cellwidth);
+        //if in first row
+        if (y > cellheight){
+            if (centerCell) {chosenCell = c3;}
+            else{chosenCell = c1;}
+            if (rightCell){chosenCell = c5;}
+        }else{
+            if (centerCell){chosenCell = c4;}
+            else{chosenCell = c2;}
+            if (rightCell){chosenCell = c6;}
+        }
+        System.out.println(getCellInt(chosenCell));
+    }
+    private int getCellInt(Cell c){
+        if(c==c1){return UPPERLEFT;}
+        if(c==c3){return UPPERCENTER;}
+        if(c==c5){return UPPERRIGHT;}
+        if(c==c2){return LOWERLEFT;}
+        if(c==c4){return LOWERCENTER;}
+        else{return LOWERRIGHT;}
+    }
+    public void drawSquareAroundChosenTableCell(Cell cell) {
+        if(cell!=null){
+            float x = table.getX()+cell.getActorX();
+            float y = table.getY()+cell.getActorY();
+            sr.begin(ShapeRenderer.ShapeType.Filled);
+            sr.setColor(0, 1, 0, 1);
+            sr.rect(x, y, cellwidth, cellheight);
+            sr.end();
+        }
+    }
+
     public void increaseListIndex(ArrayList<Image> list){
         listIndex += 2;
         if(listIndex>8){listIndex = 0;}
+        chosenCell = null;
         addStuffToTable(list);
     }
 
     public void decreaseListIndex(ArrayList<Image> list){
         listIndex -= 2;
         if(listIndex<0){listIndex = 8;}
+        chosenCell = null;
         addStuffToTable(list);
     }
 
@@ -168,23 +223,17 @@ public class ViewController extends Game {
         return table;
     }
 
-    public TextButton getLeftButton(){
-        return leftButton;
-    }
+    public TextButton getLeftButton(){return leftButton; }
 
-    public TextButton getRightButton(){
-        return rightButton;
-    }
+    public TextButton getRightButton(){return rightButton; }
 
-    public TextButton getDoneButton(){
-        return doneButton;
-    }
+    public TextButton getDoneButton(){return doneButton; }
 
-    public TextField getMoney(){
-        return money;
-    }
+    public TextField getMoney(){return money;}
 
-    public Table getBoard(){
-        return boardGrid;
+    public Table getBoard(){return boardGrid;}
+
+    public Cell getChosenCell() {
+        return chosenCell;
     }
 }
