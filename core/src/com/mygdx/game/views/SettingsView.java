@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -22,8 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.Globals;
 
 import java.util.ArrayList;
-
-import static com.badlogic.gdx.Input.Keys.R;
 
 
 public class SettingsView implements Screen {
@@ -59,7 +56,7 @@ public class SettingsView implements Screen {
         preferences = Gdx.app.getPreferences("My Preferences");
         preferences.flush();
         screenHeight = globals.getScreenHeight();
-        screenWidth = globals.getScreenWith();
+        screenWidth = globals.getScreenWidth();
         stage = new Stage();
         font = new BitmapFont();
         skin = new Skin();

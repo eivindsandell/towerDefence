@@ -30,6 +30,8 @@ public class ViewController extends Game {
 
     protected int listIndex;
 
+    protected Table boardGrid;
+    protected int gridSize;
     protected Table table;
     protected Cell c1;
     protected Cell c2;
@@ -48,16 +50,35 @@ public class ViewController extends Game {
 
         skin = new Skin();
         font = new BitmapFont();
+        gridSize = 8;
         setUpButtons();
         setUpTable();
+        createBoardGrid();
     }
+
+    private void createBoardGrid(){
+        boardGrid = new Table();
+        boardGrid.setTouchable(Touchable.enabled);
+        boardGrid.setDebug(true);
+        boardGrid.setPosition(0,(int)(g.getScreenHeight()-g.getScreenWidth()));
+        boardGrid.setHeight(g.getScreenWidth());
+        boardGrid.setWidth(g.getScreenWidth());
+        int size = g.getScreenWidth()/gridSize;
+        for (int y = 0; y < gridSize; y++) {
+            boardGrid.row();
+            for (int x = 0; x < gridSize; x++) {
+                boardGrid.add().size(size);
+            }
+        }
+    }
+
     protected void setUpTable(){
         table = new Table();
         table.setTouchable(Touchable.enabled);
         table.setDebug(true);
-        table.setPosition((int)(g.getScreenWith()*0.1),(int)((g.getScreenHeight()-g.getScreenWith())*0.25));
-        table.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.75));
-        table.setWidth((int)(g.getScreenWith()*0.8));
+        table.setPosition((int)(g.getScreenWidth()*0.1),(int)((g.getScreenHeight()-g.getScreenWidth())*0.25));
+        table.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.75));
+        table.setWidth((int)(g.getScreenWidth()*0.8));
 
         float width = table.getWidth();
         float height = table.getHeight();
@@ -95,24 +116,24 @@ public class ViewController extends Game {
         money = new TextField("0",textFieldStyle);
 
         leftButton.setPosition(0,0);
-        rightButton.setPosition((int)(g.getScreenWith()*0.9),0);
-        doneButton.setPosition((int)(g.getScreenWith()*0.6),0);
-        money.setPosition((int)(g.getScreenWith()*0.1),0);
+        rightButton.setPosition((int)(g.getScreenWidth()*0.9),0);
+        doneButton.setPosition((int)(g.getScreenWidth()*0.6),0);
+        money.setPosition((int)(g.getScreenWidth()*0.1),0);
 
-        leftButton.setWidth((int)(g.getScreenWith()*0.1));
-        leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWith()));
+        leftButton.setWidth((int)(g.getScreenWidth()*0.1));
+        leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWidth()));
 
         rightButton.setWidth(leftButton.getWidth());
         rightButton.setHeight(leftButton.getHeight());
 
-        doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWith())*0.25));
-        doneButton.setWidth((int)(g.getScreenWith()*0.3));
+        doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.25));
+        doneButton.setWidth((int)(g.getScreenWidth()*0.3));
     }
 
     public void drawBackground(){
         sr.begin(ShapeRenderer.ShapeType.Filled);
         sr.setColor(0,0,0,1);
-        sr.rect(0,0,g.getScreenWith(),g.getScreenHeight()-g.getScreenWith());
+        sr.rect(0,0,g.getScreenWidth(),g.getScreenHeight()-g.getScreenWidth());
         sr.end();
     }
     public void increaseListIndex(ArrayList<Image> list){
@@ -143,9 +164,27 @@ public class ViewController extends Game {
         c6.setActor(list.get((listIndex+5)%10));
     }
 
-    public Table getTable(){return table;}
-    public TextButton getLeftButton(){return leftButton;}
-    public TextButton getRightButton(){return rightButton;}
-    public TextButton getDoneButton(){return doneButton;}
-    public TextField getMoney(){return money;}
+    public Table getTable(){
+        return table;
+    }
+
+    public TextButton getLeftButton(){
+        return leftButton;
+    }
+
+    public TextButton getRightButton(){
+        return rightButton;
+    }
+
+    public TextButton getDoneButton(){
+        return doneButton;
+    }
+
+    public TextField getMoney(){
+        return money;
+    }
+
+    public Table getBoard(){
+        return boardGrid;
+    }
 }

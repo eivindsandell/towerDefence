@@ -4,20 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class Globals {
-    Integer screenWith;
+    Integer screenWidth;
     Integer screenHeight;
     boolean soundEnabled;
     private Preferences preferences;
 
     public Globals(){
-        screenWith = Gdx.graphics.getWidth();
+        screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
         preferences = Gdx.app.getPreferences("My Preferences");
         preferences.putBoolean("musicEnabled", true);
     }
 
-    public Integer getScreenWith() {
-        return screenWith;
+    public Integer getScreenWidth() {
+        return screenWidth;
     }
 
     public Integer getScreenHeight() {
