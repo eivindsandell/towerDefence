@@ -40,10 +40,12 @@ public class ViewController extends Game {
 
     protected Texture attcker1;
     protected Texture tower1;
+
     @Override
     public void create() {
         attcker1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
         tower1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
+
         skin = new Skin();
         font = new BitmapFont();
         setUpButtons();
@@ -67,7 +69,6 @@ public class ViewController extends Game {
         c4 = table.add();
         c6 = table.add();
         c1.top().left();
-
         c1.width(width/3).height(height/2);
         c2.width(width/3).height(height/2);
         c3.width(width/3).height(height/2);

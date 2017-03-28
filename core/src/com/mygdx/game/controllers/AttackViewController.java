@@ -34,6 +34,7 @@ public class AttackViewController extends ViewController{
         while(attackers.size()!= 10){
             attackers.add(new Image());
         }
+        doneButton.setText("Done!");
     }
 
     public void fillTable(){

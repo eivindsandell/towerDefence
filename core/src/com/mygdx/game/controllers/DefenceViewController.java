@@ -31,7 +31,7 @@ public class DefenceViewController extends ViewController{
     @Override
     public void create() {
         super.create();
-        tower1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
+        tower1 = new Texture(Gdx.files.internal("towerDefense_tile249.png"));
         towers = new ArrayList<Image>(10);
         towers.add(new Image(tower1));
         towers.add(new Image(tower1));
@@ -51,12 +51,5 @@ public class DefenceViewController extends ViewController{
         increaseListIndex(towers);
     }
 
-    public void attackLeftMenu(){
-        System.out.println("Left menu");
-    }
-
-    public void attackRightMenu(){
-        System.out.println("Right menu");
-    }
 }
 

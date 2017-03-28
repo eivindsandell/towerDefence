@@ -6,10 +6,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.AttackViewController;
 
@@ -27,6 +29,7 @@ public class AttackView implements Screen{
         goNext();
         prevMenu();
         nextMenu();
+        chooseMob();
         attackViewController.fillTable();
     }
 
@@ -64,6 +67,16 @@ public class AttackView implements Screen{
         });
     }
 
+    public void chooseMob(){
+        attackViewController.getTable().addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("I got clicked!");
+
+
+            }
+        });
+    }
 
     @Override
     public void show() {
