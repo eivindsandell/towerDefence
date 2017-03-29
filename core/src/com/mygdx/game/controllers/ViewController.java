@@ -158,11 +158,12 @@ public class ViewController extends Game {
 
     public void findPressedCell(float x, float y){
         int row = table.getRow(y);
+        Cell prevcell = chosenCell;
         chosenCell = tableCells.get((row*3)+(int)(x/(cellwidth)));
-        System.out.println(chosenCell.getActor().getName());
-        System.out.println(g.getMobActorName());
-        System.out.println(g.getTowerActorName());
         if(chosenCell.getActor().getName() != g.getTowerActorName()&&chosenCell.getActor().getName() != g.getMobActorName()){
+            chosenCell = null;
+        }
+        if(chosenCell == prevcell){
             chosenCell = null;
         }
     }

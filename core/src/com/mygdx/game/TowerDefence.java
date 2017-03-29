@@ -15,16 +15,16 @@ import com.mygdx.game.views.SettingsView;
 
 public final class TowerDefence extends Game {
 
-	MenuView menuView;
-	DefenceView defenceView;
-	SettingsView settingsView;
-	AttackView attackView;
-	BetweenRoundView betweenRoundView;
-	PlayRoundView playRoundView;
-	Music music;
-	Preferences preferences;
-	Globals globals;
-	Board board;
+	private MenuView menuView;
+	private DefenceView defenceView;
+	private SettingsView settingsView;
+	private AttackView attackView;
+	private BetweenRoundView betweenRoundView;
+	private PlayRoundView playRoundView;
+	private Music music;
+	private Preferences preferences;
+	private Globals globals;
+	private Board board;
 
 	@Override
 	public void create() {
