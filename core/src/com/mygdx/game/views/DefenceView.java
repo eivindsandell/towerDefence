@@ -94,7 +94,7 @@ public class DefenceView implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
         defenceViewController.drawBackground();
-        defenceViewController.drawSquareAroundChosenTableCell(defenceViewController.getChosenCell());
+        defenceViewController.drawSquareAroundChosenTableCell();
         defenceViewController.fillSelectedGridSquare(defenceViewController.getChosenGridCell());
         stage.draw();
     }

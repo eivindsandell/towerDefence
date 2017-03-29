@@ -1,5 +1,6 @@
 package com.mygdx.game.models;
 
+import com.mygdx.game.models.mobs.Mob;
 import java.util.ArrayList;
 
 public class Tile {
