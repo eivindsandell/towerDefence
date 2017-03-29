@@ -77,8 +77,8 @@ public abstract class Tower extends Actor {
     }
 
     public void calculate_shootable_tiles(Board board) {
-        int towerX = position.getX();
-        int towerY = position.getY();
+        int towerX = position.getXpos();
+        int towerY = position.getYpos();
         int rangeWidth = (range.size() - 1) / 2;
         for (int i = 0; i < range.size(); i++) {
             for (int j = 0; j < range.get(i).size(); j++) {
@@ -111,8 +111,8 @@ public abstract class Tower extends Actor {
     }
 
     private void fireProjectile(Mob mob) {
-        int originX = position.getX();
-        int originY = position.getY();
+        int originX = position.getXpos();
+        int originY = position.getYpos();
         double targetX = mob.getXPos();
         double tagertY = mob.getY();
     }

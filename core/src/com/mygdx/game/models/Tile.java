@@ -35,15 +35,15 @@ public class Tile extends Actor {
     public int getType() {
         return type;
     }
-    /*
-    public int getX() {
+
+    public int getXpos() {
         return x;
     }
 
-    public int getY() {
+    public int getYpos() {
         return y;
     }
-    */
+
     public int getTiles_to_portal() {
         return tiles_to_portal;
     }
@@ -59,5 +59,6 @@ public class Tile extends Actor {
     public void removeMobFromTile(Mob mob) {
         mobsOnTile.remove(mobsOnTile.indexOf(mob));
     }
+
 }
 

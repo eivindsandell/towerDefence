@@ -1,6 +1,9 @@
 package com.mygdx.game.models;
 
 
+import com.mygdx.game.models.mobs.Mob;
+import com.mygdx.game.models.towers.Tower;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -11,8 +14,8 @@ public final class Board {
     private ArrayList<ArrayList<Tile>> tile_board;
     private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal
     private int size;
-    private ArrayList<com.mygdx.game.models.towers.Tower> towersOnBoard;
-    private Queue<com.mygdx.game.models.mobs.Mob> mobsOnBoard;
+    private ArrayList<Tower> towersOnBoard;
+    private Queue<Mob> mobsOnBoard;
     private int attackerMoney;
     private int defenderMoney;
     private double towerHealth;
