@@ -11,8 +11,8 @@ public class Board {
     private ArrayList<ArrayList<Tile>> tile_board;
     private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal
     private int size;
-    private ArrayList<Tower> towersOnBoard;
-    private Queue<Mob> mobsOnBoard;
+    private ArrayList<com.mygdx.game.models.towers.Tower> towersOnBoard;
+    private Queue<com.mygdx.game.models.mobs.Mob> mobsOnBoard;
     private int attackerMoney;
     private int defenderMoney;
     private double towerHealth;
@@ -21,8 +21,8 @@ public class Board {
         this.pre_board = pre_board;
         tile_board = build_board(pre_board);
         size = pre_board.size();
-        towersOnBoard = new ArrayList<Tower>();
-        mobsOnBoard = new LinkedList<Mob>();
+        towersOnBoard = new ArrayList<com.mygdx.game.models.towers.Tower>();
+        mobsOnBoard = new LinkedList<com.mygdx.game.models.mobs.Mob>();
     }
 
     public Board() {
@@ -38,8 +38,8 @@ public class Board {
         );
         tile_board = build_board(pre_board);
         size = pre_board.size();
-        towersOnBoard = new ArrayList<Tower>();
-        mobsOnBoard = new LinkedList<Mob>();
+        towersOnBoard = new ArrayList<com.mygdx.game.models.towers.Tower>();
+        mobsOnBoard = new LinkedList<com.mygdx.game.models.mobs.Mob>();
     }
 
     public int calculate_path(int x, int y) {
@@ -102,11 +102,11 @@ public class Board {
         return tile_board;
     }
 
-    public void addMobToQueue(Mob mob) {
+    public void addMobToQueue(com.mygdx.game.models.mobs.Mob mob) {
         mobsOnBoard.add(mob);
     }
 
-    public Mob nextMob() {
+    public com.mygdx.game.models.mobs.Mob nextMob() {
         return mobsOnBoard.remove();
     }
 
@@ -122,11 +122,11 @@ public class Board {
         return size;
     }
 
-    public ArrayList<Tower> getTowersOnBoard() {
+    public ArrayList<com.mygdx.game.models.towers.Tower> getTowersOnBoard() {
         return towersOnBoard;
     }
 
-    public Queue<Mob> getMobsOnBoard() {
+    public Queue<com.mygdx.game.models.mobs.Mob> getMobsOnBoard() {
         return mobsOnBoard;
     }
 

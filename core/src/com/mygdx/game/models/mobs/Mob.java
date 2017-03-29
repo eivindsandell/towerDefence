@@ -1,4 +1,4 @@
-package com.mygdx.game.models;
+package com.mygdx.game.models.mobs;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;

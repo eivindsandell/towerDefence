@@ -1,7 +1,9 @@
-package com.mygdx.game.models;
+package com.mygdx.game.models.towers;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.models.Board;
+import com.mygdx.game.models.Tile;
+import com.mygdx.game.models.mobs.Mob;
 
 import java.util.ArrayList;
 
@@ -9,9 +11,7 @@ public abstract class Tower {
     private double damage;
     private double speed;
     private Sprite sprite;
-    private SpriteBatch spriteBatch;
     private int price;
-    private ArrayList<Tile> road;
     private Tile position;
     private ArrayList<ArrayList<Integer>> range;
     private ArrayList<Tile> shootable_tiles;
@@ -23,25 +23,25 @@ public abstract class Tower {
     private int type = 0;
 
 
-
-    public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, SpriteBatch spriteBatch, int price, Tile position, Board board) {
+    public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, int price, Tile position, Board board, int type) {
         this.damage = damage;
         this.speed = speed;
         this.position = position;
         this.range = range;
         this.sprite = sprite;
-        this.spriteBatch = spriteBatch;
         this.price = price;
         this.shootable_tiles = new ArrayList<Tile>();
         calculate_shootable_tiles(board);
+        this.type = type;
     }
 
-    public Tower(ArrayList<ArrayList<Integer>> range, Tile position, Board board) {
+    public Tower(ArrayList<ArrayList<Integer>> range, Tile position, Board board, int type) {
         this.range = range;
         this.position = position;
         this.board = board;
         this.shootable_tiles = new ArrayList<Tile>();
         calculate_shootable_tiles(board);
+        this.type = type;
     }
 
     public double getDamage() {
@@ -58,10 +58,6 @@ public abstract class Tower {
 
     public Sprite getSprite() {
         return sprite;
-    }
-
-    public SpriteBatch getSpriteBatch() {
-        return spriteBatch;
     }
 
     public int getPrice() {

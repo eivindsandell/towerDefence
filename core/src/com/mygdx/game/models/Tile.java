@@ -7,7 +7,7 @@ public class Tile {
     private int x,y;
     private int type;
     private int tiles_to_portal;
-    private ArrayList<Mob> mobsOnTile;
+    private ArrayList<com.mygdx.game.models.mobs.Mob> mobsOnTile;
 
     public void setX(int x) {
         this.x = x;
@@ -26,7 +26,7 @@ public class Tile {
         this.y = y;
         this.type = type;
         this.tiles_to_portal = tiles_to_portal;
-        mobsOnTile = new ArrayList<Mob>();
+        mobsOnTile = new ArrayList<com.mygdx.game.models.mobs.Mob>();
     }
 
     public int getType() {
@@ -45,11 +45,11 @@ public class Tile {
         return tiles_to_portal;
     }
 
-    public ArrayList<Mob> getMobsOnTile() {
+    public ArrayList<com.mygdx.game.models.mobs.Mob> getMobsOnTile() {
         return mobsOnTile;
     }
 
-    public void addMobToTile(Mob mob) {
+    public void addMobToTile(com.mygdx.game.models.mobs.Mob mob) {
         mobsOnTile.add(mob);
     }
 }

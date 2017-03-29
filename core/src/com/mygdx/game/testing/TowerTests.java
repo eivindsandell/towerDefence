@@ -1,10 +1,10 @@
 package com.mygdx.game.testing;
 
 import com.mygdx.game.models.Board;
-import com.mygdx.game.models.Mob;
-import com.mygdx.game.models.StandardTower;
-import com.mygdx.game.models.TestMob;
-import com.mygdx.game.models.Tower;
+import com.mygdx.game.models.mobs.Mob;
+import com.mygdx.game.models.mobs.TestMob;
+import com.mygdx.game.models.towers.StandardTower;
+import com.mygdx.game.models.towers.Tower;
 
 import org.junit.Test;
 
@@ -38,25 +38,21 @@ public class TowerTests {
                 )
         );
 
-        Tower tower = new StandardTower(range, board.getTile_board().get(1).get(3), board);
+        Tower tower = new StandardTower(range, board.getTile_board().get(1).get(3), board, 0);
 
         assertThat(tower.getShootable_tiles(), hasItems(
-                board.getTile_board().get(0).get(2),
                 board.getTile_board().get(0).get(3),
-                board.getTile_board().get(3).get(4),
-                board.getTile_board().get(3).get(2),
-                board.getTile_board().get(2).get(2)));
+                board.getTile_board().get(1).get(2),
+                board.getTile_board().get(1).get(4)));
     }
 
     @Test
     public void testShootableMobsOnTilesInRange() {
         ArrayList<ArrayList<Integer>> range = new ArrayList<ArrayList<Integer>>(Arrays.asList(
-                new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0)),
-                new ArrayList<Integer>(Arrays.asList(0, 1, 1, 1, 0)),
-                new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 0)),
-                new ArrayList<Integer>(Arrays.asList(0, 1, 1, 1, 0)),
-                new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0)))
-        );
+                new ArrayList<Integer>(Arrays.asList(1, 1, 1)),
+                new ArrayList<Integer>(Arrays.asList(1, 0, 1)),
+                new ArrayList<Integer>(Arrays.asList(1, 1, 1))
+        ));
 
         Board board = new Board(
                 new ArrayList<ArrayList<Integer>>(Arrays.asList(
@@ -71,7 +67,7 @@ public class TowerTests {
                 )
         );
 
-        Tower tower = new StandardTower(range, board.getTile_board().get(2).get(4), board);
+        Tower tower = new StandardTower(range, board.getTile_board().get(2).get(4), board, 0);
         Mob mobOne = new TestMob();
         Mob mobTwo = new TestMob();
         Mob mobThree = new TestMob();
