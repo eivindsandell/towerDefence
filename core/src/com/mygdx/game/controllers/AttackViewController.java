@@ -1,22 +1,12 @@
 package com.mygdx.game.controllers;
 
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
-import java.util.ArrayList;
-
 public class AttackViewController extends ViewController{
 
-    private ArrayList<Image> attackers;
 
     public AttackViewController(){
         super();
-        attackers = new ArrayList<Image>(10);
-        attackers.add(new Image(attcker1));
-        attackers.add(new Image(attcker1));
-        while(attackers.size()!= 10){
-            attackers.add(new Image());
-        }
+        fillTable();
         doneButton.setText("Done!");
     }
 
@@ -26,15 +16,15 @@ public class AttackViewController extends ViewController{
     }
 
     public void fillTable(){
-        addStuffToTable(attackers);
+        addStuffToTable(g.getAttackers(),g.getQuestionMarkMex());
     }
 
     public void left(){
-        decreaseListIndex(attackers);
+        decreaseListIndex(g.getAttackers(),g.getQuestionMarkMex());
     }
 
     public void right(){
-        increaseListIndex(attackers);
+        increaseListIndex(g.getAttackers(),g.getQuestionMarkMex());
     }
 
 }

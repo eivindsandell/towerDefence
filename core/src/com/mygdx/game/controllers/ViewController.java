@@ -15,13 +15,6 @@ import java.util.ArrayList;
 
 public class ViewController extends Game {
 
-    public static final int UPPERLEFT = 1;
-    public static final int UPPERCENTER = 3;
-    public static final int UPPERRIGHT = 5;
-    public static final int LOWERLEFT = 2;
-    public static final int LOWERCENTER = 4;
-    public static final int LOWERRIGHT = 6;
-
     protected Skin skin;
 
     protected Globals g = new Globals();
@@ -42,25 +35,17 @@ public class ViewController extends Game {
 
     protected int gridSize;
     protected Table table;
-    protected Cell c1;
-    protected Cell c2;
-    protected Cell c3;
-    protected Cell c4;
-    protected Cell c5;
-    protected Cell c6;
+
     protected float cellwidth;
     protected float cellheight;
-    protected Texture attcker1;
 
-    protected Texture tower1;
+    private Array<Cell> tableCells;
     private Cell chosenCell;
 
-    private Array<Cell> cells;
+    private Array<Cell> gridCells;
     private Cell chosenGridCell;
 
     public ViewController(){
-        attcker1 = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
-        tower1 = new Texture(Gdx.files.internal("towerDefense_tile249.png"));
         listIndex = 0;
         skin = new Skin();
         font = new BitmapFont();
@@ -70,7 +55,8 @@ public class ViewController extends Game {
         setUpButtons();
         setUpTable();
         createBoardGrid();
-        cells = boardGrid.getCells();
+        gridCells = boardGrid.getCells();
+        tableCells = table.getCells();
     }
 
     private void createBoardGrid(){
@@ -99,21 +85,14 @@ public class ViewController extends Game {
 
         cellwidth = table.getWidth()/3;
         cellheight = table.getHeight()/2;
-        c1 = table.add();
-        c3 = table.add();
-        c5 = table.add();
-        table.row();
-        c2 = table.add();
-        c4 = table.add();
-        c6 = table.add();
-        c1.top().left();
-        c1.width(cellwidth).height(cellheight);
-        c2.width(cellwidth).height(cellheight);
-        c3.width(cellwidth).height(cellheight);
-        c4.width(cellwidth).height(cellheight);
-        c5.width(cellwidth).height(cellheight);
-        c6.width(cellwidth).height(cellheight);
 
+        table.add().width(cellwidth).height(cellheight).top().left();
+        table.add().width(cellwidth).height(cellheight);
+        table.add().width(cellwidth).height(cellheight);
+        table.row();
+        table.add().width(cellwidth).height(cellheight);
+        table.add().width(cellwidth).height(cellheight);
+        table.add().width(cellwidth).height(cellheight);
     }
 
     protected void setUpButtons(){
@@ -154,11 +133,11 @@ public class ViewController extends Game {
         sr.end();
     }
 
-    public void findSelectedSquare(float x, float y){
+    public void findSelectedGridSquare(float x, float y){
         int row = boardGrid.getRow(y);
-        chosenGridCell = cells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
+        chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
     }
-    public void fillSelectedSquare(Cell cell){
+    public void fillSelectedGridSquare(Cell cell){
         if(cell!=null){
             float x = boardGrid.getX()+cell.getActorX();
             float y = boardGrid.getY()+cell.getActorY();
@@ -170,37 +149,16 @@ public class ViewController extends Game {
     }
 
     public void findPressedCell(float x, float y){
-        System.out.print("Touched x = ");
-        System.out.print(x);
-        System.out.print(" | y = ");
-        System.out.println(y);
-        System.out.println(cellwidth);
-        boolean rightCell = x > (2*cellwidth);
-        boolean centerCell = x > (cellwidth);
-        //if in first row
-        if (y > cellheight){
-            if (centerCell) {chosenCell = c3;}
-            else{chosenCell = c1;}
-            if (rightCell){chosenCell = c5;}
-        }else{
-            if (centerCell){chosenCell = c4;}
-            else{chosenCell = c2;}
-            if (rightCell){chosenCell = c6;}
+        int row = table.getRow(y);
+        chosenCell = tableCells.get((row*3)+(int)(x/(cellwidth)));
+        if(chosenCell.getActor() == new Image(g.getQuestionMarkMex())||chosenCell.getActor() == new Image(g.getQuestionMarkUs())){
+            chosenCell = null;
         }
-        System.out.println(getCellInt(chosenCell));
     }
-    private int getCellInt(Cell c){
-        if(c==c1){return UPPERLEFT;}
-        if(c==c3){return UPPERCENTER;}
-        if(c==c5){return UPPERRIGHT;}
-        if(c==c2){return LOWERLEFT;}
-        if(c==c4){return LOWERCENTER;}
-        else{return LOWERRIGHT;}
-    }
-    public void drawSquareAroundChosenTableCell(Cell cell) {
-        if(cell!=null){
-            float x = table.getX()+cell.getActorX();
-            float y = table.getY()+cell.getActorY();
+    public void drawSquareAroundChosenTableCell() {
+        if(chosenCell!=null){
+            float x = table.getX()+chosenCell.getActorX();
+            float y = table.getY()+chosenCell.getActorY();
             sr.begin(ShapeRenderer.ShapeType.Filled);
             sr.setColor(0, 1, 0, 1);
             sr.rect(x, y, cellwidth, cellheight);
@@ -208,34 +166,33 @@ public class ViewController extends Game {
         }
     }
 
-    public void increaseListIndex(ArrayList<Image> list){
+    public void increaseListIndex(ArrayList<Image> list,Texture noItemYet){
         listIndex += 2;
         if(listIndex>8){listIndex = 0;}
         chosenCell = null;
-        addStuffToTable(list);
+        addStuffToTable(list,noItemYet);
     }
 
-    public void decreaseListIndex(ArrayList<Image> list){
+    public void decreaseListIndex(ArrayList<Image> list,Texture noItemYet){
         listIndex -= 2;
         if(listIndex<0){listIndex = 8;}
         chosenCell = null;
-        addStuffToTable(list);
+        addStuffToTable(list,noItemYet);
     }
 
-    public void addStuffToTable(ArrayList<Image> list){
-        c1.setActor(null);
-        c2.setActor(null);
-        c3.setActor(null);
-        c4.setActor(null);
-        c5.setActor(null);
-        c6.setActor(null);
+    public void addStuffToTable(ArrayList<Image> list,Texture noItemyet){
 
-        c1.setActor(list.get((listIndex)));
-        c3.setActor(list.get((listIndex+2)%10));
-        c5.setActor(list.get((listIndex+4)%10));
-        c2.setActor(list.get((listIndex+1)%10));
-        c4.setActor(list.get((listIndex+3)%10));
-        c6.setActor(list.get((listIndex+5)%10));
+        for (Cell cell:tableCells) {
+            cell.setActor(null);
+        }
+        for(int i=0;i<tableCells.size;i++){
+            for (int j=0;j<list.size();j++){
+                tableCells.get(j).setActor(list.get((listIndex+j)%list.size()));
+            }
+            if(i>=list.size()){
+                tableCells.get(i).setActor(new Image(noItemyet));
+            }
+        }
     }
 
     public Table getTable(){

@@ -74,7 +74,7 @@ public class DefenceView implements Screen{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("I got clicked!");
-                defenceViewController.findSelectedSquare(x,y);
+                defenceViewController.findSelectedGridSquare(x,y);
             }
         });
     }
@@ -95,7 +95,7 @@ public class DefenceView implements Screen{
         Gdx.input.setInputProcessor(stage);
         defenceViewController.drawBackground();
         defenceViewController.drawSquareAroundChosenTableCell(defenceViewController.getChosenCell());
-        defenceViewController.fillSelectedSquare(defenceViewController.getChosenGridCell());
+        defenceViewController.fillSelectedGridSquare(defenceViewController.getChosenGridCell());
         stage.draw();
     }
 

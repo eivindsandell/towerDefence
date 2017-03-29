@@ -1,22 +1,12 @@
 package com.mygdx.game.controllers;
 
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
-import java.util.ArrayList;
-
 public class DefenceViewController extends ViewController{
 
-    private ArrayList<Image> towers;
 
     public DefenceViewController(){
         super();
-        towers = new ArrayList<Image>(10);
-        towers.add(new Image(tower1));
-        towers.add(new Image(tower1));
-        while(towers.size()!= 10){
-            towers.add(new Image());
-        }
+        fillTable();
     }
 
     @Override
@@ -25,14 +15,14 @@ public class DefenceViewController extends ViewController{
     }
 
     public void fillTable(){
-        addStuffToTable(towers);
+        addStuffToTable(g.getTowers(),g.getQuestionMarkUs());
     }
 
     public void left(){
-        decreaseListIndex(towers);
+        decreaseListIndex(g.getTowers(),g.getQuestionMarkUs());
     }
     public void right(){
-        increaseListIndex(towers);
+        increaseListIndex(g.getTowers(),g.getQuestionMarkUs());
     }
 
 }
