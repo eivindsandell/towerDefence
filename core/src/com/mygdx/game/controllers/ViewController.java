@@ -77,7 +77,7 @@ public class ViewController extends Game {
         for (int y = 0; y < gridSize; y++) {
             boardGrid.row();
             for (int x = 0; x < gridSize; x++) {
-                boardGrid.add().size(size);
+                boardGrid.add(board.getTile_board().get(y).get(x)).size(size);
             }
         }
     }

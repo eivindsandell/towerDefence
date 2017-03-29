@@ -1,10 +1,11 @@
 package com.mygdx.game.models;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.models.mobs.Mob;
 
 import java.util.ArrayList;
 
-public class Tile {
+public class Tile extends Actor {
 
     private int x,y;
     private int type;
@@ -34,7 +35,7 @@ public class Tile {
     public int getType() {
         return type;
     }
-
+    /*
     public int getX() {
         return x;
     }
@@ -42,7 +43,7 @@ public class Tile {
     public int getY() {
         return y;
     }
-
+    */
     public int getTiles_to_portal() {
         return tiles_to_portal;
     }
