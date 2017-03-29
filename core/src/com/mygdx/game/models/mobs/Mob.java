@@ -74,6 +74,9 @@ public abstract class Mob extends Actor {
         }
     }
 
+    public void update() {
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);

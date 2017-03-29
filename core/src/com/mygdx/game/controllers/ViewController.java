@@ -7,7 +7,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Globals;
 
@@ -137,6 +142,7 @@ public class ViewController extends Game {
         int row = boardGrid.getRow(y);
         chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
     }
+
     public void fillSelectedGridSquare(Cell cell){
         if(cell!=null){
             float x = boardGrid.getX()+cell.getActorX();
@@ -155,6 +161,7 @@ public class ViewController extends Game {
             chosenCell = null;
         }
     }
+
     public void drawSquareAroundChosenTableCell() {
         if(chosenCell!=null){
             float x = table.getX()+chosenCell.getActorX();

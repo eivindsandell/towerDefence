@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Board {
+public final class Board {
 
     private ArrayList<ArrayList<Tile>> tile_board;
     private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal

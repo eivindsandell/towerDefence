@@ -6,7 +6,12 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.mygdx.game.views.*;
+import com.mygdx.game.models.Board;
+import com.mygdx.game.views.AttackView;
+import com.mygdx.game.views.BetweenRoundView;
+import com.mygdx.game.views.DefenceView;
+import com.mygdx.game.views.PlayRoundView;
+import com.mygdx.game.views.SettingsView;
 
 public class TowerDefence extends Game {
 
@@ -19,9 +24,11 @@ public class TowerDefence extends Game {
 	Music music;
 	Preferences preferences;
 	Globals globals;
+	Board board;
 
 	@Override
 	public void create() {
+		board = new Board();
 		menuView = new MenuView(this);
 		globals = new Globals();
 		preferences = Gdx.app.getPreferences("My Preferences");

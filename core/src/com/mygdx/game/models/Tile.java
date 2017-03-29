@@ -1,6 +1,7 @@
 package com.mygdx.game.models;
 
 import com.mygdx.game.models.mobs.Mob;
+
 import java.util.ArrayList;
 
 public class Tile {
@@ -46,15 +47,15 @@ public class Tile {
         return tiles_to_portal;
     }
 
-    public ArrayList<com.mygdx.game.models.mobs.Mob> getMobsOnTile() {
+    public ArrayList<Mob> getMobsOnTile() {
         return mobsOnTile;
     }
 
-    public void addMobToTile(com.mygdx.game.models.mobs.Mob mob) {
+    public void addMobToTile(Mob mob) {
         mobsOnTile.add(mob);
     }
 
-    public void removeMobFromTile(com.mygdx.game.models.mobs.Mob mob) {
+    public void removeMobFromTile(Mob mob) {
         mobsOnTile.remove(mobsOnTile.indexOf(mob));
     }
 }
