@@ -17,6 +17,12 @@ public abstract class Tower {
     private ArrayList<Tile> shootable_tiles;
     private Board board;
     private ArrayList<Mob> shootableMobs;
+    public static int NORMAL = 0;
+    public static int SPLASH = 1;
+    public static int LAZER = 2;
+    private int type = 0;
+
+
 
     public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, SpriteBatch spriteBatch, int price, Tile position, Board board) {
         this.damage = damage;
@@ -100,5 +106,21 @@ public abstract class Tower {
             }
         }
         return shootableMobs;
+    }
+
+    public void Fire(){
+
+    }
+
+    private void fireProjectile(){
+
+    }
+
+    private void fireLazer(){
+
+    }
+
+    private void fireSplash(){
+
     }
 }
