@@ -1,13 +1,14 @@
 package com.mygdx.game.models.towers;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.models.Board;
 import com.mygdx.game.models.Tile;
 import com.mygdx.game.models.mobs.Mob;
 
 import java.util.ArrayList;
 
-public abstract class Tower {
+public abstract class Tower extends Actor {
     private double damage;
     private double speed;
     private Sprite sprite;
@@ -112,7 +113,7 @@ public abstract class Tower {
     private void fireProjectile(Mob mob) {
         int originX = position.getX();
         int originY = position.getY();
-        double targetX = mob.getX();
+        double targetX = mob.getXPos();
         double tagertY = mob.getY();
     }
 
@@ -121,6 +122,12 @@ public abstract class Tower {
     }
 
     private void fireLazer(){
+
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
 
     }
 }

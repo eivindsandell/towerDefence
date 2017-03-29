@@ -17,5 +17,12 @@ public class Projectile extends Actor {
 
     }
 
+    public float getXPos(){
+        return projectileSprite.getX();
+    }
+
+    public float getYPos(){
+        return projectileSprite.getY();
+    }
 
 }

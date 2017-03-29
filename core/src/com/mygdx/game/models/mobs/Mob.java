@@ -3,9 +3,10 @@ package com.mygdx.game.models.mobs;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.models.Tile;
 
-public abstract class Mob {
+public abstract class Mob extends Actor {
     protected double maxHealth;
     protected double currentHealth;
     protected double speed;
@@ -56,13 +57,11 @@ public abstract class Mob {
         this.y = y;
     }
 
-    public double getX() {
+    public double getXPos() {
         return x;
     }
 
-    public double getY() {
-        return y;
-    }
+    public double getYPos(){ return y;}
 
     public Tile getTile() {
         return tile;
@@ -72,5 +71,11 @@ public abstract class Mob {
         if (getTile() != tile) {
             this.tile = tile;
         }
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+
     }
 }
