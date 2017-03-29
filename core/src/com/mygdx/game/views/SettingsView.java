@@ -27,17 +27,13 @@ public class SettingsView implements Screen {
     Game game;
     private Globals globals;
     private Stage stage;
-    private Skin skin;
     private int screenHeight;
     private int screenWidth;
-    private TextureAtlas buttonAtlas;
     private TextureAtlas checkBoxAtlas;
-    private BitmapFont font;
     public TextButton backButton;
     private CheckBox soundCheck;
     private CheckBox musicCheck;
     private CheckBox.CheckBoxStyle checkBoxStyle;
-    private TextButton.TextButtonStyle textButtonStyle;
     private Music music;
     private Preferences preferences;
 
@@ -58,8 +54,6 @@ public class SettingsView implements Screen {
         screenHeight = globals.getScreenHeight();
         screenWidth = globals.getScreenWidth();
         stage = new Stage();
-        font = new BitmapFont();
-        skin = new Skin();
         createAllButtons();
         createCheckBox();
         checkBoxListener();
@@ -109,7 +103,7 @@ public class SettingsView implements Screen {
     private void createCheckBox(){
         checkBoxAtlas = new TextureAtlas(Gdx.files.internal("checkBoxes/checkBoxPack.atlas"));
         checkBoxStyle = new CheckBox.CheckBoxStyle();
-        checkBoxStyle.font = font;
+        checkBoxStyle.font = globals.getFont();
         checkBoxStyle.fontColor = new Color(Color.BLACK);
         checkBoxStyle.checkboxOff = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("checkBoxes/checkbox_unchecked.png"))));
         checkBoxStyle.checkboxOn = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("checkBoxes/checkbox_checked.png"))));
@@ -151,23 +145,9 @@ public class SettingsView implements Screen {
     }
 
     private void createAllButtons(){
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
-        skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("Button");
-        textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        //
-
-       backButton = new TextButton("Back to menu", textButtonStyle);
+       backButton = new TextButton("Back to menu", globals.getTextButtonStyle());
         int widthPlacement = (int)(screenWidth/2-backButton.getWidth()/2);
-        //
-
-        //
-
         backButton.setPosition(widthPlacement, 100);
-        //
-        font.getData().setScale(4);
     }
 
 }

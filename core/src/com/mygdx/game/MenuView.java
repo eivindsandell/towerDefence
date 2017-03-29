@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,29 +11,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class MenuView implements Screen {
 
-    private Game game;
-    private Globals globals;
-    private Stage stage;
-    private Skin skin;
+    private Globals g;
     private int screenHeight;
     private int screenWidth;
-    private TextureAtlas buttonAtlas;
-    private BitmapFont font;
-    private TextButton.TextButtonStyle textButtonStyle;
     public TextButton localMpButton;
     private TextButton MpButton;
     public TextButton settingsButton;
     public TextButton helpButton;
     public TextButton quitButton;
+    private Stage stage;
 
-    public MenuView(Game game){
-        this.game = game;
-        globals = new Globals();
-        screenHeight = globals.getScreenHeight();
-        screenWidth = globals.getScreenWidth();
+    public MenuView(){
+        g = new Globals();
         stage = new Stage();
-        font = new BitmapFont();
-        skin = new Skin();
+        screenHeight = g.getScreenHeight();
+        screenWidth = g.getScreenWidth();
         createAllButtons();
     }
 
@@ -85,18 +76,11 @@ public class MenuView implements Screen {
     }
 
     private void createAllButtons(){
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
-        skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("Button");
-        textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        //
-        localMpButton = new TextButton("Local Multiplayer", textButtonStyle);
-        MpButton = new TextButton("Online Multiplayer", textButtonStyle);
-        settingsButton = new TextButton("Settings", textButtonStyle);
-        helpButton = new TextButton("Help", textButtonStyle);
-        quitButton = new TextButton("Quit", textButtonStyle);
+        localMpButton = new TextButton("Local Multiplayer", g.getTextButtonStyle());
+        MpButton = new TextButton("Online Multiplayer", g.getTextButtonStyle());
+        settingsButton = new TextButton("Settings", g.getTextButtonStyle());
+        helpButton = new TextButton("Help", g.getTextButtonStyle());
+        quitButton = new TextButton("Quit", g.getTextButtonStyle());
         //
         float ratio = localMpButton.getHeight() / localMpButton.getWidth();
         //
@@ -120,8 +104,6 @@ public class MenuView implements Screen {
         helpButton.setPosition(widthplacement,settingsButton.getY() - buttonheight- buffer);
         quitButton.setPosition(widthplacement,settingsButton.getY() - 2*buttonheight - 2*buffer);
         MpButton.setDisabled(true);
-        //
-        font.getData().setScale(4);
     }
 }
 

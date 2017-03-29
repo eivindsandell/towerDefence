@@ -21,21 +21,15 @@ import java.util.ArrayList;
 
 public class ViewController extends Game {
 
-    protected Skin skin;
 
     protected Globals g = new Globals();
     protected ShapeRenderer sr = new ShapeRenderer();
     protected Board board = new Board();
 
-    protected BitmapFont font;
-
     protected TextButton rightButton;
     protected TextButton leftButton;
     protected TextField money;
     protected TextButton doneButton;
-    protected TextureAtlas buttonAtlas;
-    protected TextButton.TextButtonStyle buttonStyle;
-    protected TextField.TextFieldStyle textFieldStyle;
     protected int listIndex;
 
     protected Table boardGrid;
@@ -46,16 +40,14 @@ public class ViewController extends Game {
     protected float cellwidth;
     protected float cellheight;
 
-    private Array<Cell> tableCells;
-    private Cell chosenCell;
+    protected Array<Cell> tableCells;
+    protected Cell chosenCell;
 
-    private Array<Cell> gridCells;
-    private Cell chosenGridCell;
+    protected Array<Cell> gridCells;
+    protected Cell chosenGridCell;
 
     public ViewController(){
         listIndex = 0;
-        skin = new Skin();
-        font = new BitmapFont();
         chosenCell = null;
         chosenGridCell = null;
         gridSize = 8;
@@ -66,23 +58,37 @@ public class ViewController extends Game {
         tableCells = table.getCells();
     }
 
-    private void createBoardGrid(){
-        boardGrid = new Table();
-        boardGrid.setTouchable(Touchable.enabled);
-        boardGrid.setDebug(true);
-        boardGrid.setPosition(0,(int)(g.getScreenHeight()-g.getScreenWidth()));
-        boardGrid.setHeight(g.getScreenWidth());
-        boardGrid.setWidth(g.getScreenWidth());
-        int size = g.getScreenWidth()/gridSize;
-        for (int y = 0; y < gridSize; y++) {
-            boardGrid.row();
-            for (int x = 0; x < gridSize; x++) {
-                boardGrid.add(board.getTile_board().get(y).get(x)).size(size);
-            }
-        }
+    public void drawBackground(){
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.setColor(0,0,0,1);
+        sr.rect(0,0,g.getScreenWidth(),g.getScreenHeight()-g.getScreenWidth());
+        sr.end();
+    }
+    protected void setUpButtons(){
+        leftButton = new TextButton("<",g.getTextButtonStyle());
+        rightButton = new TextButton(">",g.getTextButtonStyle());
+        doneButton = new TextButton("Play!",g.getTextButtonStyle());
+        money = new TextField("0",g.getTextFieldStyle());
+
+        leftButton.setPosition(0,0);
+        rightButton.setPosition((int)(g.getScreenWidth()*0.9),0);
+        doneButton.setPosition((int)(g.getScreenWidth()*0.6),0);
+        money.setPosition((int)(g.getScreenWidth()*0.1),0);
+
+        leftButton.setWidth((int)(g.getScreenWidth()*0.1));
+        leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWidth()));
+
+        rightButton.setWidth(leftButton.getWidth());
+        rightButton.setHeight(leftButton.getHeight());
+
+        doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.25));
+        doneButton.setWidth((int)(g.getScreenWidth()*0.3));
     }
 
+
+    //functions for the hud table:
     protected void setUpTable(){
+
         table = new Table();
         table.setTouchable(Touchable.enabled);
         table.setDebug(true);
@@ -101,61 +107,6 @@ public class ViewController extends Game {
         table.add().width(cellwidth).height(cellheight);
         table.add().width(cellwidth).height(cellheight);
     }
-
-    protected void setUpButtons(){
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
-        skin.addRegions(buttonAtlas);
-        buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.up = skin.getDrawable("Button");
-        buttonStyle.down = skin.getDrawable("ButtonPressed");
-        buttonStyle.font = font;
-
-        textFieldStyle = new TextField.TextFieldStyle();
-        textFieldStyle.font = font;
-
-        leftButton = new TextButton("<",buttonStyle);
-        rightButton = new TextButton(">",buttonStyle);
-        doneButton = new TextButton("Play!",buttonStyle);
-        money = new TextField("0",textFieldStyle);
-
-        leftButton.setPosition(0,0);
-        rightButton.setPosition((int)(g.getScreenWidth()*0.9),0);
-        doneButton.setPosition((int)(g.getScreenWidth()*0.6),0);
-        money.setPosition((int)(g.getScreenWidth()*0.1),0);
-
-        leftButton.setWidth((int)(g.getScreenWidth()*0.1));
-        leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWidth()));
-
-        rightButton.setWidth(leftButton.getWidth());
-        rightButton.setHeight(leftButton.getHeight());
-
-        doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.25));
-        doneButton.setWidth((int)(g.getScreenWidth()*0.3));
-    }
-
-    public void drawBackground(){
-        sr.begin(ShapeRenderer.ShapeType.Filled);
-        sr.setColor(0,0,0,1);
-        sr.rect(0,0,g.getScreenWidth(),g.getScreenHeight()-g.getScreenWidth());
-        sr.end();
-    }
-
-    public void findSelectedGridSquare(float x, float y){
-        int row = boardGrid.getRow(y);
-        chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
-    }
-
-    public void fillSelectedGridSquare(Cell cell){
-        if(cell!=null){
-            float x = boardGrid.getX()+cell.getActorX();
-            float y = boardGrid.getY()+cell.getActorY();
-            sr.begin(ShapeRenderer.ShapeType.Filled);
-            sr.setColor(0,0,1,1);
-            sr.rect(x,y,boardGrid.getWidth()/gridSize,boardGrid.getHeight()/gridSize);
-            sr.end();
-        }
-    }
-
     public void findPressedCell(float x, float y){
         int row = table.getRow(y);
         Cell prevcell = chosenCell;
@@ -167,8 +118,10 @@ public class ViewController extends Game {
             chosenCell = null;
         }
     }
-
     public void drawSquareAroundChosenTableCell() {
+
+
+
         if(chosenCell!=null){
             float x = table.getX()+chosenCell.getActorX();
             float y = table.getY()+chosenCell.getActorY();
@@ -178,21 +131,18 @@ public class ViewController extends Game {
             sr.end();
         }
     }
-
     public void increaseListIndex(ArrayList<Image> list,Texture noItemYet){
         listIndex += 2;
         if(listIndex>list.size()-2){listIndex = 0;}
         chosenCell = null;
         addStuffToTable(list,noItemYet);
     }
-
     public void decreaseListIndex(ArrayList<Image> list,Texture noItemYet){
         listIndex -= 2;
         if(listIndex<0){listIndex = list.size()-2+(list.size()%2);}
         chosenCell = null;
         addStuffToTable(list,noItemYet);
     }
-
     public void addStuffToTable(ArrayList<Image> list,Texture noItemyet){
 
         for (Cell cell:tableCells) {
@@ -226,20 +176,46 @@ public class ViewController extends Game {
         }
     }
 
+    //functions for the grid:
+    private void createBoardGrid(){
+        boardGrid = new Table();
+        boardGrid.setTouchable(Touchable.enabled);
+        boardGrid.setDebug(true);
+        boardGrid.setPosition(0,(int)(g.getScreenHeight()-g.getScreenWidth()));
+        boardGrid.setHeight(g.getScreenWidth());
+        boardGrid.setWidth(g.getScreenWidth());
+        int size = g.getScreenWidth()/gridSize;
+        for (int y = 0; y < gridSize; y++) {
+            boardGrid.row();
+            for (int x = 0; x < gridSize; x++) {
+                boardGrid.add(board.getTile_board().get(y).get(x)).size(size);
+            }
+        }
+    }
+    public void findSelectedGridSquare(float x, float y){
+        int row = boardGrid.getRow(y);
+        chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
+    }
+    public void fillSelectedGridSquare(Cell cell){
+        if(cell!=null){
+            float x = boardGrid.getX()+cell.getActorX();
+            float y = boardGrid.getY()+cell.getActorY();
+            sr.begin(ShapeRenderer.ShapeType.Filled);
+            sr.setColor(0,0,1,1);
+            sr.rect(x,y,boardGrid.getWidth()/gridSize,boardGrid.getHeight()/gridSize);
+            sr.end();
+        }
+    }
+
+    //getters
     public Table getTable(){
         return table;
     }
-
     public TextButton getLeftButton(){return leftButton; }
-
     public TextButton getRightButton(){return rightButton; }
-
     public TextButton getDoneButton(){return doneButton; }
-
     public TextField getMoney(){return money;}
-
     public Table getBoard(){return boardGrid;}
-
     public Cell getChosenCell() {
         return chosenCell;
     }

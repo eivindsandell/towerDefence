@@ -28,16 +28,16 @@ public final class TowerDefence extends Game {
 
 	@Override
 	public void create() {
-		board = new Board();
-		menuView = new MenuView(this);
 		globals = new Globals();
+		board = new Board();
+		menuView = new MenuView();
 		preferences = Gdx.app.getPreferences("My Preferences");
 		defenceView = new DefenceView(this);
 		attackView = new AttackView(this);
 		betweenRoundView = new BetweenRoundView(this);
 		playRoundView = new PlayRoundView(this);
-		settingsView = new SettingsView(this, music, null);
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
+		settingsView = new SettingsView(this, music, null);
 		this.setScreen(menuView);
 		handleMusic();
 		launchGame();

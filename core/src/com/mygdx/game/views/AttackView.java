@@ -76,6 +76,7 @@ public class AttackView implements Screen{
         stage.addActor(attackViewController.getRightButton());
         stage.addActor(attackViewController.getTable());
         stage.addActor(attackViewController.getBoard());
+        stage.addActor(attackViewController.getPopup());
     }
 
     @Override

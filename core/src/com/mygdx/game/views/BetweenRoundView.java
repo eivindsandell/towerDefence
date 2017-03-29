@@ -19,11 +19,8 @@ public class BetweenRoundView implements Screen {
     TowerDefence game;
     Globals globals = new Globals();
     private Stage stage;
-    private Skin skin;
     private int screenHeight;
     private int screenWidth;
-    private TextureAtlas buttonAtlas;
-    private BitmapFont font;
     public TextButton nextButton;
     private TextButton.TextButtonStyle textButtonStyle;
     private Label.LabelStyle labelStyle;
@@ -37,8 +34,6 @@ public class BetweenRoundView implements Screen {
         screenHeight = globals.getScreenHeight();
         screenWidth = globals.getScreenWidth();
         stage = new Stage();
-        font = new BitmapFont();
-        skin = new Skin();
         createAllButtons();
         createText();
 
@@ -84,27 +79,19 @@ public class BetweenRoundView implements Screen {
     }
 
     private void createAllButtons(){
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.atlas"));
-        skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("Button");
-        textButtonStyle.down = skin.getDrawable("ButtonPressed");
-        nextButton = new TextButton("Defence player ready", textButtonStyle);
+        nextButton = new TextButton("Defence player \n ready", globals.getTextButtonStyle());
         nextButton.setWidth((int)(screenWidth*0.7));
         float ratio = nextButton.getHeight() / nextButton.getWidth();
         nextButton.setHeight((int)(ratio*nextButton.getWidth()));
         int widthPlacement = (int)(screenWidth/2-nextButton.getWidth()/2);
         nextButton.setPosition(widthPlacement, 100);
-        font.getData().setScale(2);
-
         goNext();
     }
 
     private void createText(){
         labelStyle = new Label.LabelStyle();
-        font.setColor(0,0,0,1);
-        labelStyle.font = font;
+        labelStyle.font = globals.getFont();
+        labelStyle.font.setColor(0,0,0,1);
         infoText = new Label("Pass the phone to the defending player", labelStyle);
         infoText.setPosition(screenWidth,screenHeight/2);
     }
