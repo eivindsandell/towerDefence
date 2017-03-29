@@ -19,15 +19,14 @@ public final class Globals {
     private Integer screenHeight;
     private boolean soundEnabled;
     private Preferences preferences;
-    private ArrayList<Image> attackers;
-    private ArrayList<Image> towers;
+    private ArrayList<Texture> mobTextures;
+    private ArrayList<Texture> towerTextures;
     private Texture questionMarkMex;
     private Texture questionMarkUs;
-    private String mobActorName;
-    private String towerActorName;
+    private String actorName;
     private BitmapFont font;
-    private HashMap<Image,Integer> towerMap;
-    private HashMap<Image,Integer> mobMap;
+    private HashMap<Texture, Integer> towerMap;
+    private HashMap<Texture, Integer> mobMap;
     private Skin skin;
     private TextButton.TextButtonStyle textButtonStyle;
 
@@ -52,48 +51,31 @@ public final class Globals {
         labelStyle.font = font;
         labelStyle.fontColor = new Color(1,1,1,1);
 
-        towerActorName = "tower";
-        mobActorName = "mob";
+        actorName = "actor";
 
-        mobMap = new HashMap<Image, Integer>();
-        attackers = new ArrayList<Image>();
-        attackers.add(new Image(new Texture(Gdx.files.internal("towerDefense_tile245.png"))));
-        mobMap.put(attackers.get(0),BASICMOB);
+        mobMap = new HashMap<Texture, Integer>();
+        mobTextures = new ArrayList<Texture>();
+        mobTextures.add((new Texture(Gdx.files.internal("towerDefense_tile245.png"))));
+        mobMap.put(mobTextures.get(0),BASICMOB);
 
-        towerMap = new HashMap<Image, Integer>();
-        towers = new ArrayList<Image>();
-        towers.add(new Image(new Texture(Gdx.files.internal("towerDefense_tile249.png"))));
-        towerMap.put(towers.get(0),STANDARDTOWER);
+        towerMap = new HashMap<Texture, Integer>();
+        towerTextures = new ArrayList<Texture>();
+        towerTextures.add((new Texture(Gdx.files.internal("towerDefense_tile249.png"))));
+        towerMap.put(towerTextures.get(0),STANDARDTOWER);
 
         questionMarkUs = new Texture(Gdx.files.internal("Question Mark US.png"));
         questionMarkMex = new Texture(Gdx.files.internal("Question Mark Mex.png"));
 
         preferences = Gdx.app.getPreferences("My Preferences");
         preferences.putBoolean("musicEnabled", true);
-
-        setActorNames();
     }
 
     public Skin getSkin() {
         return skin;
     }
 
-    public String getMobActorName() {
-        return mobActorName;
-    }
-
-    public String getTowerActorName() {
-        return towerActorName;
-    }
-
-    private void setActorNames(){
-        for (Image mob:attackers) {
-            mob.setName(mobActorName);
-        }
-        for (Image tower:towers){
-            tower.setName(towerActorName);
-
-        }
+    public String getActorName() {
+        return actorName;
     }
 
     public Texture getQuestionMarkUs() {
@@ -104,12 +86,12 @@ public final class Globals {
         return questionMarkMex;
     }
 
-    public ArrayList<Image> getAttackers() {
-        return attackers;
+    public ArrayList<Texture> getMobTextures() {
+        return mobTextures;
     }
 
-    public ArrayList<Image> getTowers() {
-        return towers;
+    public ArrayList<Texture> getTowerTextures() {
+        return towerTextures;
     }
 
     public Integer getScreenWidth() {

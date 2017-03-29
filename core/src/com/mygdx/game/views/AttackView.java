@@ -88,6 +88,7 @@ public class AttackView implements Screen{
         attackViewController.drawBackground();
         attackViewController.drawSquareAroundChosenTableCell();
         attackViewController.updateMoneyTable();
+        attackViewController.updatePopupTable();
         stage.draw();
     }
 

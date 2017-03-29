@@ -15,14 +15,14 @@ public class DefenceViewController extends ViewController{
     }
 
     public void fillTable(){
-        addStuffToTable(g.getTowers(),g.getQuestionMarkUs());
+        addStuffToTable(g.getTowerTextures(),g.getQuestionMarkUs());
     }
 
     public void left(){
-        decreaseListIndex(g.getTowers(),g.getQuestionMarkUs());
+        decreaseListIndex(g.getTowerTextures(),g.getQuestionMarkUs());
     }
     public void right(){
-        increaseListIndex(g.getTowers(),g.getQuestionMarkUs());
+        increaseListIndex(g.getTowerTextures(),g.getQuestionMarkUs());
     }
 
 }

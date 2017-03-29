@@ -114,7 +114,7 @@ public class ViewController extends Game {
         int row = table.getRow(y);
         Cell prevcell = chosenCell;
         chosenCell = tableCells.get((row*3)+(int)(x/(cellwidth)));
-        if(chosenCell.getActor().getName() != g.getTowerActorName()&&chosenCell.getActor().getName() != g.getMobActorName()){
+        if(chosenCell.getActor().getName() != g.getActorName()){
             chosenCell = null;
         }
         if(chosenCell == prevcell){
@@ -131,19 +131,19 @@ public class ViewController extends Game {
             sr.end();
         }
     }
-    public void increaseListIndex(ArrayList<Image> list,Texture noItemYet){
+    public void increaseListIndex(ArrayList<Texture> list,Texture noItemYet){
         listIndex += 2;
         if(listIndex>list.size()-2){listIndex = 0;}
         chosenCell = null;
         addStuffToTable(list,noItemYet);
     }
-    public void decreaseListIndex(ArrayList<Image> list,Texture noItemYet){
+    public void decreaseListIndex(ArrayList<Texture> list,Texture noItemYet){
         listIndex -= 2;
         if(listIndex<0){listIndex = list.size()-2+(list.size()%2);}
         chosenCell = null;
         addStuffToTable(list,noItemYet);
     }
-    public void addStuffToTable(ArrayList<Image> list,Texture noItemyet){
+    public void addStuffToTable(ArrayList<Texture> list,Texture noItemyet){
 
         for (Cell cell:tableCells) {
             cell.setActor(null);
@@ -151,15 +151,15 @@ public class ViewController extends Game {
         for(int i=0;i<tableCells.size;i++){
             for (int j=0;j<list.size()-listIndex;j++){
                 if(j == 0 || j == 5)
-                    tableCells.get(j).setActor(list.get((listIndex+j)%list.size()));
+                    tableCells.get(j).setActor(new Image(list.get((listIndex+j)%list.size()))).getActor().setName(g.getActorName());
                 if(j == 1)
-                    tableCells.get(3).setActor(list.get((listIndex+j)%list.size()));
+                    tableCells.get(3).setActor(new Image(list.get((listIndex+j)%list.size()))).getActor().setName(g.getActorName());
                 if(j == 2)
-                    tableCells.get(1).setActor(list.get((listIndex+j)%list.size()));
+                    tableCells.get(1).setActor(new Image(list.get((listIndex+j)%list.size()))).getActor().setName(g.getActorName());
                 if(j == 3)
-                    tableCells.get(4).setActor(list.get((listIndex+j)%list.size()));
+                    tableCells.get(4).setActor(new Image(list.get((listIndex+j)%list.size()))).getActor().setName(g.getActorName());
                 if(j == 4)
-                    tableCells.get(2).setActor(list.get((listIndex+j)%list.size()));
+                    tableCells.get(2).setActor(new Image(list.get((listIndex+j)%list.size()))).getActor().setName(g.getActorName());
             }
             if(i>=list.size()-listIndex){
                 if(i == 0 || i == 5)
