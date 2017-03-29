@@ -2,26 +2,19 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.mygdx.game.models.mobs.BasicMob;
-import com.mygdx.game.models.mobs.Mob;
-import com.mygdx.game.models.towers.Tower;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public final class Globals {
     private static final int BASICMOB = 0;
     private static final int STANDARDTOWER = 1;
-    private final TextField.TextFieldStyle textFieldStyle;
+    private final Label.LabelStyle labelStyle;
     private Integer screenWidth;
     private Integer screenHeight;
     private boolean soundEnabled;
@@ -55,8 +48,9 @@ public final class Globals {
         textButtonStyle.up = skin.getDrawable("Button");
         textButtonStyle.down = skin.getDrawable("ButtonPressed");
 
-        textFieldStyle = new TextField.TextFieldStyle();
-        textFieldStyle.font = font;
+        labelStyle = new Label.LabelStyle();
+        labelStyle.font = font;
+        labelStyle.fontColor = new Color(1,1,1,1);
 
         towerActorName = "tower";
         mobActorName = "mob";
@@ -151,8 +145,8 @@ public final class Globals {
         return textButtonStyle;
     }
 
-    public TextField.TextFieldStyle getTextFieldStyle() {
-        return textFieldStyle;
+    public Label.LabelStyle getLabelStyle() {
+        return labelStyle;
     }
 }
 

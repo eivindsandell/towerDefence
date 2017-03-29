@@ -95,7 +95,7 @@ public class DefenceView implements Screen{
         Gdx.input.setInputProcessor(stage);
         defenceViewController.drawBackground();
         defenceViewController.drawSquareAroundChosenTableCell();
-        defenceViewController.fillSelectedGridSquare(defenceViewController.getChosenGridCell());
+        defenceViewController.fillSelectedGridSquare();
         stage.draw();
     }
 

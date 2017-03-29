@@ -1,18 +1,11 @@
 package com.mygdx.game.controllers;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Globals;
 import com.mygdx.game.models.Board;
@@ -28,14 +21,15 @@ public class ViewController extends Game {
 
     protected TextButton rightButton;
     protected TextButton leftButton;
-    protected TextField money;
+    protected Label moneyLabel;
     protected TextButton doneButton;
     protected int listIndex;
 
+    protected Table table;
     protected Table boardGrid;
+    protected Table moneyTable;
 
     protected int gridSize;
-    protected Table table;
 
     protected float cellwidth;
     protected float cellheight;
@@ -45,8 +39,10 @@ public class ViewController extends Game {
 
     protected Array<Cell> gridCells;
     protected Cell chosenGridCell;
+    protected String money;
 
     public ViewController(){
+        money = "0";
         listIndex = 0;
         chosenCell = null;
         chosenGridCell = null;
@@ -54,6 +50,7 @@ public class ViewController extends Game {
         setUpButtons();
         setUpTable();
         createBoardGrid();
+        setUpMoneyTable();
         gridCells = boardGrid.getCells();
         tableCells = table.getCells();
     }
@@ -68,12 +65,10 @@ public class ViewController extends Game {
         leftButton = new TextButton("<",g.getTextButtonStyle());
         rightButton = new TextButton(">",g.getTextButtonStyle());
         doneButton = new TextButton("Play!",g.getTextButtonStyle());
-        money = new TextField("0",g.getTextFieldStyle());
 
         leftButton.setPosition(0,0);
         rightButton.setPosition((int)(g.getScreenWidth()*0.9),0);
         doneButton.setPosition((int)(g.getScreenWidth()*0.6),0);
-        money.setPosition((int)(g.getScreenWidth()*0.1),0);
 
         leftButton.setWidth((int)(g.getScreenWidth()*0.1));
         leftButton.setHeight((int)(g.getScreenHeight()-g.getScreenWidth()));
@@ -84,7 +79,15 @@ public class ViewController extends Game {
         doneButton.setHeight((int)((g.getScreenHeight()-g.getScreenWidth())*0.25));
         doneButton.setWidth((int)(g.getScreenWidth()*0.3));
     }
+    protected void setUpMoneyTable(){
+        moneyLabel = new Label(money,g.getLabelStyle());
 
+        moneyTable = new Table();
+        moneyTable.setBounds(g.getScreenWidth()/10,0,g.getScreenWidth()/2,(g.getScreenHeight()-g.getScreenWidth())/4);
+        moneyTable.add(moneyLabel).left().width((float)(g.getScreenWidth()*0.3)).height((float)((g.getScreenHeight()-g.getScreenWidth())*0.25));
+        moneyTable.add().expand();
+        moneyTable.debug();
+    }
 
     //functions for the hud table:
     protected void setUpTable(){
@@ -119,9 +122,6 @@ public class ViewController extends Game {
         }
     }
     public void drawSquareAroundChosenTableCell() {
-
-
-
         if(chosenCell!=null){
             float x = table.getX()+chosenCell.getActorX();
             float y = table.getY()+chosenCell.getActorY();
@@ -196,10 +196,10 @@ public class ViewController extends Game {
         int row = boardGrid.getRow(y);
         chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
     }
-    public void fillSelectedGridSquare(Cell cell){
-        if(cell!=null){
-            float x = boardGrid.getX()+cell.getActorX();
-            float y = boardGrid.getY()+cell.getActorY();
+    public void fillSelectedGridSquare(){
+        if(chosenGridCell!=null){
+            float x = boardGrid.getX()+chosenGridCell.getActorX();
+            float y = boardGrid.getY()+chosenGridCell.getActorY();
             sr.begin(ShapeRenderer.ShapeType.Filled);
             sr.setColor(0,0,1,1);
             sr.rect(x,y,boardGrid.getWidth()/gridSize,boardGrid.getHeight()/gridSize);
@@ -214,7 +214,6 @@ public class ViewController extends Game {
     public TextButton getLeftButton(){return leftButton; }
     public TextButton getRightButton(){return rightButton; }
     public TextButton getDoneButton(){return doneButton; }
-    public TextField getMoney(){return money;}
     public Table getBoard(){return boardGrid;}
     public Cell getChosenCell() {
         return chosenCell;
@@ -222,9 +221,18 @@ public class ViewController extends Game {
     public Cell getChosenGridCell() {
         return chosenGridCell;
     }
+    public Table getMoneyTable() {
+
+        return moneyTable;
+    }
 
     @Override
     public void create() {
 
+    }
+
+    public void updateMoneyTable() {
+        moneyLabel.setText(money);
+        moneyLabel.setAlignment(Align.right);
     }
 }

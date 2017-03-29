@@ -77,6 +77,7 @@ public class AttackView implements Screen{
         stage.addActor(attackViewController.getTable());
         stage.addActor(attackViewController.getBoard());
         stage.addActor(attackViewController.getPopup());
+        stage.addActor(attackViewController.getMoneyTable());
     }
 
     @Override
@@ -86,6 +87,7 @@ public class AttackView implements Screen{
         Gdx.input.setInputProcessor(stage);
         attackViewController.drawBackground();
         attackViewController.drawSquareAroundChosenTableCell();
+        attackViewController.updateMoneyTable();
         stage.draw();
     }
 

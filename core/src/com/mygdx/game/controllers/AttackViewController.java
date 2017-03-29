@@ -9,6 +9,7 @@ public class AttackViewController extends ViewController{
 
     public AttackViewController(){
         super();
+        money = "10000";
         setUpPopupTable();
         fillTable();
         doneButton.setText("Done!");
