@@ -13,7 +13,7 @@ import com.mygdx.game.views.DefenceView;
 import com.mygdx.game.views.PlayRoundView;
 import com.mygdx.game.views.SettingsView;
 
-public class TowerDefence extends Game {
+public final class TowerDefence extends Game {
 
 	MenuView menuView;
 	DefenceView defenceView;

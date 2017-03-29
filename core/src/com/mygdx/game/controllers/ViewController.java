@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Globals;
+import com.mygdx.game.models.Board;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class ViewController extends Game {
 
     protected Globals g = new Globals();
     protected ShapeRenderer sr = new ShapeRenderer();
+    protected Board board = new Board();
 
     protected BitmapFont font;
 
