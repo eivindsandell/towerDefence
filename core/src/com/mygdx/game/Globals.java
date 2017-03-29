@@ -16,28 +16,15 @@ public final class Globals {
     private ArrayList<Image> towers;
     private Texture questionMarkMex;
     private Texture questionMarkUs;
-
-    public Texture getQuestionMarkUs() {
-        return questionMarkUs;
-    }
-
-    public Texture getQuestionMarkMex() {
-        return questionMarkMex;
-    }
-
-    private Image getQuestionmarkMex;
-
-    public ArrayList<Image> getAttackers() {
-        return attackers;
-    }
-
-    public ArrayList<Image> getTowers() {
-        return towers;
-    }
+    private String mobActorName;
+    private String towerActorName;
 
     public Globals(){
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
+
+        towerActorName = "tower";
+        mobActorName = "mob";
 
         attackers = new ArrayList<Image>();
         attackers.add(new Image(new Texture(Gdx.files.internal("towerDefense_tile245.png"))));
@@ -51,6 +38,41 @@ public final class Globals {
         preferences = Gdx.app.getPreferences("My Preferences");
         preferences.putBoolean("musicEnabled", true);
 
+        setActorNames();
+    }
+
+    public String getMobActorName() {
+        return mobActorName;
+    }
+
+    public String getTowerActorName() {
+        return towerActorName;
+    }
+
+    private void setActorNames(){
+        for (Image mob:attackers) {
+            mob.setName(mobActorName);
+        }
+        for (Image tower:towers){
+            tower.setName(towerActorName);
+
+        }
+    }
+
+    public Texture getQuestionMarkUs() {
+        return questionMarkUs;
+    }
+
+    public Texture getQuestionMarkMex() {
+        return questionMarkMex;
+    }
+
+    public ArrayList<Image> getAttackers() {
+        return attackers;
+    }
+
+    public ArrayList<Image> getTowers() {
+        return towers;
     }
 
     public Integer getScreenWidth() {
