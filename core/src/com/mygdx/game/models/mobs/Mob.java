@@ -3,6 +3,7 @@ package com.mygdx.game.models.mobs;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.models.Tile;
 
 public abstract class Mob {
     protected double maxHealth;
@@ -14,7 +15,7 @@ public abstract class Mob {
     protected int damage;
     protected double x, y;
     protected Game game;
-
+    protected Tile tile;
 
     public Mob() {
     }
@@ -61,5 +62,15 @@ public abstract class Mob {
 
     public double getY() {
         return y;
+    }
+
+    public Tile getTile() {
+        return tile;
+    }
+
+    public void setTile(Tile tile) {
+        if (getTile() != tile) {
+            this.tile = tile;
+        }
     }
 }

@@ -22,7 +22,6 @@ public abstract class Tower {
     public static int LAZER = 2;
     private int type = 0;
 
-
     public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, int price, Tile position, Board board, int type) {
         this.damage = damage;
         this.speed = speed;
@@ -104,19 +103,24 @@ public abstract class Tower {
         return shootableMobs;
     }
 
-    public void Fire(){
-
+    public void fire(Mob mob) {
+        if (type == 0) {
+            fireProjectile(mob);
+        }
     }
 
-    private void fireProjectile(){
+    private void fireProjectile(Mob mob) {
+        int originX = position.getX();
+        int originY = position.getY();
+        double targetX = mob.getX();
+        double tagertY = mob.getY();
+    }
+
+    private void fireSplash() {
 
     }
 
     private void fireLazer(){
-
-    }
-
-    private void fireSplash(){
 
     }
 }
