@@ -70,6 +70,7 @@ public abstract class Mob {
 
     public void setTile(Tile tile) {
         if (getTile() != tile) {
+            this.tile.removeMobFromTile(this);
             this.tile = tile;
         }
     }
