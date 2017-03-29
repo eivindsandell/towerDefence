@@ -69,6 +69,7 @@ public abstract class Mob extends Actor {
 
     public void setTile(Tile tile) {
         if (getTile() != tile) {
+            this.tile.removeMobFromTile(this);
             this.tile = tile;
         }
     }
