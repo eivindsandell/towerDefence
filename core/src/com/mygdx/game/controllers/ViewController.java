@@ -12,7 +12,7 @@ import com.mygdx.game.models.Board;
 
 import java.util.ArrayList;
 
-public class ViewController extends Game {
+public abstract class ViewController extends Game {
 
 
     protected Globals g = new Globals();
@@ -39,6 +39,7 @@ public class ViewController extends Game {
 
     protected Array<Cell> gridCells;
     protected Cell chosenGridCell;
+    protected Cell prevChosenGridCell;
     protected Integer money;
 
     public ViewController(){
@@ -46,6 +47,7 @@ public class ViewController extends Game {
         listIndex = 0;
         chosenCell = null;
         chosenGridCell = null;
+        prevChosenGridCell = null;
         gridSize = 8;
         setUpButtons();
         setUpTable();
@@ -119,6 +121,10 @@ public class ViewController extends Game {
         if(chosenCell == prevcell){
             chosenCell = null;
         }
+        if(chosenCell==null){
+            chosenGridCell = null;
+            prevChosenGridCell = null;
+        }
     }
     public void drawSquareAroundChosenTableCell() {
         if(chosenCell!=null){
@@ -191,9 +197,14 @@ public class ViewController extends Game {
         }
     }
     public void findSelectedGridSquare(float x, float y){
-        int row = boardGrid.getRow(y);
-        chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
+        if(chosenCell!=null){
+            int row = boardGrid.getRow(y);
+            prevChosenGridCell = chosenGridCell;
+            chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
+        }
     }
+
+
     public void fillSelectedGridSquare(){
         if(chosenGridCell!=null){
             float x = boardGrid.getX()+chosenGridCell.getActorX();

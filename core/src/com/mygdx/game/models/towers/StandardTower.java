@@ -30,4 +30,17 @@ public class StandardTower extends Tower {
     public StandardTower(ArrayList<ArrayList<Integer>> range, Tile position, Board board, int type) {
         super(range, position, board, type);
     }
+
+    public StandardTower() {
+        super();
+        damage = 100;
+        speed = 100;
+        range = new ArrayList<ArrayList<Integer>>(Arrays.asList(
+                new ArrayList<Integer>(Arrays.asList(0, 1, 0)),
+                new ArrayList<Integer>(Arrays.asList(1, 0, 1)),
+                new ArrayList<Integer>(Arrays.asList(0, 1, 0))));
+        sprite = new Sprite(new Texture(Gdx.files.internal("towerDefense_tile249.png")));
+        price = 100;
+        type = Tower.NORMAL;
+    }
 }

@@ -86,6 +86,7 @@ public class DefenceView implements Screen{
         stage.addActor(defenceViewController.getRightButton());
         stage.addActor(defenceViewController.getTable());
         stage.addActor(defenceViewController.getBoard());
+        stage.addActor(defenceViewController.getMoneyTable());
     }
 
     @Override
@@ -96,6 +97,7 @@ public class DefenceView implements Screen{
         defenceViewController.drawBackground();
         defenceViewController.drawSquareAroundChosenTableCell();
         defenceViewController.fillSelectedGridSquare();
+        defenceViewController.updateMoneyTable();
         stage.draw();
     }
 

@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.models.mobs.BasicMob;
 import com.mygdx.game.models.mobs.Mob;
+import com.mygdx.game.models.towers.StandardTower;
+import com.mygdx.game.models.towers.Tower;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -134,9 +136,19 @@ public final class Globals {
     }
 
     public Mob whichMob(int mobtype) {
-        switch (mobtype){
+        int m = mobMap.get(mobTextures.get(mobtype));
+        switch (m){
             case BASICMOB:
                 return new BasicMob();
+        }
+        return null;
+    }
+
+    public Tower whichTower(int towertype) {
+        int t = towerMap.get(towerTextures.get(towertype));
+        switch (t){
+            case STANDARDTOWER:
+                return new StandardTower();
         }
         return null;
     }

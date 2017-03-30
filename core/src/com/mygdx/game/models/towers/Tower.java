@@ -9,19 +9,19 @@ import com.mygdx.game.models.mobs.Mob;
 import java.util.ArrayList;
 
 public abstract class Tower extends Actor {
-    private double damage;
-    private double speed;
-    private Sprite sprite;
-    private int price;
-    private Tile position;
-    private ArrayList<ArrayList<Integer>> range;
-    private ArrayList<Tile> shootable_tiles;
-    private Board board;
-    private ArrayList<Mob> shootableMobs;
+    protected double damage;
+    protected double speed;
+    protected Sprite sprite;
+    protected int price;
+    protected Tile position;
+    protected ArrayList<ArrayList<Integer>> range;
+    protected ArrayList<Tile> shootable_tiles;
+    protected Board board;
+    protected ArrayList<Mob> shootableMobs;
     public static int NORMAL = 0;
     public static int SPLASH = 1;
     public static int LAZER = 2;
-    private int type = 0;
+    protected int type = 0;
 
     public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, int price, Tile position, Board board, int type) {
         this.damage = damage;
@@ -42,6 +42,10 @@ public abstract class Tower extends Actor {
         this.shootable_tiles = new ArrayList<Tile>();
         calculate_shootable_tiles(board);
         this.type = type;
+    }
+
+    public Tower() {
+
     }
 
     public double getDamage() {
@@ -105,7 +109,7 @@ public abstract class Tower extends Actor {
     }
 
     public void fire(Mob mob) {
-        if (type == 0) {
+        if (type == NORMAL) {
             fireProjectile(mob);
         }
     }
