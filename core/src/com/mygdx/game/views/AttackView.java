@@ -26,6 +26,7 @@ public class AttackView implements Screen{
         chooseMob();
         add();
         subtract();
+        buy();
         attackViewController.fillTable();
     }
 
@@ -81,6 +82,14 @@ public class AttackView implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 attackViewController.subtract();
+            }
+        });
+    }
+    public void buy(){
+        attackViewController.getPurchase().addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                attackViewController.buy();
             }
         });
     }

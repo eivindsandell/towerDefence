@@ -86,7 +86,6 @@ public class ViewController extends Game {
         moneyTable.setBounds(g.getScreenWidth()/10,0,g.getScreenWidth()/2,(g.getScreenHeight()-g.getScreenWidth())/4);
         moneyTable.add(moneyLabel).left().width((float)(g.getScreenWidth()*0.3)).height((float)((g.getScreenHeight()-g.getScreenWidth())*0.25));
         moneyTable.add().expand();
-        moneyTable.debug();
     }
 
     //functions for the hud table:
