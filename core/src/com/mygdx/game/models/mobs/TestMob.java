@@ -55,7 +55,7 @@ public class TestMob extends Mob {
     }
 
     @Override
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 

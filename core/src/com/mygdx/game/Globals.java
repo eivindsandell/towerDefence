@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.mygdx.game.models.mobs.BasicMob;
+import com.mygdx.game.models.mobs.Mob;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,6 +131,14 @@ public final class Globals {
 
     public Label.LabelStyle getLabelStyle() {
         return labelStyle;
+    }
+
+    public Mob whichMob(int mobtype) {
+        switch (mobtype){
+            case BASICMOB:
+                return new BasicMob();
+        }
+        return null;
     }
 }
 

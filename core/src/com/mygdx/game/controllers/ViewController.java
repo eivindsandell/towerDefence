@@ -39,10 +39,10 @@ public class ViewController extends Game {
 
     protected Array<Cell> gridCells;
     protected Cell chosenGridCell;
-    protected String money;
+    protected Integer money;
 
     public ViewController(){
-        money = "0";
+        money = 0;
         listIndex = 0;
         chosenCell = null;
         chosenGridCell = null;
@@ -80,7 +80,7 @@ public class ViewController extends Game {
         doneButton.setWidth((int)(g.getScreenWidth()*0.3));
     }
     protected void setUpMoneyTable(){
-        moneyLabel = new Label(money,g.getLabelStyle());
+        moneyLabel = new Label(money.toString(),g.getLabelStyle());
 
         moneyTable = new Table();
         moneyTable.setBounds(g.getScreenWidth()/10,0,g.getScreenWidth()/2,(g.getScreenHeight()-g.getScreenWidth())/4);
@@ -180,7 +180,6 @@ public class ViewController extends Game {
     private void createBoardGrid(){
         boardGrid = new Table();
         boardGrid.setTouchable(Touchable.enabled);
-        boardGrid.setDebug(true);
         boardGrid.setPosition(0,(int)(g.getScreenHeight()-g.getScreenWidth()));
         boardGrid.setHeight(g.getScreenWidth());
         boardGrid.setWidth(g.getScreenWidth());
@@ -232,7 +231,7 @@ public class ViewController extends Game {
     }
 
     public void updateMoneyTable() {
-        moneyLabel.setText(money);
+        moneyLabel.setText(money.toString());
         moneyLabel.setAlignment(Align.right);
     }
 }

@@ -12,7 +12,7 @@ public abstract class Mob extends Actor {
     protected double speed;
     protected Sprite sprite;
     protected SpriteBatch spriteBatch;
-    protected int price;
+    protected Integer price;
     protected int damage;
     protected double x, y;
     protected Game game;
@@ -41,7 +41,7 @@ public abstract class Mob extends Actor {
         return spriteBatch;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 

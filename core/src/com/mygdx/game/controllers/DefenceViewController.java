@@ -7,6 +7,7 @@ public class DefenceViewController extends ViewController{
     public DefenceViewController(){
         super();
         fillTable();
+        boardGrid.debug();
     }
 
     @Override

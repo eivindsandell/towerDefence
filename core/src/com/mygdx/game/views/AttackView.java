@@ -24,9 +24,12 @@ public class AttackView implements Screen{
         prevMenu();
         nextMenu();
         chooseMob();
+        add();
+        subtract();
         attackViewController.fillTable();
     }
 
+    //metoder for å sette opp listeners
     private void goNext(){
         attackViewController.getDoneButton().addListener(new ChangeListener() {
             @Override
@@ -38,7 +41,6 @@ public class AttackView implements Screen{
         });
 
     }
-
     public void prevMenu(){
         attackViewController.getLeftButton().addListener(new ChangeListener() {
             @Override
@@ -48,7 +50,6 @@ public class AttackView implements Screen{
             }
         });
     }
-
     public void nextMenu(){
         attackViewController.getRightButton().addListener(new ChangeListener() {
             @Override
@@ -58,13 +59,28 @@ public class AttackView implements Screen{
             }
         });
     }
-
     public void chooseMob(){
         attackViewController.getTable().addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("I got clicked!");
                 attackViewController.findPressedCell(x,y);
+            }
+        });
+    }
+    public void add(){
+        attackViewController.getAdd().addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                attackViewController.add();
+            }
+        });
+    }
+    public void subtract(){
+        attackViewController.getSubtract().addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                attackViewController.subtract();
             }
         });
     }
