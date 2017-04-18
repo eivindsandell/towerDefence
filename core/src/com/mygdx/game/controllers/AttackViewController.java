@@ -76,7 +76,7 @@ public class AttackViewController extends ViewController{
     @Override
     public void findPressedCell(float x, float y){
         super.findPressedCell(x,y);
-        if(chosenCell==null){
+        if(chosenCell==null&& prevCell!= null){
             money += (chosenQuantity*currentChosenMob.getPrice());
             chosenQuantity = 0;
         }

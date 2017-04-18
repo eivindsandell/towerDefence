@@ -18,25 +18,25 @@ public abstract class ViewController extends Game {
     protected Globals g = new Globals();
     protected ShapeRenderer sr = new ShapeRenderer();
     protected Board board = new Board();
-
     protected TextButton rightButton;
+
     protected TextButton leftButton;
     protected Label moneyLabel;
     protected TextButton doneButton;
     protected int listIndex;
-
     protected Table table;
+
     protected Table boardGrid;
     protected Table moneyTable;
-
     protected int gridSize;
 
     protected float cellwidth;
+
     protected float cellheight;
-
     protected Array<Cell> tableCells;
-    protected Cell chosenCell;
 
+    protected Cell chosenCell;
+    protected Cell prevCell;
     protected Array<Cell> gridCells;
     protected Cell chosenGridCell;
     protected Cell prevChosenGridCell;
@@ -46,6 +46,7 @@ public abstract class ViewController extends Game {
         money = 0;
         listIndex = 0;
         chosenCell = null;
+        prevCell = null;
         chosenGridCell = null;
         prevChosenGridCell = null;
         gridSize = 8;
@@ -113,12 +114,12 @@ public abstract class ViewController extends Game {
     }
     public void findPressedCell(float x, float y){
         int row = table.getRow(y);
-        Cell prevcell = chosenCell;
+        prevCell = chosenCell;
         chosenCell = tableCells.get((row*3)+(int)(x/(cellwidth)));
         if(chosenCell.getActor().getName() != g.getActorName()){
             chosenCell = null;
         }
-        if(chosenCell == prevcell){
+        if(chosenCell == prevCell){
             chosenCell = null;
         }
         if(chosenCell==null){
