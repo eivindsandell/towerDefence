@@ -45,13 +45,9 @@ public abstract class Tower extends Actor {
     }
 
     public Tower() {
-<<<<<<< HEAD
         shootable_tiles = new ArrayList<Tile>();
         shootableMobs = new ArrayList<Mob>();
         board = new Board();
-=======
-
->>>>>>> parent of 9ed5100... startet på skytingen og fjærnet unødvendige konstruktører i tower
     }
 
     public double getDamage() {

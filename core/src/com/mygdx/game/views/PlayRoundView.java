@@ -8,11 +8,9 @@ import com.mygdx.game.Globals;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.PlayRoundViewController;
 import com.mygdx.game.models.Board;
-<<<<<<< HEAD
 import com.mygdx.game.models.Tile;
 import com.mygdx.game.models.mobs.Mob;
-=======
->>>>>>> parent of 9ed5100... startet på skytingen og fjærnet unødvendige konstruktører i tower
+
 
 public class PlayRoundView implements Screen {
     private TowerDefence game;
@@ -65,8 +63,11 @@ public class PlayRoundView implements Screen {
         Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 <<<<<<< HEAD
+<<<<<<< HEAD
         counter ++;
         spawnMob();
+=======
+>>>>>>> parent of 9ed5100... startet på skytingen og fjærnet unødvendige konstruktører i tower
 =======
 >>>>>>> parent of 9ed5100... startet på skytingen og fjærnet unødvendige konstruktører i tower
         stage.act(delta);
