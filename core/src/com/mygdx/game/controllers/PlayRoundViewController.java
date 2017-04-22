@@ -1,6 +1,6 @@
 package com.mygdx.game.controllers;
 
 
-public class PlayRoundViewController {
+public class PlayRoundViewController extends ViewController {
     //todo: hele denne klassen.
 }

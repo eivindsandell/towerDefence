@@ -8,6 +8,7 @@ import com.mygdx.game.Globals;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.PlayRoundViewController;
 import com.mygdx.game.models.Board;
+import com.mygdx.game.models.mobs.Mob;
 
 public class PlayRoundView implements Screen {
     private TowerDefence game;
@@ -25,12 +26,15 @@ public class PlayRoundView implements Screen {
     }
     @Override
     public void show() {
+        stage.addActor(playRoundViewController.getBoard());
         for(int i=0;i<board.getSize();i++){
             for(int j=0;j<board.getSize();j++){
                 if(board.getTile_board().get(i).get(j).getType()==Board.GROUND && board.getTile_board().get(i).get(j).getTower()!=null){
                     stage.addActor(board.getTile_board().get(i).get(j).getTower());
                 }else{
-
+                    for(Mob mob:board.getTile_board().get(i).get(j).getMobsOnTile()){
+                        stage.addActor(mob);
+                    }
                 }
             }
         }
@@ -39,8 +43,9 @@ public class PlayRoundView implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         stage.act(delta);
         stage.draw();
     }
