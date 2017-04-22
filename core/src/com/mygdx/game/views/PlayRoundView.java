@@ -11,7 +11,9 @@ public class PlayRoundView implements Screen {
     Stage stage;
 
     public PlayRoundView(TowerDefence game){
+
         this.game = game;
+        stage = new Stage();
     }
     @Override
     public void show() {
@@ -23,6 +25,7 @@ public class PlayRoundView implements Screen {
         Gdx.gl.glClearColor(201/255f, 163/255f, 14/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
+        stage.draw();
     }
 
 
