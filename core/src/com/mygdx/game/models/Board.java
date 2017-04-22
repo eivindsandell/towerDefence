@@ -9,7 +9,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public final class Board {
+public class Board {
+    private static Board ourInstance = new Board();
+
+    public static Board getInstance() {
+        return ourInstance;
+    }
 
     private ArrayList<ArrayList<Tile>> tile_board;
     private ArrayList<ArrayList<Integer>> pre_board;//0: Ground, 1: Road, 2: Start, 3: Goal

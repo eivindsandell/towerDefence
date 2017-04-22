@@ -26,6 +26,7 @@ public abstract class Tower extends Actor {
     protected int type = 0;
 
     public Tower() {
+        board = Board.getInstance();
         shootable_tiles = new ArrayList<Tile>();
         shootableMobs = new ArrayList<Mob>();
     }

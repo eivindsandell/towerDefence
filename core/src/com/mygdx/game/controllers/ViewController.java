@@ -17,7 +17,7 @@ public abstract class ViewController extends Game {
 
     protected Globals g = new Globals();
     protected ShapeRenderer sr = new ShapeRenderer();
-    protected Board board = new Board();
+    protected Board board = Board.getInstance();
     protected TextButton rightButton;
 
     protected TextButton leftButton;

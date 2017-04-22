@@ -29,7 +29,7 @@ public final class TowerDefence extends Game {
 	@Override
 	public void create() {
 		globals = new Globals();
-		board = new Board();
+		board = Board.getInstance();
 		menuView = new MenuView();
 		preferences = Gdx.app.getPreferences("My Preferences");
 		defenceView = new DefenceView(this);
