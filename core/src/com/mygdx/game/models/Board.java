@@ -156,4 +156,13 @@ public final class Board {
     public void setTowerHealth(double towerHealth) {
         this.towerHealth = towerHealth;
     }
+
+    public boolean tileHasNoTowerAndIsPlacableTile(float x,float y) {
+        //Todo: sjekk om det går å plassere tårn i cellen.
+        return false;
+    }
+
+    public void placeTower(float x, float y, Tower tower) {
+        //Todo: plasser tårn i riktig tile
+    }
 }

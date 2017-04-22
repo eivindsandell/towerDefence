@@ -1,6 +1,7 @@
 package com.mygdx.game.models.mobs;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -80,6 +81,12 @@ public abstract class Mob extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        //todo:
+    }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        //todo:
     }
 }
