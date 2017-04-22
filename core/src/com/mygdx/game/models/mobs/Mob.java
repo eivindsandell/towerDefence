@@ -32,6 +32,7 @@ public abstract class Mob extends Actor {
 
     public Mob() {
         distanceWalked = 0;
+        board = Board.getInstance();
     }
 
     public double getMaxHealth() {
