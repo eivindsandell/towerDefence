@@ -12,7 +12,13 @@ import java.util.Queue;
 public final class Board {
 
     private ArrayList<ArrayList<Tile>> tile_board;
-    private ArrayList<ArrayList<Integer>> pre_board; //0: Ground, 1: Road, 2: Start, 3: Goal
+    private ArrayList<ArrayList<Integer>> pre_board;//0: Ground, 1: Road, 2: Start, 3: Goal
+
+    public static final int GROUND = 0;
+    public static final int ROAD = 1;
+    public static final int START = 2;
+    public static final int GOAL = 3;
+
     private int size;
     private ArrayList<Tower> towersOnBoard;
     private Queue<Mob> mobsOnBoard;
@@ -157,9 +163,8 @@ public final class Board {
         this.towerHealth = towerHealth;
     }
 
-    public boolean tileHasNoTowerAndIsPlacableTile(float x,float y) {
-        //Todo: sjekk om det går å plassere tårn i cellen.
-        return false;
+    public boolean tileHasNoTowerAndIsPlacableTile(int x,int y) {
+        return tile_board.get(x).get(y).isPlacable();
     }
 
     public void placeTower(float x, float y, Tower tower) {

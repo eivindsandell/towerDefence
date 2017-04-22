@@ -198,8 +198,8 @@ public abstract class ViewController extends Game {
         }
     }
     public void findSelectedGridSquare(float x, float y){
-        if(chosenCell!=null){
-            int row = boardGrid.getRow(y);
+        int row = boardGrid.getRow(y);
+        if(chosenCell!=null && board.tileHasNoTowerAndIsPlacableTile(row,(int)(x/(boardGrid.getWidth()/gridSize)))){
             prevChosenGridCell = chosenGridCell;
             chosenGridCell = gridCells.get((row*gridSize)+(int)(x/(boardGrid.getWidth()/gridSize)));
         }
