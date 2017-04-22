@@ -19,6 +19,10 @@ public final class Globals {
     private static final int BASICMOB = 0;
     private static final int STANDARDTOWER = 1;
     private final Label.LabelStyle labelStyle;
+    private final Texture grass;
+    private final Texture road;
+    private final Texture start;
+    private final Texture goal;
     private Integer screenWidth;
     private Integer screenHeight;
     private boolean soundEnabled;
@@ -33,6 +37,22 @@ public final class Globals {
     private HashMap<Texture, Integer> mobMap;
     private Skin skin;
     private TextButton.TextButtonStyle textButtonStyle;
+
+    public Texture getGrass() {
+        return grass;
+    }
+
+    public Texture getRoad() {
+        return road;
+    }
+
+    public Texture getStart() {
+        return start;
+    }
+
+    public Texture getGoal() {
+        return goal;
+    }
 
     public Globals(){
 
@@ -59,12 +79,12 @@ public final class Globals {
 
         mobMap = new HashMap<Texture, Integer>();
         mobTextures = new ArrayList<Texture>();
-        mobTextures.add((new Texture(Gdx.files.internal("towerDefense_tile245.png"))));
+        mobTextures.add((new Texture(Gdx.files.internal("sombrero.png"))));
         mobMap.put(mobTextures.get(0),BASICMOB);
 
         towerMap = new HashMap<Texture, Integer>();
         towerTextures = new ArrayList<Texture>();
-        towerTextures.add((new Texture(Gdx.files.internal("towerDefense_tile249.png"))));
+        towerTextures.add((new Texture(Gdx.files.internal("canon_green.png"))));
         towerMap.put(towerTextures.get(0),STANDARDTOWER);
 
         questionMarkUs = new Texture(Gdx.files.internal("Question Mark US.png"));
@@ -72,6 +92,11 @@ public final class Globals {
 
         preferences = Gdx.app.getPreferences("My Preferences");
         preferences.putBoolean("musicEnabled", true);
+
+        grass = new Texture(Gdx.files.internal("grass_tile.png"));
+        road = new Texture(Gdx.files.internal("sand_tile.png"));
+        start = new Texture(Gdx.files.internal("Question Mark Mex.png"));
+        goal = new Texture(Gdx.files.internal("trumptowerlogo.png"));
     }
 
     public Skin getSkin() {

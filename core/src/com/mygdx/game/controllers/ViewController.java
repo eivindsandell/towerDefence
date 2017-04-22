@@ -193,10 +193,25 @@ public abstract class ViewController extends Game {
         for (int y = 0; y < gridSize; y++) {
             boardGrid.row();
             for (int x = 0; x < gridSize; x++) {
-                boardGrid.add(board.getTile_board().get(y).get(x)).size(size);
+                boardGrid.add().size(size);
             }
         }
     }
+
+    public void drawBoardGrid(){
+        for(int i=0;i<gridSize;i++){
+            for(int j=0;j<gridSize;j++){
+                switch (board.getTile_board().get(i).get(j).getType()){
+                    case Board.ROAD:
+                        gridCells.get(i*gridSize + j).setActor(new Image(g.getRoad()));
+                    case Board.GOAL:
+                        gridCells.get(i*gridSize + j).setActor(new Image(g.getGoal()));
+                }
+                boardGrid.addActor(new Image(g.getGrass()));
+            }
+        }
+    }
+
     public void findSelectedGridSquare(float x, float y){
         int row = boardGrid.getRow(y);
         if(chosenCell!=null && board.tileHasNoTowerAndIsPlacableTile(row,(int)(x/(boardGrid.getWidth()/gridSize)))){

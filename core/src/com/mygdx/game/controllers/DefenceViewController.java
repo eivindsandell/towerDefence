@@ -35,11 +35,14 @@ public class DefenceViewController extends ViewController{
     @Override
     public void findSelectedGridSquare(float x, float y) {
         super.findSelectedGridSquare(x, y);
+        if(chosenGridCell!= null){
+            showTowerRange(x,y);
+        }
 
         if(chosenCell!=null){
             if(chosenGridCell == prevChosenGridCell && money >= chosenTower.getPrice()){
                 Tower tower = g.whichTower(listIndex+tableCells.indexOf(chosenCell,true));
-                board.placeTower(x,y,tower);
+                board.placeTower(boardGrid.getRow(y),(int)(x/(boardGrid.getWidth()/gridSize)),tower);
                 chosenCell = null;
                 money -= tower.getPrice();
             }
@@ -52,6 +55,10 @@ public class DefenceViewController extends ViewController{
         if(chosenCell!=null){
             chosenTower = g.whichTower(listIndex+tableCells.indexOf(chosenCell,true));
         }
+    }
+
+    public void showTowerRange(float x, float y){
+        //todo: les fra rangematrisen i tower og tegn tilsvarende ruter i boardgrid.
     }
 }
 

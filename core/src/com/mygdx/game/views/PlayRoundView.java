@@ -4,21 +4,38 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.game.Globals;
 import com.mygdx.game.TowerDefence;
+import com.mygdx.game.controllers.PlayRoundViewController;
+import com.mygdx.game.models.Board;
 
 public class PlayRoundView implements Screen {
-    TowerDefence game;
-    Stage stage;
+    private TowerDefence game;
+    private Stage stage;
+    private PlayRoundViewController playRoundViewController;
+    private Board board;
 
     public PlayRoundView(TowerDefence game){
 
         this.game = game;
         stage = new Stage();
+        playRoundViewController = new PlayRoundViewController();
+        board = new Board();
+
     }
     @Override
     public void show() {
+        for(int i=0;i<board.getSize();i++){
+            for(int j=0;j<board.getSize();j++){
+                if(board.getTile_board().get(i).get(j).getType()==Board.GROUND && board.getTile_board().get(i).get(j).getTower()!=null){
+                    stage.addActor(board.getTile_board().get(i).get(j).getTower());
+                }else{
 
+                }
+            }
+        }
     }
+
 
     @Override
     public void render(float delta) {

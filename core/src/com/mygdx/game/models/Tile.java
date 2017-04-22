@@ -6,7 +6,7 @@ import com.mygdx.game.models.towers.Tower;
 
 import java.util.ArrayList;
 
-public class Tile extends Actor {
+public class Tile{
 
     private int x,y;
     private int type;
@@ -65,6 +65,14 @@ public class Tile extends Actor {
 
     public boolean isPlacable() {
         return ((type==Board.GROUND)&&(tower==null));
+    }
+
+    public void placeTower(Tower tower) {
+        this.tower = tower;
+    }
+
+    public Tower getTower() {
+        return tower;
     }
 }
 

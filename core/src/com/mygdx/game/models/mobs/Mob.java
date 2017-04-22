@@ -75,7 +75,8 @@ public abstract class Mob extends Actor {
         }
     }
 
-    public void update() {
+    public void updatePos() {
+
     }
 
     @Override

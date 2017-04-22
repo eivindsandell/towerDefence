@@ -111,11 +111,11 @@ public final class Board {
         return tile_board;
     }
 
-    public void addMobToQueue(com.mygdx.game.models.mobs.Mob mob) {
+    public void addMobToQueue(Mob mob) {
         mobsOnBoard.add(mob);
     }
 
-    public com.mygdx.game.models.mobs.Mob nextMob() {
+    public Mob nextMob() {
         return mobsOnBoard.remove();
     }
 
@@ -131,11 +131,11 @@ public final class Board {
         return size;
     }
 
-    public ArrayList<com.mygdx.game.models.towers.Tower> getTowersOnBoard() {
+    public ArrayList<Tower> getTowersOnBoard() {
         return towersOnBoard;
     }
 
-    public Queue<com.mygdx.game.models.mobs.Mob> getMobsOnBoard() {
+    public Queue<Mob> getMobsOnBoard() {
         return mobsOnBoard;
     }
 
@@ -167,7 +167,8 @@ public final class Board {
         return tile_board.get(x).get(y).isPlacable();
     }
 
-    public void placeTower(float x, float y, Tower tower) {
+    public void placeTower(int x, int y, Tower tower) {
         //Todo: plasser tårn i riktig tile
+        tile_board.get(x).get(y).placeTower(tower);
     }
 }
