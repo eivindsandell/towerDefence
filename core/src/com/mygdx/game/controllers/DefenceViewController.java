@@ -45,6 +45,7 @@ public class DefenceViewController extends ViewController{
                 Tower tower = g.whichTower(listIndex+tableCells.indexOf(chosenCell,true));
                 board.placeTower(boardGrid.getRow(y),(int)(x/(boardGrid.getWidth()/gridSize)),tower);
                 chosenCell = null;
+                prevChosenGridCell = null;
                 money -= tower.getPrice();
             }
         }
