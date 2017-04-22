@@ -2,6 +2,7 @@ package com.mygdx.game.models;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.models.mobs.Mob;
+import com.mygdx.game.models.towers.Tower;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Tile extends Actor {
     private int type;
     private int tiles_to_portal;
     private ArrayList<Mob> mobsOnTile;
+    private Tower tower;
 
     public void setX(int x) {
         this.x = x;

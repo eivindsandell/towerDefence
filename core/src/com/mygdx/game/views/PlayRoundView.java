@@ -56,6 +56,6 @@ public class PlayRoundView implements Screen {
 
 
     public void updateAllActors(){
-
+        //todo: kall på en tilsvarende funksjon i controlleren
     }
 }
