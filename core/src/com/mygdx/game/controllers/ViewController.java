@@ -56,6 +56,7 @@ public abstract class ViewController extends Game {
         setUpMoneyTable();
         gridCells = boardGrid.getCells();
         tableCells = table.getCells();
+        fillBoardGrid();
     }
 
     public void drawBackground(){
@@ -198,16 +199,24 @@ public abstract class ViewController extends Game {
         }
     }
 
-    public void drawBoardGrid(){
+    public void fillBoardGrid(){
         for(int i=0;i<gridSize;i++){
             for(int j=0;j<gridSize;j++){
                 switch (board.getTile_board().get(i).get(j).getType()){
                     case Board.ROAD:
                         gridCells.get(i*gridSize + j).setActor(new Image(g.getRoad()));
+                        break;
                     case Board.GOAL:
                         gridCells.get(i*gridSize + j).setActor(new Image(g.getGoal()));
+                        break;
+                    case Board.GROUND:
+                        gridCells.get(i*gridSize + j).setActor(new Image(g.getGrass()));
+                        break;
+                    case Board.START:
+                        gridCells.get(i*gridSize + j).setActor(new Image(g.getStart()));
+                        break;
                 }
-                boardGrid.addActor(new Image(g.getGrass()));
+                gridCells.get(i*gridSize + j).getActor().setZIndex(0);
             }
         }
     }

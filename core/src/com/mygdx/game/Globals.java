@@ -23,6 +23,7 @@ public final class Globals {
     private final Texture road;
     private final Texture start;
     private final Texture goal;
+    private final Texture selected_tile;
     private Integer screenWidth;
     private Integer screenHeight;
     private boolean soundEnabled;
@@ -52,6 +53,10 @@ public final class Globals {
 
     public Texture getGoal() {
         return goal;
+    }
+
+    public Texture getSelected_tile() {
+        return selected_tile;
     }
 
     public Globals(){
@@ -95,8 +100,9 @@ public final class Globals {
 
         grass = new Texture(Gdx.files.internal("grass_tile.png"));
         road = new Texture(Gdx.files.internal("sand_tile.png"));
-        start = new Texture(Gdx.files.internal("Question Mark Mex.png"));
+        start = new Texture(Gdx.files.internal("stairs.png"));
         goal = new Texture(Gdx.files.internal("trumptowerlogo.png"));
+        selected_tile = new Texture(Gdx.files.internal("Button.png"));
     }
 
     public Skin getSkin() {

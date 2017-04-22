@@ -1,6 +1,7 @@
 package com.mygdx.game.controllers;
 
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.models.towers.Tower;
 
 public class DefenceViewController extends ViewController{
@@ -37,6 +38,7 @@ public class DefenceViewController extends ViewController{
         super.findSelectedGridSquare(x, y);
         if(chosenGridCell!= null){
             showTowerRange(x,y);
+            //gridCells.get(boardGrid.getRow(y)*gridSize + (int)(x/(boardGrid.getWidth()/gridSize))).setActor(new Image(g.getSelected_tile()));
         }
 
         if(chosenCell!=null){

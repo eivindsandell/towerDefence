@@ -11,7 +11,7 @@ public class BasicMob extends Mob {
         maxHealth = 100;
         currentHealth = maxHealth;
         speed = 0.01;
-        Texture texture = new Texture(Gdx.files.internal("towerDefense_tile245.png"));
+        Texture texture = new Texture(Gdx.files.internal("sombrero.png"));
         Sprite sprite = new Sprite(texture);
         SpriteBatch spriteBatch;
         price = 10;

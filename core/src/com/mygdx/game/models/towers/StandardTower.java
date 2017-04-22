@@ -20,7 +20,7 @@ public class StandardTower extends Tower {
                         new ArrayList<Integer>(Arrays.asList(0, 1, 0)),
                         new ArrayList<Integer>(Arrays.asList(1, 0, 1)),
                         new ArrayList<Integer>(Arrays.asList(0, 1, 0)))),
-                new Sprite(new Texture(Gdx.files.internal("towerDefense_tile249.png"))), //Sprite
+                new Sprite(new Texture(Gdx.files.internal("canon_green.png"))), //Sprite
                 100, //Price
                 position,
                 board,
@@ -39,7 +39,7 @@ public class StandardTower extends Tower {
                 new ArrayList<Integer>(Arrays.asList(0, 1, 0)),
                 new ArrayList<Integer>(Arrays.asList(1, 0, 1)),
                 new ArrayList<Integer>(Arrays.asList(0, 1, 0))));
-        sprite = new Sprite(new Texture(Gdx.files.internal("towerDefense_tile249.png")));
+        sprite = new Sprite(new Texture(Gdx.files.internal("canon_green.png")));
         price = 100;
         type = Tower.NORMAL;
     }
