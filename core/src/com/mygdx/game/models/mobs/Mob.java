@@ -161,6 +161,8 @@ public abstract class Mob extends Actor {
         y += speed*(globals.getScreenWidth()/globals.getGridSize())*speedY;
         if (distanceWalked == 1){
             distanceWalked = 0;
+            tile.removeMobFromTile(this);
+            nextTile.addMobToTile(this);
         }
     }
 
