@@ -37,7 +37,7 @@ public class DefenceViewController extends ViewController{
         super.findSelectedGridSquare(x, y);
 
         if(chosenCell!=null){
-            if(chosenGridCell == prevChosenGridCell && money >= chosenTower.getPrice() && board.tileHasNoTowerAndIsPlacableTile(x,y)){
+            if(chosenGridCell == prevChosenGridCell && money >= chosenTower.getPrice()){
                 Tower tower = g.whichTower(listIndex+tableCells.indexOf(chosenCell,true));
                 board.placeTower(x,y,tower);
                 chosenCell = null;

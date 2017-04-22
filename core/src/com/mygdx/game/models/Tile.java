@@ -32,6 +32,7 @@ public class Tile extends Actor {
         this.type = type;
         this.tiles_to_portal = tiles_to_portal;
         mobsOnTile = new ArrayList<Mob>();
+        tower = null;
     }
 
     public int getType() {
@@ -62,5 +63,8 @@ public class Tile extends Actor {
         mobsOnTile.remove(mobsOnTile.indexOf(mob));
     }
 
+    public boolean isPlacable() {
+        return ((type==Board.GROUND)&&(tower==null));
+    }
 }
 
