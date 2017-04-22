@@ -33,6 +33,7 @@ public final class Globals {
     private Texture questionMarkMex;
     private Texture questionMarkUs;
     private String actorName;
+    private int gridSize;
     private BitmapFont font;
     private HashMap<Texture, Integer> towerMap;
     private HashMap<Texture, Integer> mobMap;
@@ -63,6 +64,8 @@ public final class Globals {
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
+
+        gridSize = 8;
 
         font = new BitmapFont();
         font.getData().setScale(4);
@@ -139,6 +142,10 @@ public final class Globals {
 
     public boolean isSoundEnabled() {
         return soundEnabled;
+    }
+
+    public int getGridSize() {
+        return gridSize;
     }
 
     // Enables or disables sound

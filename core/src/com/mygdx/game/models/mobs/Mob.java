@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.Globals;
+import com.mygdx.game.models.Board;
 import com.mygdx.game.models.Tile;
 
 public abstract class Mob extends Actor {
@@ -15,11 +19,19 @@ public abstract class Mob extends Actor {
     protected SpriteBatch spriteBatch;
     protected Integer price;
     protected int damage;
-    protected double x, y;
+    protected float x, y;
     protected Game game;
     protected Tile tile;
+    protected Board board;
+    protected Tile nextTile;
+    protected float distanceWalked;
+    protected int speedX;
+    protected int speedY;
+    protected Globals globals;
+
 
     public Mob() {
+        distanceWalked = 0;
     }
 
     public double getMaxHealth() {
@@ -50,11 +62,11 @@ public abstract class Mob extends Actor {
         return damage;
     }
 
-    public void setX(double x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public void setY(double y) {
+    public void setY(float y) {
         this.y = y;
     }
 
@@ -75,19 +87,93 @@ public abstract class Mob extends Actor {
         }
     }
 
-    public void updatePos() {
+    private void findNextTile(int x, int y){
+        int nextX = 0;
+        int nextY = 0;
+        int nextMin = board.getTile_board().get(x).get(y).getTiles_to_portal();
+        Array<Tile> roadTiles = new Array<Tile>();
+        try {
+            if (board.getTile_board().get(x - 1).get(y).getType() == 1) {
+                roadTiles.add(board.getTile_board().get(x - 1).get(y));
+            }
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        try {
+            if (board.getTile_board().get(x+1).get(y).getType() == 1){
+                roadTiles.add(board.getTile_board().get(x+1).get(y));
+            }
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        try {
+            if (board.getTile_board().get(x).get(y-1).getType() == 1){
+                roadTiles.add(board.getTile_board().get(x).get(y-1));
+            }
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        try {
+            if (board.getTile_board().get(x).get(y+1).getType() == 1){
+                roadTiles.add(board.getTile_board().get(x).get(y+1));
+            }
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
 
+
+        for (int i = 0; i<roadTiles.size; i++){
+            if (tile.getTiles_to_portal()<nextMin){
+                nextMin = tile.getTiles_to_portal();
+                nextX = tile.getXpos();
+                nextY = tile.getYpos();
+            }
+        }
+        nextTile = board.getTile_board().get(nextX).get(nextY);
+    }
+
+    public void updatePos() {
+        if (distanceWalked == 0){
+            findNextTile(tile.getXpos(), tile.getYpos());
+            if (nextTile.getXpos() < tile.getXpos()){
+                speedX = -1;
+                speedY = 0;
+            }
+            else if (nextTile.getXpos() > tile.getXpos()){
+                speedX = 1;
+                speedY = 0;
+            }
+            else if (nextTile.getYpos() < tile.getYpos()){
+                speedX = 0;
+                speedY = 1;
+            }
+            else if (nextTile.getYpos() > tile.getYpos()){
+                speedX = 0;
+                speedY = -1;
+            }
+        }
+        distanceWalked += speed;
+        x += speed*(globals.getScreenWidth()/globals.getGridSize())*speedX;
+        y += speed*(globals.getScreenWidth()/globals.getGridSize())*speedY;
+        if (distanceWalked == 1){
+            distanceWalked = 0;
+        }
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        //todo:
+        updatePos();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         //todo:
+
     }
 }

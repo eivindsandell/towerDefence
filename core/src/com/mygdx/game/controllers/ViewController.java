@@ -49,7 +49,7 @@ public abstract class ViewController extends Game {
         prevCell = null;
         chosenGridCell = null;
         prevChosenGridCell = null;
-        gridSize = 8;
+        gridSize = g.getGridSize();
         setUpButtons();
         setUpTable();
         createBoardGrid();
