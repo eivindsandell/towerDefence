@@ -8,6 +8,7 @@ import com.mygdx.game.Globals;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.PlayRoundViewController;
 import com.mygdx.game.models.Board;
+import com.mygdx.game.models.Tile;
 import com.mygdx.game.models.mobs.Mob;
 
 public class PlayRoundView implements Screen {
@@ -15,15 +16,33 @@ public class PlayRoundView implements Screen {
     private Stage stage;
     private PlayRoundViewController playRoundViewController;
     private Board board;
+    private int counter;
+    private Tile startTile;
+    private Globals globals;
 
     public PlayRoundView(TowerDefence game){
 
         this.game = game;
+        globals = new Globals();
         stage = new Stage();
         playRoundViewController = new PlayRoundViewController();
         board = new Board();
+        counter = 0;
+        startTile = findStartTile();
 
     }
+
+    private Tile findStartTile() {
+        for(int i=0;i<globals.getGridSize();i++){
+            for(int j=0;j<globals.getGridSize();j++){
+                if(board.getTile_board().get(i).get(j).getType()==Board.START){
+                    return board.getTile_board().get(i).get(j);
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public void show() {
         stage.addActor(playRoundViewController.getBoard());
@@ -45,9 +64,21 @@ public class PlayRoundView implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        counter ++;
+        spawnMob();
         stage.act(delta);
         stage.draw();
+    }
+
+    private void spawnMob() {
+        if(timeToSpawnMob()){
+            counter = 0;
+            startTile.addMobToTile(board.getMobsOnBoard().remove());
+        }
+    }
+
+    private boolean timeToSpawnMob() {
+        return counter == 60;
     }
 
 
@@ -68,7 +99,7 @@ public class PlayRoundView implements Screen {
 
     @Override
     public void hide() {
-
+        stage.clear();
     }
 
     @Override

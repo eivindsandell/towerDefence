@@ -1,6 +1,7 @@
 package com.mygdx.game.models;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.Globals;
 import com.mygdx.game.models.mobs.Mob;
 import com.mygdx.game.models.towers.Tower;
 
@@ -13,6 +14,7 @@ public class Tile{
     private int tiles_to_portal;
     private ArrayList<Mob> mobsOnTile;
     private Tower tower;
+    private Globals globals;
 
     public void setX(int x) {
         this.x = x;
@@ -33,6 +35,7 @@ public class Tile{
         this.tiles_to_portal = tiles_to_portal;
         mobsOnTile = new ArrayList<Mob>();
         tower = null;
+        globals = new Globals();
     }
 
     public int getType() {
@@ -57,6 +60,8 @@ public class Tile{
 
     public void addMobToTile(Mob mob) {
         mobsOnTile.add(mob);
+        mob.setX(x*globals.getScreenWidth()/globals.getGridSize());
+        mob.setY(y*globals.getScreenWidth()/globals.getGridSize());
     }
 
     public void removeMobFromTile(Mob mob) {
