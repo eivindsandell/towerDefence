@@ -3,6 +3,7 @@ package com.mygdx.game.models.towers;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.models.Board;
+import com.mygdx.game.models.Projectile.Projectile;
 import com.mygdx.game.models.Tile;
 import com.mygdx.game.models.mobs.Mob;
 
@@ -18,36 +19,15 @@ public abstract class Tower extends Actor {
     protected ArrayList<Tile> shootable_tiles;
     protected Board board;
     protected ArrayList<Mob> shootableMobs;
-    public static int NORMAL = 0;
-    public static int SPLASH = 1;
-    public static int LAZER = 2;
+    protected ArrayList<Projectile> projectiles;
+    public static final int NORMAL = 0;
+    public static final int SPLASH = 1;
+    public static final int LAZER = 2;
     protected int type = 0;
-
-    public Tower(double damage, double speed, ArrayList<ArrayList<Integer>> range, Sprite sprite, int price, Tile position, Board board, int type) {
-        this.damage = damage;
-        this.speed = speed;
-        this.position = position;
-        this.range = range;
-        this.sprite = sprite;
-        this.price = price;
-        this.shootable_tiles = new ArrayList<Tile>();
-        calculate_shootable_tiles(board);
-        this.type = type;
-    }
-
-    public Tower(ArrayList<ArrayList<Integer>> range, Tile position, Board board, int type) {
-        this.range = range;
-        this.position = position;
-        this.board = board;
-        this.shootable_tiles = new ArrayList<Tile>();
-        calculate_shootable_tiles(board);
-        this.type = type;
-    }
 
     public Tower() {
         shootable_tiles = new ArrayList<Tile>();
         shootableMobs = new ArrayList<Mob>();
-        board = new Board();
     }
 
     public double getDamage() {
@@ -101,7 +81,6 @@ public abstract class Tower extends Actor {
     }
 
     public ArrayList<Mob> getShootableMobs() {
-        shootableMobs = new ArrayList<Mob>();
         for (int i = 0; i < shootable_tiles.size(); i++) {
             for (int j = 0; j < shootable_tiles.get(i).getMobsOnTile().size(); j++) {
                 shootableMobs.add(shootable_tiles.get(i).getMobsOnTile().get(j));
@@ -119,8 +98,10 @@ public abstract class Tower extends Actor {
     private void fireProjectile(Mob mob) {
         int originX = position.getXpos();
         int originY = position.getYpos();
-        double targetX = mob.getXPos();
-        double tagertY = mob.getY();
+        float targetX = mob.getXPos();
+        float targetY = mob.getYPos();
+        projectiles.add(new Projectile(type,targetX,targetY));
+
     }
 
     private void fireSplash() {
@@ -134,6 +115,20 @@ public abstract class Tower extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if(shootableMobs.size()>0 && timeTooShoot()){
+            fire(shootableMobs.get(0));
+        }
+        for(Projectile p:projectiles)
+            p.act(delta);
         //todo
+    }
+
+    private boolean timeTooShoot() {
+        return false;
+    }
+
+    public void setTile(Tile tile) {
+        position = tile;
+        calculate_shootable_tiles(board);
     }
 }

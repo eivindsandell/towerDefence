@@ -170,5 +170,6 @@ public final class Board {
     public void placeTower(int x, int y, Tower tower) {
         //Todo: plasser tårn i riktig tile
         tile_board.get(x).get(y).placeTower(tower);
+        tower.setTile(tile_board.get(x).get(y));
     }
 }

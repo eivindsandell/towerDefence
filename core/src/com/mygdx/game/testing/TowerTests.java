@@ -38,7 +38,7 @@ public class TowerTests {
                 )
         );
 
-        Tower tower = new StandardTower(range, board.getTile_board().get(1).get(3), board, 0);
+        Tower tower = new StandardTower();
 
         assertThat(tower.getShootable_tiles(), hasItems(
                 board.getTile_board().get(0).get(3),
@@ -67,7 +67,7 @@ public class TowerTests {
                 )
         );
 
-        Tower tower = new StandardTower(range, board.getTile_board().get(2).get(4), board, 0);
+        Tower tower = new StandardTower();
         Mob mobOne = new TestMob();
         Mob mobTwo = new TestMob();
         Mob mobThree = new TestMob();
