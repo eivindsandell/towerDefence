@@ -70,11 +70,11 @@ public abstract class Mob extends Actor {
         this.y = y;
     }
 
-    public float getXPos() {
+    public double getXPos() {
         return x;
     }
 
-    public float getYPos(){ return y;}
+    public double getYPos(){ return y;}
 
     public Tile getTile() {
         return tile;
