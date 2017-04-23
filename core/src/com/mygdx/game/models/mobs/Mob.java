@@ -178,8 +178,11 @@ public abstract class Mob extends Actor {
         System.out.println(currentHealth);
         if(currentHealth<= 0){
             tile.removeMobFromTile(this);
-            this.remove();
+            globals.setDefence_money(globals.getDefence_money()+1000);
             board.updateKilledMobsThisRound();
+            this.remove();
+
+
 
         }
     }

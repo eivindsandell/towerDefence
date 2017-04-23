@@ -273,7 +273,7 @@ public abstract class ViewController extends Game {
         ArrayList<Tower> towers = new ArrayList<Tower>();
         for(ArrayList<Tile> tiles:board.getTile_board()){
             for(Tile tile:tiles){
-                if(tile.getType()==Board.GROUND){
+                if(tile.getType()==Board.GROUND && tile.getTower() != null){
                     towers.add(tile.getTower());
                 }
             }

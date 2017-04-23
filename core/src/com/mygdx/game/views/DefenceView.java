@@ -34,13 +34,13 @@ public class DefenceView implements Screen{
     }
 
     private void goNext(){
-        defenceViewController.getDoneButton().addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("Button pressed!");
-                game.setScreen(game.getPlayRoundView());
-            }
-        });
+            defenceViewController.getDoneButton().addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    System.out.println("Button pressed!");
+                    game.setScreen(game.getPlayRoundView());
+                }
+            });
 
     }
 
@@ -120,7 +120,17 @@ public class DefenceView implements Screen{
         defenceViewController.fillSelectedGridSquare();
         defenceViewController.updateMoneyTable(defenceViewController.getMoney());
         defenceViewController.getPlacedTowers();
+        readyToPlay();
         stage.draw();
+    }
+
+    private void readyToPlay(){
+        if (defenceViewController.getPlacedTowers().isEmpty()){
+            defenceViewController.getDoneButton().setDisabled(true);
+        }
+        else {
+            defenceViewController.getDoneButton().setDisabled(false);
+        }
     }
 
     @Override
