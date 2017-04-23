@@ -170,7 +170,7 @@ public abstract class Mob extends Actor {
     public void setStartPos() {
 
         this.setX(tile.getXpos()*globals.getSize());
-        this.setY(globals.getScreenHeight()-tile.getYpos()*globals.getSize()+globals.getSize());
+        this.setY(globals.getScreenHeight()-tile.getYpos()*globals.getSize()-globals.getSize());
     }
 
     public void dealDamage(int damage) {
