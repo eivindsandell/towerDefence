@@ -180,6 +180,7 @@ public abstract class Mob extends Actor {
             tile.removeMobFromTile(this);
             this.remove();
             board.updateKilledMobsThisRound();
+
         }
     }
 }

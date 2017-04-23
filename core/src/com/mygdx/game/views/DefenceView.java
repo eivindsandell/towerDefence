@@ -118,7 +118,7 @@ public class DefenceView implements Screen{
         defenceViewController.drawBackground();
         defenceViewController.drawSquareAroundChosenTableCell();
         defenceViewController.fillSelectedGridSquare();
-        defenceViewController.updateMoneyTable();
+        defenceViewController.updateMoneyTable(defenceViewController.getMoney());
         defenceViewController.getPlacedTowers();
         stage.draw();
     }

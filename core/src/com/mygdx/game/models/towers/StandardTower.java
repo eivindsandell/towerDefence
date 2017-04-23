@@ -21,7 +21,7 @@ public class StandardTower extends Tower {
                 new ArrayList<Integer>(Arrays.asList(1, 0, 1)),
                 new ArrayList<Integer>(Arrays.asList(0, 1, 0))));
         texture = new Texture(Gdx.files.internal("canon_green.png"));
-        price = 100;
+        price = 500;
         type = Tower.NORMAL;
         fireRate = 30;
     }

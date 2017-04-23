@@ -32,6 +32,8 @@ public final class Globals {
     private Preferences preferences;
     private ArrayList<Texture> mobTextures;
     private ArrayList<Texture> towerTextures;
+    private int attack_money;
+    private int defence_money;
     private Texture questionMarkMex;
     private Texture questionMarkUs;
     private String actorName;
@@ -67,6 +69,9 @@ public final class Globals {
 
         defender_HP = 10;
         gameOver = false;
+
+        defence_money = 1000;
+        attack_money = 500;
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -145,6 +150,22 @@ public final class Globals {
 
     public Integer getScreenHeight() {
         return screenHeight;
+    }
+
+    public int getAttack_money() {
+        return attack_money;
+    }
+
+    public int getDefence_money() {
+        return defence_money;
+    }
+
+    public void setAttack_money(int attack_money) {
+        this.attack_money = attack_money;
+    }
+
+    public void setDefence_money(int defence_money) {
+        this.defence_money = defence_money;
     }
 
     public boolean isSoundEnabled() {

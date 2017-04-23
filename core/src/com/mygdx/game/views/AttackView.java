@@ -124,7 +124,7 @@ public class AttackView implements Screen{
         Gdx.input.setInputProcessor(stage);
         attackViewController.drawBackground();
         attackViewController.drawSquareAroundChosenTableCell();
-        attackViewController.updateMoneyTable();
+        attackViewController.updateMoneyTable(attackViewController.getMoney());
         attackViewController.updatePopupTable();
         stage.draw();
     }

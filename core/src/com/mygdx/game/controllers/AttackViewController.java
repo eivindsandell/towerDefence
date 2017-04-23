@@ -22,7 +22,6 @@ public class AttackViewController extends ViewController{
 
     public AttackViewController(){
         super();
-        money = 1000;
         popup = new Table();
         popup.setClip(true);
         add = new TextButton("+",g.getTextButtonStyle());
@@ -33,8 +32,12 @@ public class AttackViewController extends ViewController{
         quantityLabel = null;
         fillTable();
         doneButton.setText("Done!");
+        setUpMoneyTable(g.getAttack_money());
     }
 
+    public Integer getMoney(){
+        return g.getAttack_money();
+    }
 
     @Override
     public void create() {
@@ -78,7 +81,7 @@ public class AttackViewController extends ViewController{
     public void findPressedCell(float x, float y){
         super.findPressedCell(x,y);
         if(chosenCell==null&& prevCell!= null){
-            money += (chosenQuantity*currentChosenMob.getPrice());
+            g.setAttack_money(g.getAttack_money()+(chosenQuantity*currentChosenMob.getPrice()));
             chosenQuantity = 0;
         }
     }
@@ -114,9 +117,9 @@ public class AttackViewController extends ViewController{
 
     public void add() {
         if(popup.hasChildren()) {
-            if(money >= currentChosenMob.getPrice()){
+            if(g.getAttack_money() >= currentChosenMob.getPrice()){
                 chosenQuantity++;
-                money -= currentChosenMob.getPrice();
+                g.setAttack_money(g.getAttack_money()-currentChosenMob.getPrice());
                 quantityLabel.setText(chosenQuantity.toString());
             }
         }
@@ -124,7 +127,7 @@ public class AttackViewController extends ViewController{
     public void subtract(){
         if(popup.hasChildren()&&chosenQuantity!=0) {
             chosenQuantity--;
-            money += currentChosenMob.getPrice();
+            g.setAttack_money(g.getAttack_money()+currentChosenMob.getPrice());
             quantityLabel.setText(chosenQuantity.toString());
         }
     }

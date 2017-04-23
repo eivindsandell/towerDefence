@@ -12,14 +12,17 @@ public class DefenceViewController extends ViewController{
         super();
         fillTable();
         chosenTower = null;
-        money = 200;
         boardGrid.debug();
-        setUpMoneyTable();
+        setUpMoneyTable(g.getDefence_money());
     }
 
     @Override
     public void create() {
 
+    }
+
+    public Integer getMoney(){
+        return g.getDefence_money();
     }
 
     public void fillTable(){
@@ -41,12 +44,12 @@ public class DefenceViewController extends ViewController{
         }
 
         if(chosenCell!=null){
-            if(chosenGridCell == prevChosenGridCell && money >= chosenTower.getPrice()){
+            if(chosenGridCell == prevChosenGridCell && g.getDefence_money() >= chosenTower.getPrice()){
                 Tower tower = g.whichTower(listIndex+tableCells.indexOf(chosenCell,true));
                 board.placeTower(boardGrid.getRow(y),(int)(x/(boardGrid.getWidth()/gridSize)),tower);
                 chosenCell = null;
                 prevChosenGridCell = null;
-                money -= tower.getPrice();
+                g.setDefence_money(g.getDefence_money() - tower.getPrice());
             }
         }
     }
