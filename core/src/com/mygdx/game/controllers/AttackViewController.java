@@ -134,8 +134,9 @@ public class AttackViewController extends ViewController{
     }
 
     public void buy() {
+        int type = listIndex+tableCells.indexOf(chosenCell,true);
         for(int i=0;i<chosenQuantity;i++){
-            board.addMobToQueue(g.whichMob(listIndex+tableCells.indexOf(chosenCell,true)));
+            board.addMobToQueue(g.whichMob(type));
         }
         chosenCell = null;
         currentChosenMob = null;

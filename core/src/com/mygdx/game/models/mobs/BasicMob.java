@@ -10,7 +10,7 @@ public class BasicMob extends Mob {
     public BasicMob() {
         maxHealth = 100;
         currentHealth = maxHealth;
-        speed = 0.5;
+        speed = 0.1;
         texture = new Texture(Gdx.files.internal("sombrero.png"));
         price = 10;
         damage = 1;

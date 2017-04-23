@@ -127,26 +127,26 @@ public abstract class Mob extends Actor {
         if (distanceWalked == 0){
             findNextTile(tile.getXpos(), tile.getYpos());
             if (nextTile.getXpos() < tile.getXpos()){
-                speedX = -1;
-                speedY = 0;
-            }
-            else if (nextTile.getXpos() > tile.getXpos()){
-                speedX = 1;
-                speedY = 0;
-            }
-            else if (nextTile.getYpos() < tile.getYpos()){
                 speedX = 0;
                 speedY = 1;
             }
-            else if (nextTile.getYpos() > tile.getYpos()){
+            else if (nextTile.getXpos() > tile.getXpos()){
                 speedX = 0;
                 speedY = -1;
+            }
+            else if (nextTile.getYpos() < tile.getYpos()){
+                speedX = -1;
+                speedY = 0;
+            }
+            else if (nextTile.getYpos() > tile.getYpos()){
+                speedX = 1;
+                speedY = 0;
             }
         }
         distanceWalked += speed;
         setX((float) (this.getX() + speed*(globals.getScreenWidth()/globals.getGridSize())*speedX));
         setY((float) (this.getY() + speed*(globals.getScreenWidth()/globals.getGridSize())*speedY));
-        if (distanceWalked == 1){
+        if (distanceWalked >= 1){
             distanceWalked = 0;
             tile.removeMobFromTile(this);
             nextTile.addMobToTile(this);
@@ -170,7 +170,7 @@ public abstract class Mob extends Actor {
     public void setStartPos() {
 
         this.setX(tile.getXpos()*globals.getSize());
-        this.setY(tile.getYpos()*globals.getSize());
+        this.setY(globals.getScreenHeight()-tile.getYpos()*globals.getSize()+globals.getSize());
     }
 
     public void dealDamage(int damage) {
