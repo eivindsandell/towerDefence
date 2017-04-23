@@ -100,6 +100,14 @@ public class DefenceView implements Screen{
         stage.addActor(defenceViewController.getTable());
         stage.addActor(defenceViewController.getBoard());
         stage.addActor(defenceViewController.getMoneyTable());
+        towers = defenceViewController.getPlacedTowers();
+        if(towers != null){
+            for(Tower tower:towers){
+                if(tower != null){
+                    stage.addActor(tower);
+                }
+            }
+        }
     }
 
     @Override

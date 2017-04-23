@@ -10,11 +10,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.AttackViewController;
+import com.mygdx.game.models.towers.Tower;
+
+import java.util.ArrayList;
 
 public class AttackView implements Screen{
     private AttackViewController attackViewController;
     private TowerDefence game;
     private Stage stage;
+    private ArrayList<Tower> towers;
 
     public AttackView(TowerDefence game) {
         this.game = game;
@@ -103,6 +107,14 @@ public class AttackView implements Screen{
         stage.addActor(attackViewController.getBoard());
         stage.addActor(attackViewController.getPopup());
         stage.addActor(attackViewController.getMoneyTable());
+        towers = attackViewController.getPlacedTowers();
+        if(towers != null){
+            for(Tower tower:towers){
+                if(tower != null){
+                    stage.addActor(tower);
+                }
+            }
+        }
     }
 
     @Override

@@ -32,7 +32,7 @@ public class Projectile extends Actor {
             case Tower.NORMAL:
                 projectileTexture = new Texture(Gdx.files.internal("missile_small.png"));
                 speed = 10;
-                damage = 10;
+                damage = 100;
         }
         this.mob = mob;
         this.destX = mob.getTile().getXpos();
