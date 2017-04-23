@@ -73,47 +73,49 @@ public abstract class Mob extends Actor {
         int nextMin = board.getTile_board().get(x).get(y).getTiles_to_portal();
         Array<Tile> roadTiles = new Array<Tile>();
         try {
-            if (board.getTile_board().get(x - 1).get(y).getType() == 1) {
+            if (board.getTile_board().get(x - 1).get(y).getType() == Board.ROAD || board.getTile_board().get(x-1).get(y).getType() == Board.GOAL) {
                 roadTiles.add(board.getTile_board().get(x - 1).get(y));
             }
         }
-        catch (ArrayIndexOutOfBoundsException e){
+        catch (IndexOutOfBoundsException e){
 
         }
         try {
-            if (board.getTile_board().get(x+1).get(y).getType() == 1){
+            if (board.getTile_board().get(x+1).get(y).getType() == Board.ROAD || board.getTile_board().get(x+1).get(y).getType() == Board.GOAL){
                 roadTiles.add(board.getTile_board().get(x+1).get(y));
             }
         }
-        catch (ArrayIndexOutOfBoundsException e){
+        catch (IndexOutOfBoundsException e){
 
         }
         try {
-            if (board.getTile_board().get(x).get(y-1).getType() == 1){
+            if (board.getTile_board().get(x).get(y-1).getType() == Board.ROAD || board.getTile_board().get(x).get(y-1).getType() == Board.GOAL){
                 roadTiles.add(board.getTile_board().get(x).get(y-1));
             }
         }
-        catch (ArrayIndexOutOfBoundsException e){
+        catch (IndexOutOfBoundsException e){
 
         }
         try {
-            if (board.getTile_board().get(x).get(y+1).getType() == 1){
+            if (board.getTile_board().get(x).get(y+1).getType() == Board.ROAD || board.getTile_board().get(x).get(y+1).getType() == Board.GOAL){
                 roadTiles.add(board.getTile_board().get(x).get(y+1));
             }
         }
-        catch (ArrayIndexOutOfBoundsException e){
+        catch (IndexOutOfBoundsException e){
 
         }
 
 
         for (int i = 0; i<roadTiles.size; i++){
-            if (tile.getTiles_to_portal()<nextMin){
-                nextMin = tile.getTiles_to_portal();
-                nextX = tile.getXpos();
-                nextY = tile.getYpos();
+            if (roadTiles.get(i).getTiles_to_portal()<nextMin){
+                nextMin = roadTiles.get(i).getTiles_to_portal();
+                nextX = roadTiles.get(i).getXpos();
+                nextY = roadTiles.get(i).getYpos();
             }
         }
+        System.out.print("row :");
         System.out.println(nextX);
+        System.out.print("col :");
         System.out.println(nextY);
         nextTile = board.getTile_board().get(nextX).get(nextY);
     }

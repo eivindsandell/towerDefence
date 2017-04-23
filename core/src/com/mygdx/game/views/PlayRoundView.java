@@ -38,9 +38,15 @@ public class PlayRoundView implements Screen {
         if(playRoundViewController.spawnMob()){
          stage.addActor(playRoundViewController.getStartTile().getMobsOnTile().get(0));
         }
-        playRoundViewController.checkIfMobReachedGoal();
+        if(playRoundViewController.checkIfMobReachedGoal()){
+            endGame();
+        }
         stage.act(delta);
         stage.draw();
+    }
+
+    private void endGame() {
+        game.setScreen(game.getGameOverView());
     }
 
 

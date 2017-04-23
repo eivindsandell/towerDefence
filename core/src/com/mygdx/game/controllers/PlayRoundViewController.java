@@ -53,10 +53,16 @@ public class PlayRoundViewController extends ViewController {
         return false;
     }
 
-    public void checkIfMobReachedGoal(){
+    public boolean checkIfMobReachedGoal(){
         if (goalTile.getMobsOnTile().size()!=0){
+            int damage = goalTile.getMobsOnTile().remove(0).getDamage();
+            g.giveDamageToDefender(damage);
             System.out.println("a mob has reached the goal");
+            if(g.getDefendersHP()<= 0){
+                return true;
+            }
         }
+        return false;
     }
 
     private boolean timeToSpawnMob() {

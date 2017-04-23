@@ -3,15 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.models.Board;
-import com.mygdx.game.views.AttackView;
-import com.mygdx.game.views.BetweenRoundView;
-import com.mygdx.game.views.DefenceView;
-import com.mygdx.game.views.PlayRoundView;
-import com.mygdx.game.views.SettingsView;
+import com.mygdx.game.views.*;
 
 public final class TowerDefence extends Game {
 
@@ -25,6 +22,7 @@ public final class TowerDefence extends Game {
 	private Preferences preferences;
 	private Globals globals;
 	private Board board;
+	private Screen gameOverView;
 
 	@Override
 	public void create() {
@@ -38,6 +36,7 @@ public final class TowerDefence extends Game {
 		playRoundView = new PlayRoundView(this);
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
 		settingsView = new SettingsView(this, music, null);
+		gameOverView = new GameOverView(this);
 		this.setScreen(menuView);
 		handleMusic();
 		launchGame();
@@ -99,4 +98,8 @@ public final class TowerDefence extends Game {
 	public AttackView getAttackView(){return attackView;}
 	public BetweenRoundView getBetweenRoundView(){return betweenRoundView;}
 	public PlayRoundView getPlayRoundView(){return playRoundView;}
+
+	public Screen getGameOverView() {
+		return gameOverView;
+	}
 }

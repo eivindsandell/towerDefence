@@ -24,6 +24,7 @@ public final class Globals {
     private final Texture start;
     private final Texture goal;
     private final Texture selected_tile;
+    private int defender_HP;
     private Integer screenWidth;
     private Integer screenHeight;
     private boolean soundEnabled;
@@ -39,6 +40,7 @@ public final class Globals {
     private HashMap<Texture, Integer> mobMap;
     private Skin skin;
     private TextButton.TextButtonStyle textButtonStyle;
+    private boolean gameOver;
 
     public Texture getGrass() {
         return grass;
@@ -61,6 +63,9 @@ public final class Globals {
     }
 
     public Globals(){
+
+        defender_HP = 10;
+        gameOver = false;
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -189,6 +194,18 @@ public final class Globals {
                 return new StandardTower();
         }
         return null;
+    }
+
+    public void giveDamageToDefender(int damage) {
+        defender_HP -= damage;
+    }
+
+    public int getDefendersHP() {
+        return defender_HP;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 }
 

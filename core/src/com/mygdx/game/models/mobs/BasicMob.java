@@ -15,6 +15,6 @@ public class BasicMob extends Mob {
         Sprite sprite = new Sprite(texture);
         SpriteBatch spriteBatch;
         price = 10;
-        damage = 1;
+        damage = 10;
     }
 }
