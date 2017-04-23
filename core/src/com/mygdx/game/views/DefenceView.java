@@ -10,11 +10,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.DefenceViewController;
+import com.mygdx.game.models.Tile;
+import com.mygdx.game.models.towers.Tower;
+
+import java.util.ArrayList;
 
 public class DefenceView implements Screen{
     private DefenceViewController defenceViewController;
     private TowerDefence game;
     private Stage stage;
+    private ArrayList<Tower> towers;
 
     public DefenceView(TowerDefence game) {
         this.game = game;
@@ -75,6 +80,14 @@ public class DefenceView implements Screen{
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("I got clicked!");
                 defenceViewController.findSelectedGridSquare(x,y);
+                towers = defenceViewController.getPlacedTowers();
+                if(towers != null){
+                    for(Tower tower:towers){
+                        if(tower != null){
+                            stage.addActor(tower);
+                        }
+                    }
+                }
             }
         });
     }
@@ -98,6 +111,7 @@ public class DefenceView implements Screen{
         defenceViewController.drawSquareAroundChosenTableCell();
         defenceViewController.fillSelectedGridSquare();
         defenceViewController.updateMoneyTable();
+        defenceViewController.getPlacedTowers();
         stage.draw();
     }
 

@@ -19,7 +19,6 @@ public class PlayRoundViewController extends ViewController {
         startTile = findStartTile();
         goalTile = findGoalTile();
         counter = 0;
-        board.setSpawnedMobs(board.getMobsOnBoard().size());
 
     }
     private Tile findStartTile() {
@@ -41,6 +40,11 @@ public class PlayRoundViewController extends ViewController {
             }
         }
         return null;
+    }
+
+    public void setMobsToBeSpawned(){
+        board.setSpawnedMobs(board.getMobsOnBoard().size());
+
     }
 
     public Tile getStartTile() {
@@ -83,15 +87,7 @@ public class PlayRoundViewController extends ViewController {
         return false;
     }
 
-    public ArrayList<Tower> getPlacedTowers() {
-        ArrayList<Tower> towers = new ArrayList<Tower>();
-        for(ArrayList<Tile> tiles:board.getTile_board()){
-            for(Tile tile:tiles){
-                if(tile.getType()==Board.GROUND){
-                    towers.add(tile.getTower());
-                }
-            }
-        }
-        return towers;
+    public void reset() {
+        board.reset();
     }
 }

@@ -144,7 +144,7 @@ public abstract class Tower extends Actor {
 
     private boolean timeTooShoot() {
         if(timeSinceLastShot >= fireRate){
-            timeSinceLastShot =0;
+            timeSinceLastShot = 0;
             return true;
         }
         return false;

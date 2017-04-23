@@ -31,7 +31,7 @@ public class Projectile extends Actor {
         switch (type){
             case Tower.NORMAL:
                 projectileTexture = new Texture(Gdx.files.internal("missile_small.png"));
-                speed = 1;
+                speed = 10;
                 damage = 10;
         }
         this.mob = mob;
@@ -44,12 +44,13 @@ public class Projectile extends Actor {
         findSpeeds();
         this.setX(startY*globals.getSize());
         this.setY(globals.getScreenHeight()-startX*globals.getSize()-globals.getSize());
+        System.out.println("projectile fired");
     }
 
     private void findSpeeds(){
         int Lx = destX-startX;
         int Ly = destY - startY;
-        double L =  Math.sqrt((Lx*Lx)+(Ly+Ly));
+        double L =  Math.sqrt((Lx*Lx)+(Ly*Ly));
         t = L/speed;
         xSpeed = (Lx)/t;
         ySpeed = (Ly)/t;
@@ -64,6 +65,7 @@ public class Projectile extends Actor {
         deltaT += (t/60);
         if(deltaT >= t){
             mob.dealDamage(damage);
+            deltaT =-999999;
             this.remove();
         }
     }
@@ -79,7 +81,7 @@ public class Projectile extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(projectileTexture, getX(), getY(), globals.getSize()/2, globals.getSize()/2);
+        batch.draw(projectileTexture, getX(), getY(), globals.getSize(), globals.getSize());
     }
 
 }

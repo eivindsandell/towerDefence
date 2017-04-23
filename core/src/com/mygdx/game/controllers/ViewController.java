@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Globals;
 import com.mygdx.game.models.Board;
+import com.mygdx.game.models.Tile;
+import com.mygdx.game.models.towers.Tower;
 
 import java.util.ArrayList;
 
@@ -269,4 +271,19 @@ public abstract class ViewController extends Game {
         moneyLabel.setText(money.toString());
         moneyLabel.setAlignment(Align.right);
     }
+
+    public ArrayList<Tower> getPlacedTowers() {
+        ArrayList<Tower> towers = new ArrayList<Tower>();
+        for(ArrayList<Tile> tiles:board.getTile_board()){
+            for(Tile tile:tiles){
+                if(tile.getType()==Board.GROUND){
+                    towers.add(tile.getTower());
+                }
+            }
+        }
+        return towers;
+    }
+
+
+
 }

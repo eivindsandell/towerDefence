@@ -32,7 +32,9 @@ public class PlayRoundView implements Screen {
     @Override
     public void show() {
         stage.addActor(playRoundViewController.getBoard());
+
         towers = playRoundViewController.getPlacedTowers();
+        playRoundViewController.setMobsToBeSpawned();
         if(towers != null){
             for(Tower tower:towers){
                 if(tower != null){
@@ -64,9 +66,16 @@ public class PlayRoundView implements Screen {
         if(playRoundViewController.checkIfMobReachedGoal()){
             endGame();
         }
-        if(playRoundViewController.checkIfAllMobsKilled())
+        if(playRoundViewController.checkIfAllMobsKilled()){
+            endTurn();
+        }
         stage.act(delta);
         stage.draw();
+    }
+
+    private void endTurn() {
+        game.setScreen(game.getAttackView());
+        playRoundViewController.reset();
     }
 
     private void endGame() {
