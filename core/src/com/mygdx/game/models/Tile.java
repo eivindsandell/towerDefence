@@ -57,10 +57,12 @@ public class Tile{
 
     public void addMobToTile(Mob mob) {
         mobsOnTile.add(mob);
+        mob.setTile(this);
+        mob.setStartPos();
     }
 
     public void removeMobFromTile(Mob mob) {
-        mobsOnTile.remove(mobsOnTile.indexOf(mob));
+        mobsOnTile.remove(mob);
     }
 
     public boolean isPlacable() {

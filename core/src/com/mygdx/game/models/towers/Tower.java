@@ -99,9 +99,7 @@ public abstract class Tower extends Actor {
     private void fireProjectile(Mob mob) {
         int originX = position.getXpos();
         int originY = position.getYpos();
-        float targetX = mob.getXPos();
-        float targetY = mob.getYPos();
-        projectiles.add(new Projectile(type,targetX,targetY));
+        projectiles.add(new Projectile(type,mob.getX(),mob.getY()));
 
     }
 

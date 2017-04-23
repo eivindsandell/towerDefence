@@ -27,6 +27,7 @@ public class PlayRoundView implements Screen {
     @Override
     public void show() {
         stage.addActor(playRoundViewController.getBoard());
+
     }
 
 
@@ -34,7 +35,10 @@ public class PlayRoundView implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        playRoundViewController.spawnMob();
+        if(playRoundViewController.spawnMob()){
+         stage.addActor(playRoundViewController.getStartTile().getMobsOnTile().get(0));
+        }
+        playRoundViewController.checkIfMobReachedGoal();
         stage.act(delta);
         stage.draw();
     }

@@ -16,10 +16,8 @@ public abstract class Mob extends Actor {
     protected double currentHealth;
     protected double speed;
     protected Sprite sprite;
-    protected SpriteBatch spriteBatch;
     protected Integer price;
     protected int damage;
-    protected float x, y;
     protected Game game;
     protected Tile tile;
     protected Board board;
@@ -33,6 +31,7 @@ public abstract class Mob extends Actor {
     public Mob() {
         distanceWalked = 0;
         board = Board.getInstance();
+        globals = new Globals();
     }
 
     public double getMaxHealth() {
@@ -51,9 +50,6 @@ public abstract class Mob extends Actor {
         return sprite;
     }
 
-    public SpriteBatch getSpriteBatch() {
-        return spriteBatch;
-    }
 
     public Integer getPrice() {
         return price;
@@ -63,29 +59,12 @@ public abstract class Mob extends Actor {
         return damage;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getXPos() {
-        return x;
-    }
-
-    public float getYPos(){ return y;}
-
     public Tile getTile() {
         return tile;
     }
 
     public void setTile(Tile tile) {
-        if (getTile() != tile) {
-            this.tile.removeMobFromTile(this);
-            this.tile = tile;
-        }
+        this.tile = tile;
     }
 
     private void findNextTile(int x, int y){
@@ -99,7 +78,7 @@ public abstract class Mob extends Actor {
             }
         }
         catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
+
         }
         try {
             if (board.getTile_board().get(x+1).get(y).getType() == 1){
@@ -107,7 +86,7 @@ public abstract class Mob extends Actor {
             }
         }
         catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
+
         }
         try {
             if (board.getTile_board().get(x).get(y-1).getType() == 1){
@@ -115,7 +94,7 @@ public abstract class Mob extends Actor {
             }
         }
         catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
+
         }
         try {
             if (board.getTile_board().get(x).get(y+1).getType() == 1){
@@ -123,7 +102,7 @@ public abstract class Mob extends Actor {
             }
         }
         catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
+
         }
 
 
@@ -134,6 +113,8 @@ public abstract class Mob extends Actor {
                 nextY = tile.getYpos();
             }
         }
+        System.out.println(nextX);
+        System.out.println(nextY);
         nextTile = board.getTile_board().get(nextX).get(nextY);
     }
 
@@ -158,8 +139,8 @@ public abstract class Mob extends Actor {
             }
         }
         distanceWalked += speed;
-        x += speed*(globals.getScreenWidth()/globals.getGridSize())*speedX;
-        y += speed*(globals.getScreenWidth()/globals.getGridSize())*speedY;
+        setX((float) (this.getX() + speed*(globals.getScreenWidth()/globals.getGridSize())*speedX));
+        setY((float) (this.getY() + speed*(globals.getScreenWidth()/globals.getGridSize())*speedY));
         if (distanceWalked == 1){
             distanceWalked = 0;
             tile.removeMobFromTile(this);
@@ -178,5 +159,11 @@ public abstract class Mob extends Actor {
         super.draw(batch, parentAlpha);
         //todo:
 
+    }
+
+    public void setStartPos() {
+        float cellsize = globals.getScreenWidth()/globals.getGridSize();
+        this.setX(tile.getXpos()*cellsize + cellsize/2);
+        this.setY(tile.getYpos()*cellsize + cellsize/2);
     }
 }

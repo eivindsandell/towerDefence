@@ -20,9 +20,6 @@ public class TestMob extends Mob {
         this.damage = damage;
     }
 
-    public void setSpriteBatch(SpriteBatch spriteBatch) {
-        this.spriteBatch = spriteBatch;
-    }
 
     public void setPrice(int price) {
         this.price = price;
@@ -49,10 +46,6 @@ public class TestMob extends Mob {
         return sprite;
     }
 
-    @Override
-    public SpriteBatch getSpriteBatch() {
-        return spriteBatch;
-    }
 
     @Override
     public Integer getPrice() {
