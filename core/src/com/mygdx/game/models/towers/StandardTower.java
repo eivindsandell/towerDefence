@@ -23,5 +23,6 @@ public class StandardTower extends Tower {
         sprite = new Sprite(new Texture(Gdx.files.internal("canon_green.png")));
         price = 100;
         type = Tower.NORMAL;
+        fireRate = 30;
     }
 }

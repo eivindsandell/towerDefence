@@ -11,6 +11,9 @@ import java.util.Queue;
 
 public class Board {
     private static Board ourInstance = new Board();
+    private int mobsKilled;
+    private int mobsSpawned;
+    private int spawnedMobs;
 
     public static Board getInstance() {
         return ourInstance;
@@ -176,5 +179,26 @@ public class Board {
         //Todo: plasser tårn i riktig tile
         tile_board.get(x).get(y).placeTower(tower);
         tower.setTile(tile_board.get(x).get(y));
+    }
+
+    public void updateKilledMobsThisRound() {
+        mobsKilled ++;
+    }
+
+    public void reset() {
+        mobsKilled =0;
+        mobsSpawned = 0;
+    }
+
+    public void setSpawnedMobs(int spawnedMobs) {
+        this.spawnedMobs = spawnedMobs;
+    }
+
+    public int getKilledMobs() {
+        return mobsKilled;
+    }
+
+    public int getSpawnedMobs() {
+        return spawnedMobs;
     }
 }

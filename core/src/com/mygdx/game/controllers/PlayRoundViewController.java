@@ -16,6 +16,8 @@ public class PlayRoundViewController extends ViewController {
         startTile = findStartTile();
         goalTile = findGoalTile();
         counter = 0;
+        board.setSpawnedMobs(board.getMobsOnBoard().size());
+
     }
     private Tile findStartTile() {
         for(int i=0;i<g.getGridSize();i++){
@@ -59,6 +61,7 @@ public class PlayRoundViewController extends ViewController {
             g.giveDamageToDefender(damage);
             System.out.println("a mob has reached the goal");
             if(g.getDefendersHP()<= 0){
+                board.reset();
                 return true;
             }
         }
@@ -69,4 +72,10 @@ public class PlayRoundViewController extends ViewController {
         return counter == 60;
     }
 
+    public boolean checkIfAllMobsKilled() {
+        if(board.getKilledMobs() == board.getSpawnedMobs()){
+            return true;
+        }
+        return false;
+    }
 }

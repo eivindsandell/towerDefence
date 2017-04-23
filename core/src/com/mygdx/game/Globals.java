@@ -24,6 +24,7 @@ public final class Globals {
     private final Texture start;
     private final Texture goal;
     private final Texture selected_tile;
+    private int size;
     private int defender_HP;
     private Integer screenWidth;
     private Integer screenHeight;
@@ -71,6 +72,7 @@ public final class Globals {
         screenHeight = Gdx.graphics.getHeight();
 
         gridSize = 8;
+        size = screenWidth/gridSize;
 
         font = new BitmapFont();
         font.getData().setScale(4);
@@ -206,6 +208,10 @@ public final class Globals {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
 

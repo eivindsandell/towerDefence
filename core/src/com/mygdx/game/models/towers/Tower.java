@@ -24,11 +24,14 @@ public abstract class Tower extends Actor {
     public static final int SPLASH = 1;
     public static final int LAZER = 2;
     protected int type = 0;
+    protected int timeSinceLastShot;
+    protected int fireRate;
 
     public Tower() {
         board = Board.getInstance();
         shootable_tiles = new ArrayList<Tile>();
         shootableMobs = new ArrayList<Mob>();
+        timeSinceLastShot = 0;
     }
 
     public double getDamage() {
@@ -97,9 +100,8 @@ public abstract class Tower extends Actor {
     }
 
     private void fireProjectile(Mob mob) {
-        int originX = position.getXpos();
-        int originY = position.getYpos();
-        projectiles.add(new Projectile(type,mob.getX(),mob.getY()));
+
+        projectiles.add(new Projectile(mob,type,position.getXpos(),position.getYpos()));
 
     }
 
@@ -114,15 +116,23 @@ public abstract class Tower extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        timeSinceLastShot ++;
         if(shootableMobs.size()>0 && timeTooShoot()){
             fire(shootableMobs.get(0));
         }
-        for(Projectile p:projectiles)
+        for(Projectile p:projectiles){
             p.act(delta);
-        //todo
+            if(p.hasHit()){
+                projectiles.remove(p);
+            }
+        }
     }
 
     private boolean timeTooShoot() {
+        if(timeSinceLastShot >= fireRate){
+            timeSinceLastShot =0;
+            return true;
+        }
         return false;
     }
 

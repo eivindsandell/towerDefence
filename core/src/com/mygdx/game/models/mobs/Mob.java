@@ -168,4 +168,13 @@ public abstract class Mob extends Actor {
         this.setX(tile.getXpos()*cellsize + cellsize/2);
         this.setY(tile.getYpos()*cellsize + cellsize/2);
     }
+
+    public void dealDamage(int damage) {
+        currentHealth -= damage;
+        System.out.println(currentHealth);
+        if(currentHealth<= 0){
+            tile.removeMobFromTile(this);
+            board.updateKilledMobsThisRound();
+        }
+    }
 }

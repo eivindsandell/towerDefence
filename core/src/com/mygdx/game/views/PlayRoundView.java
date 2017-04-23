@@ -41,6 +41,7 @@ public class PlayRoundView implements Screen {
         if(playRoundViewController.checkIfMobReachedGoal()){
             endGame();
         }
+        if(playRoundViewController.checkIfAllMobsKilled())
         stage.act(delta);
         stage.draw();
     }
