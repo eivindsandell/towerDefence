@@ -1,7 +1,10 @@
 package com.mygdx.game.models.towers;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.Globals;
 import com.mygdx.game.models.Board;
 import com.mygdx.game.models.Projectile.Projectile;
 import com.mygdx.game.models.Tile;
@@ -18,6 +21,7 @@ public abstract class Tower extends Actor {
     protected ArrayList<ArrayList<Integer>> range;
     protected ArrayList<Tile> shootable_tiles;
     protected Board board;
+    protected Texture texture;
     protected ArrayList<Mob> shootableMobs;
     protected ArrayList<Projectile> projectiles;
     public static final int NORMAL = 0;
@@ -26,12 +30,14 @@ public abstract class Tower extends Actor {
     protected int type = 0;
     protected int timeSinceLastShot;
     protected int fireRate;
+    protected Globals globals;
 
     public Tower() {
         board = Board.getInstance();
         shootable_tiles = new ArrayList<Tile>();
         shootableMobs = new ArrayList<Mob>();
         timeSinceLastShot = 0;
+        globals = new Globals();
     }
 
     public double getDamage() {
@@ -126,6 +132,12 @@ public abstract class Tower extends Actor {
                 projectiles.remove(p);
             }
         }
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        batch.draw(texture,getX(),getY(), globals.getSize(), globals.getSize());
     }
 
     private boolean timeTooShoot() {
