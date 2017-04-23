@@ -1,6 +1,8 @@
 package com.mygdx.game.models.mobs;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -159,7 +161,8 @@ public abstract class Mob extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        //todo:
+        Texture mobTexture = new Texture(Gdx.files.internal("sombrero.png"));
+        batch.draw(mobTexture,getX(),getY(),globals.getScreenHeight()/globals.getGridSize(), globals.getScreenHeight()/globals.getGridSize());
 
     }
 
