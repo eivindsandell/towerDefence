@@ -21,6 +21,7 @@ public abstract class Mob extends Actor {
     protected Integer price;
     protected int damage;
     protected Game game;
+    protected Texture texture;
     protected Tile tile;
     protected Board board;
     protected Tile nextTile;
@@ -161,8 +162,7 @@ public abstract class Mob extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        Texture mobTexture = new Texture(Gdx.files.internal("sombrero.png"));
-        batch.draw(mobTexture,getX(),getY(),globals.getScreenHeight()/globals.getGridSize(), globals.getScreenHeight()/globals.getGridSize());
+        batch.draw(texture,getX(),getY(),globals.getSize(), globals.getSize());
 
     }
 
