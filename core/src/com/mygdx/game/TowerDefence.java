@@ -23,6 +23,7 @@ public final class TowerDefence extends Game {
 	private Globals globals;
 	private Board board;
 	private Screen gameOverView;
+	private EndgameView endgameView;
 
 	@Override
 	public void create() {
@@ -37,12 +38,15 @@ public final class TowerDefence extends Game {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/game_sound.mp3"));
 		settingsView = new SettingsView(this, music, null);
 		gameOverView = new GameOverView(this);
+		//TEST: endgame
+		endgameView = new EndgameView(this);
 		this.setScreen(menuView);
 		handleMusic();
 		launchGame();
 		settingsGame();
 		backToMenuGame();
 		quitGame();
+		endGame();
 	}
 
 	private void launchGame(){
@@ -85,8 +89,27 @@ public final class TowerDefence extends Game {
 		});
 	}
 
+	private void endGame(){
+		menuView.helpButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("Button pressed!");
+				setScreen(endgameView);
+
+			}
+		});
+	}
+
 	private void backToMenuGame(){
 		settingsView.backButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("Button pressed!");
+				setScreen(menuView);
+			}
+		});
+		// Backbutton for endgame
+		endgameView.backButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Button pressed!");
