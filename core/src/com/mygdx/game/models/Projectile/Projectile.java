@@ -42,8 +42,8 @@ public class Projectile extends Actor {
         globals = new Globals();
         deltaT = 0;
         findSpeeds();
-        this.setX(startX*globals.getSize() + globals.getSize()/2);
-        this.setY(startY*globals.getSize() + globals.getSize()/2);
+        this.setX(startY*globals.getSize());
+        this.setY(globals.getScreenHeight()-startX*globals.getSize()-globals.getSize());
     }
 
     private void findSpeeds(){
@@ -60,19 +60,19 @@ public class Projectile extends Actor {
         this.setY((float) (this.getY()+ ySpeed*globals.getSize()));
     }
 
-    public boolean hasHit(){
+    public void hasHit(){
         deltaT += (t/60);
         if(deltaT >= t){
             mob.dealDamage(damage);
-            return true;
+            this.remove();
         }
-        return false;
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
         travel();
+        hasHit();
         //todo:
     }
 

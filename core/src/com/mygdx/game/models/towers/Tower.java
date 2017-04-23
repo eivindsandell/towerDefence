@@ -131,9 +131,7 @@ public abstract class Tower extends Actor {
         }
         if(projectiles.size() != 0){
             for(Projectile p:projectiles){
-                if(p.hasHit()){
-                    p.remove();
-                }
+                p.act(delta);
             }
         }
     }
@@ -159,5 +157,10 @@ public abstract class Tower extends Actor {
 
     public ArrayList<Projectile> getProjectiles() {
         return projectiles;
+    }
+
+    public void setCoordinates() {
+        this.setX(position.getYpos()*globals.getSize());
+        this.setY(globals.getScreenHeight()-position.getXpos()*globals.getSize()-globals.getSize());
     }
 }

@@ -179,6 +179,7 @@ public class Board {
         //Todo: plasser tårn i riktig tile
         tile_board.get(x).get(y).placeTower(tower);
         tower.setTile(tile_board.get(x).get(y));
+        tower.setCoordinates();
     }
 
     public void updateKilledMobsThisRound() {
