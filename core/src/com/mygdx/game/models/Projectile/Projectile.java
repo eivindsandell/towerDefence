@@ -16,7 +16,7 @@ public class Projectile extends Actor {
     private int startX;
     private int startY;
     private int speed;
-    Sprite projectileSprite;
+    Texture projectileTexture;
     private int destX;
     private int destY;
     private double xSpeed;
@@ -30,7 +30,7 @@ public class Projectile extends Actor {
     public Projectile (Mob mob, int type, int startX, int startY){
         switch (type){
             case Tower.NORMAL:
-                projectileSprite = new Sprite(new Texture(Gdx.files.internal("missile_small.png")));
+                projectileTexture = new Texture(Gdx.files.internal("missile_small"));
                 speed = 1;
                 damage = 10;
         }
@@ -79,15 +79,7 @@ public class Projectile extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        //todo:
-    }
-
-    public float getXPos(){
-        return projectileSprite.getX();
-    }
-
-    public float getYPos(){
-        return projectileSprite.getY();
+        batch.draw(projectileTexture, getX(), getY(), globals.getSize()/2, globals.getSize()/2);
     }
 
 }
