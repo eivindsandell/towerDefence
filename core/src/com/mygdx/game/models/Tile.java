@@ -58,7 +58,9 @@ public class Tile{
     public void addMobToTile(Mob mob) {
         mobsOnTile.add(mob);
         mob.setTile(this);
-        mob.setStartPos();
+        if(type == Board.START){
+            mob.setStartPos();
+        }
     }
 
     public void removeMobFromTile(Mob mob) {

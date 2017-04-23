@@ -8,13 +8,18 @@ import com.mygdx.game.Globals;
 import com.mygdx.game.TowerDefence;
 import com.mygdx.game.controllers.PlayRoundViewController;
 import com.mygdx.game.models.Board;
+import com.mygdx.game.models.Projectile.Projectile;
 import com.mygdx.game.models.Tile;
 import com.mygdx.game.models.mobs.Mob;
+import com.mygdx.game.models.towers.Tower;
+
+import java.util.ArrayList;
 
 public class PlayRoundView implements Screen {
     private TowerDefence game;
     private Stage stage;
     private PlayRoundViewController playRoundViewController;
+    private ArrayList<Tower> towers;
 
     public PlayRoundView(TowerDefence game){
 
@@ -27,7 +32,14 @@ public class PlayRoundView implements Screen {
     @Override
     public void show() {
         stage.addActor(playRoundViewController.getBoard());
-
+        towers = playRoundViewController.getPlacedTowers();
+        if(towers != null){
+            for(Tower tower:towers){
+                if(tower != null){
+                    stage.addActor(tower);
+                }
+            }
+        }
     }
 
 
@@ -35,8 +47,19 @@ public class PlayRoundView implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if(towers.size()!= 0){
+            for(Tower tower:towers){
+                if(tower!= null){
+                    if(tower.getProjectiles()!=null){
+                        for(Projectile p : tower.getProjectiles()){
+                            stage.addActor(p);
+                        }
+                    }
+                }
+            }
+        }
         if(playRoundViewController.spawnMob()){
-         stage.addActor(playRoundViewController.getStartTile().getMobsOnTile().get(0));
+            stage.addActor(playRoundViewController.getStartTile().getMobsOnTile().get(playRoundViewController.getStartTile().getMobsOnTile().size()-1));
         }
         if(playRoundViewController.checkIfMobReachedGoal()){
             endGame();

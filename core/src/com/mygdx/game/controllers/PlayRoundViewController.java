@@ -5,6 +5,9 @@ package com.mygdx.game.controllers;
 import com.mygdx.game.models.Board;
 import com.mygdx.game.models.Tile;
 import com.mygdx.game.models.mobs.Mob;
+import com.mygdx.game.models.towers.Tower;
+
+import java.util.ArrayList;
 
 public class PlayRoundViewController extends ViewController {
     private Tile goalTile;
@@ -57,7 +60,8 @@ public class PlayRoundViewController extends ViewController {
 
     public boolean checkIfMobReachedGoal(){
         if (goalTile.getMobsOnTile().size()!=0){
-            int damage = goalTile.getMobsOnTile().remove(0).getDamage();
+            int damage = goalTile.getMobsOnTile().get(0).getDamage();
+            goalTile.getMobsOnTile().get(0).dealDamage(90000);
             g.giveDamageToDefender(damage);
             System.out.println("a mob has reached the goal");
             if(g.getDefendersHP()<= 0){
@@ -77,5 +81,17 @@ public class PlayRoundViewController extends ViewController {
             return true;
         }
         return false;
+    }
+
+    public ArrayList<Tower> getPlacedTowers() {
+        ArrayList<Tower> towers = new ArrayList<Tower>();
+        for(ArrayList<Tile> tiles:board.getTile_board()){
+            for(Tile tile:tiles){
+                if(tile.getType()==Board.GROUND){
+                    towers.add(tile.getTower());
+                }
+            }
+        }
+        return towers;
     }
 }

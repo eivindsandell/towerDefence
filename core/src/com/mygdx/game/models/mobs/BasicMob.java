@@ -13,6 +13,6 @@ public class BasicMob extends Mob {
         speed = 0.5;
         texture = new Texture(Gdx.files.internal("sombrero.png"));
         price = 10;
-        damage = 10;
+        damage = 1;
     }
 }

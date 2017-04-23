@@ -150,6 +150,7 @@ public abstract class Mob extends Actor {
             distanceWalked = 0;
             tile.removeMobFromTile(this);
             nextTile.addMobToTile(this);
+            tile = nextTile;
         }
     }
 
@@ -167,9 +168,9 @@ public abstract class Mob extends Actor {
     }
 
     public void setStartPos() {
-        float cellsize = globals.getScreenWidth()/globals.getGridSize();
-        this.setX(tile.getXpos()*cellsize + cellsize/2);
-        this.setY(tile.getYpos()*cellsize + cellsize/2);
+
+        this.setX(tile.getXpos()*globals.getSize());
+        this.setY(tile.getYpos()*globals.getSize());
     }
 
     public void dealDamage(int damage) {
@@ -177,6 +178,7 @@ public abstract class Mob extends Actor {
         System.out.println(currentHealth);
         if(currentHealth<= 0){
             tile.removeMobFromTile(this);
+            this.remove();
             board.updateKilledMobsThisRound();
         }
     }

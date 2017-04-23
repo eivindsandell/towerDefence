@@ -36,8 +36,9 @@ public abstract class Tower extends Actor {
         board = Board.getInstance();
         shootable_tiles = new ArrayList<Tile>();
         shootableMobs = new ArrayList<Mob>();
-        timeSinceLastShot = 0;
+        timeSinceLastShot = 120;
         globals = new Globals();
+        projectiles = new ArrayList<Projectile>();
     }
 
     public double getDamage() {
@@ -91,9 +92,10 @@ public abstract class Tower extends Actor {
     }
 
     public ArrayList<Mob> getShootableMobs() {
-        for (int i = 0; i < shootable_tiles.size(); i++) {
-            for (int j = 0; j < shootable_tiles.get(i).getMobsOnTile().size(); j++) {
-                shootableMobs.add(shootable_tiles.get(i).getMobsOnTile().get(j));
+        shootableMobs.clear();
+        for(Tile tile:shootable_tiles){
+            for(Mob mob:tile.getMobsOnTile()){
+                shootableMobs.add(mob);
             }
         }
         return shootableMobs;
@@ -123,13 +125,15 @@ public abstract class Tower extends Actor {
     public void act(float delta) {
         super.act(delta);
         timeSinceLastShot ++;
+        getShootableMobs();
         if(shootableMobs.size()>0 && timeTooShoot()){
             fire(shootableMobs.get(0));
         }
-        for(Projectile p:projectiles){
-            p.act(delta);
-            if(p.hasHit()){
-                projectiles.remove(p);
+        if(projectiles.size() != 0){
+            for(Projectile p:projectiles){
+                if(p.hasHit()){
+                    p.remove();
+                }
             }
         }
     }
@@ -151,5 +155,9 @@ public abstract class Tower extends Actor {
     public void setTile(Tile tile) {
         position = tile;
         calculate_shootable_tiles(board);
+    }
+
+    public ArrayList<Projectile> getProjectiles() {
+        return projectiles;
     }
 }

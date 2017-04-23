@@ -30,7 +30,7 @@ public class Projectile extends Actor {
     public Projectile (Mob mob, int type, int startX, int startY){
         switch (type){
             case Tower.NORMAL:
-                projectileSprite = new Sprite(new Texture(Gdx.files.internal("missile_small")));
+                projectileSprite = new Sprite(new Texture(Gdx.files.internal("missile_small.png")));
                 speed = 1;
                 damage = 10;
         }
